@@ -1,0 +1,71 @@
+@import 'tailwindcss';
+
+/* Tokens do protótipo (reference/alpha-pro-lp.html, :root). Só tons de cinza;
+   verde apenas em "Grátis", "Liberado" e frete grátis. Raios: 8, 12 ou 16px. */
+@theme {
+  --font-sans: 'Plus Jakarta Sans Variable', 'Helvetica Neue', Arial, sans-serif;
+
+  --color-white: #ffffff;
+  --color-paper: #f4f4f4;
+  --color-mist: #e7e7e7;
+  --color-line: #dcdcdc;
+  --color-stone: #8a8a8a;
+  --color-graphite: #4a4a4a;
+  --color-ink: #121212;
+  --color-border: rgb(18 18 18 / 0.1);
+  --color-ok: #1e7a46;
+  --color-ok-bg: #e3f3e9;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+
+  --container-page: 1240px;
+
+  --ease-soft: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --animate-roll: roll 26s linear infinite;
+  @keyframes roll {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 104px;
+    color-scheme: light;
+  }
+  body {
+    @apply bg-white font-sans text-ink antialiased;
+    font-size: 16.5px;
+    line-height: 1.6;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+}
+
+/* Largura da página: 1240px com 60px de respiro lateral no desktop, 24px no celular. */
+@utility wrap {
+  @apply mx-auto w-full max-w-page px-6 lg:px-[60px];
+  max-width: calc(var(--container-page) + 120px);
+}

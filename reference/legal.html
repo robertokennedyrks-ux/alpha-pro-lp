@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Políticas · ALPHA PRO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap">
+<style>
+:root{
+  --white:#ffffff; --paper:#f4f4f4; --mist:#e7e7e7; --line:#dcdcdc;
+  --stone:#8a8a8a; --graphite:#4a4a4a; --ink:#121212;
+  --border:rgba(18,18,18,.1);
+  --font:"Plus Jakarta Sans","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.65 var(--font);-webkit-font-smoothing:antialiased}
+a{color:var(--ink);font-weight:700;text-decoration:underline;text-underline-offset:2px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:1240px;margin:0 auto;padding:20px 16px}
+.mark{font:600 21px/1 var(--font);letter-spacing:-.03em;color:var(--ink);text-decoration:none}
+.mark .l{font-weight:300}
+.back{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;border:1px solid var(--border);border-radius:12px;background:var(--white);font-size:14px;font-weight:600;text-decoration:none}
+.back svg{width:16px;height:16px}
+.box{max-width:1240px;margin:0 auto 48px;padding:0 16px}
+.card{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px;border-bottom:1px solid var(--border);scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;display:flex;align-items:center;min-height:44px;padding:0 14px;border:0;border-radius:12px;background:none;color:var(--graphite);font:600 15px/1.25 var(--font);text-align:left;text-decoration:none;cursor:pointer;white-space:nowrap}
+.tab:hover{background:var(--paper);color:var(--ink)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--white)}
+.tab:focus-visible{outline:3px solid var(--stone);outline-offset:2px}
+.doc{padding:28px 20px 40px}
+.doc h1{font:700 28px/1.15 var(--font);letter-spacing:-.03em;margin:0 0 8px}
+.doc .upd{margin:0 0 20px;font-size:13px;color:var(--stone)}
+.doc .intro{margin:0 0 8px;font-size:17px;color:var(--graphite)}
+.doc h2{font:700 19px/1.3 var(--font);letter-spacing:-.01em;margin:32px 0 10px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.doc p{margin:0 0 12px;color:var(--graphite)}
+.doc ul{margin:0 0 12px;padding-left:20px;color:var(--graphite)}
+.doc li{margin:0 0 6px}
+.doc b{color:var(--ink)}
+.doc[aria-busy="true"]{opacity:.4}
+.foot{max-width:1240px;margin:0 auto;padding:0 16px 32px;font-size:13px;color:var(--stone)}
+@media (min-width:768px){
+  .top,.box,.foot{padding-inline:60px}
+  .doc{padding:40px 48px 56px}
+  .doc h1{font-size:34px}
+}
+@media (min-width:1024px){
+  .card{display:grid;grid-template-columns:280px minmax(0,1fr);align-items:start;min-height:70vh}
+  .tabs{position:sticky;top:0;flex-direction:column;overflow:visible;border-bottom:0;border-right:1px solid var(--border);padding:16px;align-self:stretch}
+  .tab{white-space:normal;min-height:48px;padding:10px 14px}
+  .doc{max-width:780px;padding:48px 56px 64px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="mark" href="./" aria-label="ALPHA PRO, voltar para a página">ALPHA<span class="l">PRO</span></a>
+  <a class="back" href="./"><svg data-icon="chevron-esquerda" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>Voltar para a página</a>
+</header>
+<main class="box">
+  <div class="card">
+    <nav class="tabs" id="tabs" role="tablist" aria-label="Políticas"></nav>
+    <article class="doc" id="doc" role="tabpanel" tabindex="-1"></article>
+  </div>
+</main>
+<p class="foot">Alpha Zago Suplementos Ltda · CNPJ 60.689.966/0001-60 · Marília/SP</p>
+
+<!-- Conteúdo das políticas: virá do CMS. Cada página tem seu próprio endereço (slug).
+     No Next.js: rotas /trocas-e-devolucoes, /politica-de-privacidade e /termos-de-uso compartilham este layout;
+     trocar de aba troca a URL sem recarregar. No protótipo, o endereço de cada aba é o #slug. -->
+<script type="application/json" id="paginas-legais">
+{
+ "paginas": [
+  {
+   "slug": "trocas-e-devolucoes",
+   "titulo": "Trocas e devoluções",
+   "atualizado": "[data de publicação]",
+   "intro": "Queremos que você compre com tranquilidade. Aqui está como funcionam a desistência, a troca e o reembolso do ALPHA PRO.",
+   "secoes": [
+    {
+     "titulo": "1. Garantia de 7 dias (direito de arrependimento)",
+     "html": "<p>Você pode desistir da compra em até <b>7 dias corridos a partir do recebimento<\/b>, conforme o artigo 49 do Código de Defesa do Consumidor. Não é preciso explicar o motivo.<\/p>"
+    },
+    {
+     "titulo": "2. Como pedir",
+     "html": "<p>Fale com a gente pelo WhatsApp <a href=\"https://wa.me/5514997343080\">(14) 99734-3080<\/a> ou pelo e-mail <b>[e-mail de atendimento]<\/b>, informando o número do pedido e o nome de quem comprou. Respondemos em dias úteis, das [8h às 18h].<\/p>"
+    },
+    {
+     "titulo": "3. Como devolver",
+     "html": "<p>Enviamos as instruções de devolução e, quando for o caso, o código de postagem. [Confirmar com o cliente: se aceita potes abertos e quem paga o frete de devolução.]<\/p>"
+    },
+    {
+     "titulo": "4. Reembolso",
+     "html": "<p>Depois que o produto chega até nós, devolvemos o valor pago pelo mesmo meio de pagamento:<\/p><ul><li><b>Pix:<\/b> em até [5] dias úteis, na mesma conta que fez o pagamento.<\/li><li><b>Cartão de crédito:<\/b> pedimos o estorno à operadora em até [5] dias úteis. O crédito aparece em até duas faturas, conforme o seu banco.<\/li><\/ul>"
+    },
+    {
+     "titulo": "5. Produto com defeito ou avariado",
+     "html": "<p>Se o pote chegar violado, danificado ou com defeito, avise em até [7] dias do recebimento, com fotos da embalagem e do produto. Trocamos sem custo para você ou devolvemos o valor, como preferir.<\/p>"
+    },
+    {
+     "titulo": "6. Atraso ou extravio",
+     "html": "<p>Se o rastreio parar de atualizar ou o prazo passar, fale com a gente. Acionamos a transportadora e, se o pedido for extraviado, enviamos outro ou devolvemos o valor.<\/p>"
+    },
+    {
+     "titulo": "7. Bônus",
+     "html": "<p>Os bônus digitais acompanham o pedido. Se o pedido for cancelado ou devolvido, o acesso aos bônus também é encerrado.<\/p>"
+    },
+    {
+     "titulo": "8. Contato",
+     "html": "<p>Alpha Zago Suplementos Ltda, CNPJ 60.689.966/0001-60, R. XV de Novembro, 2326, Somenzari, Marília/SP, CEP 17506-020.<br>WhatsApp <a href=\"https://wa.me/5514997343080\">(14) 99734-3080<\/a> · E-mail <b>[e-mail de atendimento]<\/b><\/p>"
+    }
+   ]
+  },
+  {
+   "slug": "politica-de-privacidade",
+   "titulo": "Política de privacidade",
+   "atualizado": "[data de publicação]",
+   "intro": "Esta política explica como a Alpha trata os dados pessoais de quem visita esta página e compra o ALPHA PRO, de acordo com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018).",
+   "secoes": [
+    {
+     "titulo": "1. Quem somos",
+     "html": "<p>Alpha Zago Suplementos Ltda, CNPJ 60.689.966/0001-60, R. XV de Novembro, 2326, Somenzari, Marília/SP, CEP 17506-020 (\"Alpha\").<\/p>"
+    },
+    {
+     "titulo": "2. Quais dados coletamos",
+     "html": "<ul><li><b>No checkout:<\/b> nome, CPF, e-mail, telefone, endereço de entrega e dados de pagamento. O pagamento é processado pela plataforma [nome da plataforma]; não guardamos o número completo do seu cartão.<\/li><li><b>Na navegação:<\/b> endereço IP, aparelho, navegador, páginas visitadas e origem da visita, por meio de cookies.<\/li><li><b>No atendimento:<\/b> as mensagens que você envia pelo WhatsApp, e-mail ou redes sociais.<\/li><\/ul>"
+    },
+    {
+     "titulo": "3. Para que usamos",
+     "html": "<ul><li>Processar o pedido, entregar o produto e emitir nota fiscal.<\/li><li>Enviar os bônus e o código de rastreio por e-mail e WhatsApp.<\/li><li>Atender dúvidas, trocas e devoluções.<\/li><li>Medir o desempenho da página e dos anúncios, com o seu consentimento.<\/li><li>Enviar ofertas e novidades, com o seu consentimento, que pode ser retirado a qualquer momento.<\/li><li>Prevenir fraudes.<\/li><\/ul>"
+    },
+    {
+     "titulo": "4. Compartilhamento de dados",
+     "html": "<p>Não vendemos os seus dados. Compartilhamos apenas o necessário com: a plataforma de checkout e os meios de pagamento; transportadoras e Correios; ferramentas de e-mail, WhatsApp e atendimento; e plataformas de anúncio e análise ([Meta, Google, TikTok, confirmar]), só com dados de navegação e quando você aceita os cookies. Também podemos compartilhar com autoridades, quando a lei exigir.<\/p>"
+    },
+    {
+     "titulo": "5. Cookies",
+     "html": "<p>Usamos cookies necessários para a página funcionar e, com o seu consentimento, cookies de análise e de marketing. Você pode apagar ou bloquear cookies nas configurações do navegador; a página continua funcionando.<\/p>"
+    },
+    {
+     "titulo": "6. Segurança e armazenamento",
+     "html": "<p>Usamos conexão segura (HTTPS) em toda a página e no checkout, e limitamos o acesso aos dados a quem precisa deles para atender você. Guardamos os dados do pedido pelo prazo exigido pelas leis fiscais e de defesa do consumidor (em geral, 5 anos) e os dados de marketing até você pedir para sair.<\/p>"
+    },
+    {
+     "titulo": "7. Seus direitos (LGPD)",
+     "html": "<p>Você pode, a qualquer momento, pedir: confirmação e acesso aos seus dados; correção; anonimização ou exclusão; portabilidade; informação sobre com quem compartilhamos; e revogação do consentimento. Para isso, fale com o nosso encarregado pelos canais abaixo.<\/p>"
+    },
+    {
+     "titulo": "8. Contato do responsável",
+     "html": "<p>Encarregado de dados: <b>[nome]<\/b> · E-mail <b>[e-mail]<\/b><br>WhatsApp <a href=\"https://wa.me/5514997343080\">(14) 99734-3080<\/a><\/p><p>Esta política pode ser atualizada. A versão vigente fica sempre nesta página.<\/p>"
+    }
+   ]
+  },
+  {
+   "slug": "termos-de-uso",
+   "titulo": "Termos de uso",
+   "atualizado": "[data de publicação]",
+   "intro": "Estes termos valem para esta página e para as compras do ALPHA PRO feitas a partir dela.",
+   "secoes": [
+    {
+     "titulo": "1. Sobre o produto",
+     "html": "<p>O ALPHA PRO é um alimento (suplemento alimentar) notificado na ANVISA sob o nº 25351118192202606. <b>Não é um medicamento.<\/b> Não é indicado para gestantes, lactantes e menores de 19 anos. Não exceda a recomendação diária. Os resultados variam de pessoa para pessoa; em caso de dúvida, consulte um profissional de saúde.<\/p>"
+    },
+    {
+     "titulo": "2. Preços e ofertas",
+     "html": "<p>Valem os preços, ofertas por quantidade, bônus e condições de frete mostrados na página e no checkout no momento da compra. Se houver diferença, vale o que aparece no checkout antes do pagamento. Ofertas podem mudar ou acabar sem aviso, sem afetar pedidos já pagos.<\/p>"
+    },
+    {
+     "titulo": "3. Pagamento",
+     "html": "<p>Aceitamos cartão de crédito em até 5x sem juros e Pix com 5% de desconto. O pedido é confirmado depois da aprovação do pagamento.<\/p>"
+    },
+    {
+     "titulo": "4. Entrega",
+     "html": "<p>O prazo e o valor do frete para o seu CEP aparecem no checkout, antes do pagamento. Quando a oferta tem frete grátis, isso também aparece no checkout. O código de rastreio é enviado por e-mail e WhatsApp assim que o pedido sai.<\/p>"
+    },
+    {
+     "titulo": "5. Bônus",
+     "html": "<p>Os bônus são materiais digitais e acesso a grupo, liberados conforme a quantidade de potes e enviados após a confirmação do pagamento. São de uso pessoal e não podem ser trocados por dinheiro.<\/p>"
+    },
+    {
+     "titulo": "6. Garantia, trocas e devoluções",
+     "html": "<p>Você tem 7 dias a partir do recebimento para desistir da compra. As regras completas estão em <a href=\"#trocas-e-devolucoes\" data-tab=\"trocas-e-devolucoes\">Trocas e devoluções<\/a>.<\/p>"
+    },
+    {
+     "titulo": "7. Conteúdo da página",
+     "html": "<p>Textos, imagens, vídeos e a marca ALPHA pertencem à Alpha ou são usados com autorização. Os depoimentos são de clientes reais, publicados com consentimento, e mostram experiências individuais.<\/p>"
+    },
+    {
+     "titulo": "8. Privacidade",
+     "html": "<p>O tratamento dos seus dados segue a nossa <a href=\"#politica-de-privacidade\" data-tab=\"politica-de-privacidade\">Política de privacidade<\/a>.<\/p>"
+    },
+    {
+     "titulo": "9. Contato e foro",
+     "html": "<p>Alpha Zago Suplementos Ltda, CNPJ 60.689.966/0001-60, R. XV de Novembro, 2326, Somenzari, Marília/SP, CEP 17506-020.<br>WhatsApp <a href=\"https://wa.me/5514997343080\">(14) 99734-3080<\/a> · E-mail <b>[e-mail de atendimento]<\/b><\/p><p>Fica eleito o foro do domicílio do consumidor.<\/p>"
+    }
+   ]
+  }
+ ]
+}
+</script>
+<script>
+(function(){
+  var D={paginas:[]}; try{D=JSON.parse(document.getElementById('paginas-legais').textContent)}catch(e){}
+  var P=D.paginas||[], tabs=document.getElementById('tabs'), doc=document.getElementById('doc');
+  if(!P.length) return;
+  tabs.innerHTML=P.map(function(p){return '<a class="tab" role="tab" id="tab-'+p.slug+'" href="#'+p.slug+'" data-tab="'+p.slug+'" aria-controls="doc">'+p.titulo+'</a>'}).join('');
+  var links=[].slice.call(tabs.querySelectorAll('.tab'));
+  function find(slug){for(var i=0;i<P.length;i++) if(P[i].slug===slug) return P[i]; return null}
+  function render(slug,focus){
+    var p=find(slug)||P[0];
+    links.forEach(function(a){var on=a.dataset.tab===p.slug; a.setAttribute('aria-selected',on?'true':'false'); a.tabIndex=on?0:-1;});
+    doc.setAttribute('aria-labelledby','tab-'+p.slug);
+    doc.innerHTML='<h1>'+p.titulo+'</h1>'+(p.atualizado?'<p class="upd">Última atualização: '+p.atualizado+'</p>':'')+(p.intro?'<p class="intro">'+p.intro+'</p>':'')+
+      (p.secoes||[]).map(function(s){return '<h2>'+s.titulo+'</h2>'+s.html}).join('');
+    document.title=p.titulo+' · ALPHA PRO';
+    if(focus){ doc.focus({preventScroll:true}); if(innerWidth<1024) tabs.scrollIntoView({block:'start'}); else scrollTo(0,0); }
+    var cur=tabs.querySelector('[aria-selected="true"]'); if(cur&&cur.scrollIntoView&&innerWidth<1024) cur.scrollIntoView({inline:'center',block:'nearest'});
+  }
+  function slugNow(){return decodeURIComponent(location.hash.replace('#',''))}
+  /* trocar de aba troca a URL (cada política tem o seu link) */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('[data-tab]'); if(!a) return;
+    e.preventDefault(); var s=a.dataset.tab; if(s===slugNow()) return;
+    history.pushState(null,'','#'+s); render(s,true);
+  });
+  addEventListener('popstate',function(){render(slugNow(),false)});
+  addEventListener('hashchange',function(){render(slugNow(),false)});
+  tabs.addEventListener('keydown',function(e){
+    var i=links.indexOf(document.activeElement); if(i<0) return;
+    var n=e.key==='ArrowDown'||e.key==='ArrowRight'?i+1:e.key==='ArrowUp'||e.key==='ArrowLeft'?i-1:null; if(n===null) return;
+    e.preventDefault(); n=(n+links.length)%links.length; links[n].focus(); links[n].click();
+  });
+  if(!find(slugNow())) history.replaceState(null,'','#'+P[0].slug);
+  render(slugNow(),false);
+})();
+</script>
+</body>
+</html>
