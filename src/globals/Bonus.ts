@@ -34,7 +34,7 @@ export const Bonus = global({
           ],
         },
         campoIcone(),
-        { name: 'imagem', label: 'Imagem', type: 'upload', relationTo: 'media', admin: ajuda('Usada no carrinho. Sem imagem, usa o ícone.') },
+        { name: 'imagem', label: 'Imagem', type: 'upload', relationTo: 'media', admin: ajuda('Usada no carrinho. Sem imagem, aparece um espaço reservado.') },
       ],
     },
   ],

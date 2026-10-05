@@ -40,7 +40,7 @@ O conteúdo desta página (textos, imagens, vídeos e marca ALPHA) pertence à A
 
 ## 9. Privacidade
 
-O tratamento dos seus dados segue a nossa [Política de Privacidade](#).
+O tratamento dos seus dados segue a nossa [Política de Privacidade](/politica-de-privacidade).
 
 ## 10. Contato e foro
 

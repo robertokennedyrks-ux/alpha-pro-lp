@@ -1,1 +1,113 @@
-/* politicas: estilos da seção que não cabem em classes do Tailwind. */
+/* politicas: widget de abas e texto das políticas (reference/legal.html). */
+
+.pol-tabs {
+  scrollbar-width: none;
+}
+.pol-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.pol-tab {
+  flex: none;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 12px;
+  color: var(--color-graphite);
+  font: 600 15px/1.25 var(--font-sans);
+  text-align: left;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.pol-tab:hover {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+.pol-tab[aria-selected='true'] {
+  background: var(--color-ink);
+  color: var(--color-white);
+}
+.pol-tab:focus-visible {
+  outline: 3px solid var(--color-stone);
+  outline-offset: 2px;
+}
+
+.pol-doc {
+  padding: 28px 20px 40px;
+}
+.pol-doc h1 {
+  font: 700 28px/1.15 var(--font-sans);
+  letter-spacing: -0.03em;
+  margin: 0 0 8px;
+  text-wrap: wrap;
+}
+.pol-doc .upd {
+  margin: 0 0 20px;
+  font-size: 13px;
+  color: var(--color-stone);
+}
+.pol-doc .intro {
+  margin: 0 0 8px;
+  font-size: 17px;
+  color: var(--color-graphite);
+}
+.pol-doc h2 {
+  font: 700 19px/1.3 var(--font-sans);
+  letter-spacing: -0.01em;
+  margin: 32px 0 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--color-border);
+  text-wrap: wrap;
+}
+.pol-doc p {
+  margin: 0 0 12px;
+  color: var(--color-graphite);
+}
+.pol-doc ul {
+  margin: 0 0 12px;
+  padding-left: 20px;
+  list-style: disc;
+  color: var(--color-graphite);
+}
+.pol-doc ol {
+  margin: 0 0 12px;
+  padding-left: 20px;
+  list-style: decimal;
+  color: var(--color-graphite);
+}
+.pol-doc li {
+  margin: 0 0 6px;
+}
+.pol-doc b,
+.pol-doc strong {
+  font-weight: 700;
+  color: var(--color-ink);
+}
+.pol-doc a {
+  color: var(--color-ink);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (min-width: 768px) {
+  .pol-doc {
+    padding: 40px 48px 56px;
+  }
+  .pol-doc h1 {
+    font-size: 34px;
+  }
+}
+@media (min-width: 1024px) {
+  .pol-tab {
+    white-space: normal;
+    min-height: 48px;
+    padding: 10px 14px;
+  }
+  .pol-doc {
+    max-width: 780px;
+    padding: 48px 56px 64px;
+  }
+}

@@ -846,7 +846,7 @@ export interface Bonus {
             )
           | null;
         /**
-         * Usada no carrinho. Sem imagem, usa o ícone.
+         * Usada no carrinho. Sem imagem, aparece um espaço reservado.
          */
         imagem?: (number | null) | Media;
         id?: string | null;

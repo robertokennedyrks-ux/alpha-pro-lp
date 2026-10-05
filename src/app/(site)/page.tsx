@@ -1,5 +1,4 @@
 import { PedidoProvider } from '@/components/pedido'
-import { Anuncios } from '@/components/sections/Anuncios'
 import { AvisoCookies } from '@/components/sections/AvisoCookies'
 import { Bonus } from '@/components/sections/Bonus'
 import { Carrinho } from '@/components/sections/Carrinho'
@@ -26,7 +25,6 @@ export default async function HomePage() {
   const d = await getDados()
   return (
     <PedidoProvider>
-      <Anuncios d={d} />
       <Topo d={d} />
       <main>
         <Hero d={d} />

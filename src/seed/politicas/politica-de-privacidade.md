@@ -14,14 +14,12 @@ Esta política explica como a **Alpha Zago Suplementos Ltda**, CNPJ 60.689.966/0
 
 ## 2. Para que usamos
 
-| Finalidade | Base legal (LGPD) |
-| --- | --- |
-| Processar o pedido, entregar o produto e emitir nota fiscal | Execução de contrato e obrigação legal |
-| Enviar os bônus digitais e o código de rastreio por e-mail e WhatsApp | Execução de contrato |
-| Responder dúvidas e atender trocas e devoluções | Execução de contrato e legítimo interesse |
-| Medir o desempenho da página e dos anúncios | Consentimento (cookies de marketing) |
-| Enviar ofertas e novidades | Consentimento, que pode ser retirado a qualquer momento |
-| Prevenir fraudes | Legítimo interesse |
+- **Processar o pedido, entregar o produto e emitir nota fiscal:** Execução de contrato e obrigação legal.
+- **Enviar os bônus digitais e o código de rastreio por e-mail e WhatsApp:** Execução de contrato.
+- **Responder dúvidas e atender trocas e devoluções:** Execução de contrato e legítimo interesse.
+- **Medir o desempenho da página e dos anúncios:** Consentimento (cookies de marketing).
+- **Enviar ofertas e novidades:** Consentimento, que pode ser retirado a qualquer momento.
+- **Prevenir fraudes:** Legítimo interesse.
 
 ## 3. Com quem compartilhamos
 

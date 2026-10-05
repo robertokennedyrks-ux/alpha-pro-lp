@@ -1,1 +1,381 @@
-/* historia: estilos da seção que não cabem em classes do Tailwind. */
+/* historia: estilos das seções 2 a 4 (dor, não é culpa sua, destaque, produto)
+   que não cabem bem em classes do Tailwind: estados de animação por classe no pai,
+   pseudo-elementos, keyframes e @property. Tudo escopado pela classe da seção. */
+
+/* ===== letras reveladas pela rolagem (hero-close e título do destaque) ===== */
+.pain .tw-w,
+.hl-sec .tw-w {
+  white-space: nowrap;
+}
+.pain .tw-c,
+.hl-sec .tw-c {
+  display: inline-block;
+  will-change: opacity, filter;
+}
+.hl-sec .tw-box,
+.hl-sec .tw-w {
+  display: inline;
+}
+
+/* ===== 2. espelho da dor: trilha ===== */
+.pain .tl > li:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 50px;
+  bottom: -10px;
+  border-left: 2px dashed var(--color-stone);
+  opacity: 0.6;
+}
+.pain .tl.anim > li .n {
+  opacity: 0;
+  transform: scale(0.55);
+  transition:
+    opacity 0.35s ease,
+    transform 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.25);
+}
+.pain .tl.anim > li.on-n .n {
+  opacity: 1;
+  transform: none;
+}
+.pain .tl.anim > li .tc {
+  opacity: 0;
+  transform: translateX(18px);
+  transition:
+    opacity 0.45s ease,
+    transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.pain .tl.anim > li.on-c .tc {
+  opacity: 1;
+  transform: none;
+}
+.pain .tl.anim > li:not(:last-child)::before {
+  clip-path: inset(0 0 calc((1 - var(--l, 0)) * 100%) 0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pain .tl.anim > li .n,
+  .pain .tl.anim > li .tc {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .pain .tl.anim > li:not(:last-child)::before {
+    clip-path: none;
+  }
+}
+
+/* ===== 2. balões em volta da foto ===== */
+@property --fy {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+.pain .bx-bal > li {
+  position: absolute;
+  z-index: 2;
+  padding: 11px 18px;
+  border-radius: 999px;
+  background: var(--color-white);
+  color: var(--color-ink);
+  font: 600 clamp(14px, 4.2vw, 17px) / 1 var(--font-sans);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  box-shadow: 0 8px 20px rgb(18 18 18 / 0.18);
+}
+.pain .bx-bal > li.dk {
+  background: var(--color-ink);
+  color: var(--color-white);
+  border: 1.5px solid var(--color-white);
+  border-radius: 16px;
+}
+.pain .bx-bal .b1 {
+  left: 10px;
+  top: 132px;
+  transform: rotate(-4deg);
+}
+.pain .bx-bal .b2 {
+  right: 10px;
+  top: 188px;
+  transform: rotate(3deg);
+}
+.pain .bx-bal .b3 {
+  left: 18px;
+  top: 252px;
+  transform: rotate(-2deg);
+}
+.pain .bx-bal .b4 {
+  right: 16px;
+  top: 312px;
+  transform: rotate(3deg);
+  border-radius: 16px;
+}
+@media (min-width: 1024px) {
+  .pain .bx-bal .b1 {
+    top: 150px;
+  }
+  .pain .bx-bal .b2 {
+    top: 222px;
+  }
+  .pain .bx-bal .b3 {
+    top: 300px;
+  }
+  .pain .bx-bal .b4 {
+    top: 376px;
+  }
+}
+.pain .bx-bal.anim > li {
+  --e: 0;
+  opacity: var(--e);
+  translate: calc(var(--dx, 0px) * (1 - var(--e))) calc(var(--dy, 0px) * (1 - var(--e)) + var(--fy));
+  scale: calc(0.35 + 0.65 * var(--e));
+  will-change: translate, scale, opacity;
+}
+.pain .bx-bal.anim.float > li {
+  animation: bxFloat 4.2s ease-in-out infinite;
+}
+.pain .bx-bal.anim.float .b2 {
+  animation-duration: 4.8s;
+  animation-delay: -1.3s;
+}
+.pain .bx-bal.anim.float .b3 {
+  animation-duration: 3.9s;
+  animation-delay: -2.1s;
+}
+.pain .bx-bal.anim.float .b4 {
+  animation-duration: 5.1s;
+  animation-delay: -0.7s;
+}
+@keyframes bxFloat {
+  0%,
+  100% {
+    --fy: 0px;
+  }
+  50% {
+    --fy: -7px;
+  }
+}
+
+/* ===== 2. fechamento: pontuação muda no desktop ===== */
+.pain .hero-close .pd {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .pain .hero-close .pm {
+    display: none;
+  }
+  .pain .hero-close .pd {
+    display: inline;
+  }
+}
+
+/* ===== 3. não é culpa sua ===== */
+.nc-card {
+  transition:
+    background 0.35s ease,
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+.nc-card h3,
+.nc-card p,
+.nc-card .sad {
+  transition:
+    color 0.35s ease,
+    opacity 0.35s ease;
+}
+.nc-card.is-on {
+  background: var(--color-ink);
+  transform: scale(1.015);
+  box-shadow: 0 14px 34px rgb(18 18 18 / 0.22);
+}
+.nc-card.is-on h3 {
+  color: var(--color-white);
+}
+.nc-card.is-on p {
+  color: var(--color-white);
+  opacity: 0.72;
+}
+.nc-card.is-on .sad {
+  color: var(--color-white);
+  opacity: 0.35;
+}
+@media (hover: hover) and (pointer: fine) {
+  .nc-card:hover {
+    background: var(--color-ink);
+    transform: scale(1.015);
+    box-shadow: 0 14px 34px rgb(18 18 18 / 0.22);
+  }
+  .nc-card:hover h3 {
+    color: var(--color-white);
+  }
+  .nc-card:hover p {
+    color: var(--color-white);
+    opacity: 0.72;
+  }
+  .nc-card:hover .sad {
+    color: var(--color-white);
+    opacity: 0.35;
+  }
+}
+.nc-close .pd {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .nc-close .pd {
+    display: inline;
+  }
+  .nc-close .pm {
+    display: none;
+  }
+}
+.nc-band-track {
+  animation: ncmq 18s linear infinite;
+}
+@keyframes ncmq {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nc-band-track {
+    animation: none;
+  }
+}
+
+/* ===== 4a. destaque ===== */
+.hl-sec .cap {
+  display: inline-block;
+  width: 2.3em;
+  height: 0.86em;
+  margin: 0 0.22em;
+  border-radius: 999px;
+  border: 0.07em solid var(--color-ink);
+  background: linear-gradient(
+    90deg,
+    #3a3a3a 0%,
+    var(--color-ink) 18%,
+    var(--color-ink) 44%,
+    #2e2e2e 50%,
+    #ffffff 50%,
+    #ffffff 100%
+  );
+  box-shadow: inset 0.08em 0.1em 0 rgb(255 255 255 / 0.22);
+  will-change: transform, opacity;
+}
+.hl-sec .hl-title {
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+.hl-track {
+  animation: hlRoll 40s linear infinite;
+}
+@keyframes hlRoll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hl-strip {
+    overflow-x: auto;
+  }
+}
+
+/* ===== 4. produto: "O que você vai sentir" ===== */
+.feel .sp {
+  transform: scale(4);
+  animation: spGlow 2.6s ease-in-out infinite;
+  will-change: scale, rotate, opacity;
+}
+.feel li:nth-child(2) .sp {
+  animation-delay: -0.7s;
+}
+.feel li:nth-child(3) .sp {
+  animation-delay: -1.4s;
+}
+.feel li:nth-child(4) .sp {
+  animation-delay: -2s;
+}
+.feel.anim .ico {
+  transform: scale(0);
+  transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.feel.anim .ico .sp {
+  transform: scale(0);
+  transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.feel.anim li.in .ico {
+  transform: scale(1);
+}
+.feel.anim li.in .ico .sp {
+  transform: scale(4);
+  transition-delay: 0.35s;
+}
+.feel li.cl {
+  display: none; /* cópias do carrossel, só no desktop */
+}
+@keyframes spGlow {
+  0%,
+  100% {
+    scale: 0.82;
+    rotate: -8deg;
+    opacity: 0.75;
+    filter: drop-shadow(0 0 0 rgb(255 255 255 / 0));
+  }
+  50% {
+    scale: 1.12;
+    rotate: 12deg;
+    opacity: 1;
+    filter: drop-shadow(0 0 1.5px rgb(255 255 255 / 0.9));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .feel .sp {
+    animation: none;
+  }
+}
+@media (min-width: 1024px) {
+  .prod .feel ul {
+    animation: feelRoll 24s linear infinite;
+  }
+  .prod .feel:hover ul {
+    animation-play-state: paused;
+  }
+  .prod .feel li,
+  .prod .feel li.cl {
+    display: flex;
+    flex: none;
+    width: 176px;
+  }
+}
+@keyframes feelRoll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ===== 4. produto: tabela comparativa ===== */
+.prod .cmp-row > span {
+  display: flex;
+  align-items: center;
+  min-height: 52px;
+  padding: 16px;
+  background: var(--color-paper);
+  border: 2px solid var(--color-white);
+  margin: -1px;
+}
+.prod .cmp-row > .cmp-c {
+  justify-content: center;
+  color: var(--color-stone);
+}
+.prod .cmp-row > .cmp-c.is-on {
+  background: var(--color-ink);
+  color: var(--color-white);
+}
+.prod .cmp-head + .cmp-row .cmp-lbl {
+  border-top-left-radius: 12px;
+}
+.prod .cmp-row:last-child .cmp-lbl {
+  border-bottom-left-radius: 12px;
+}
+.prod .cmp-row:last-child > span:last-child {
+  border-bottom-right-radius: 12px;
+}

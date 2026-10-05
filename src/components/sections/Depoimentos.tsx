@@ -1,6 +1,94 @@
+import { Icon } from '@/components/icons'
+import { Contador } from '@/components/prova/Contador'
+import { midia } from '@/components/prova/midia'
 import type { Dados } from '@/lib/dados'
 
-// 5. prova social. A portar de reference/alpha-pro-lp.html.
-export function Depoimentos(_props: { d: Dados }) {
-  return null
+// 5. prova social: conversas reais (ou o print original) e os números da linha.
+export function Depoimentos({ d }: { d: Dados }) {
+  const numeros = d.prova.numeros ?? []
+  return (
+    <section id="depoimentos" data-secao="depoimentos">
+      <div className="wrap stack">
+        <span className="pill">Clientes reais</span>
+        <h2>
+          Elas também achavam que <span className="l">nada funcionava.</span>
+        </h2>
+        <p className="text-graphite">Mensagens reais de clientes, do jeito que chegaram no nosso WhatsApp e no Instagram.</p>
+        {d.depoimentos.length > 0 && (
+          <>
+            <div className="revs">
+              {d.depoimentos.map((dep) => {
+                const print = midia(dep.print)
+                return (
+                  <div className="rev" key={dep.id}>
+                    <h3>{dep.titulo}</h3>
+                    {print ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        className="rev-print"
+                        src={print.url!}
+                        alt={print.alt || `Print da conversa: ${dep.titulo}`}
+                        width={print.width ?? undefined}
+                        height={print.height ?? undefined}
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="chat">
+                        <div className="top">
+                          <i />
+                          <s />
+                        </div>
+                        {(dep.mensagens ?? []).map((m, k) => (
+                          <div key={m.id ?? k} className={`b ${m.lado === 'loja' ? 'out' : 'in'}`}>
+                            {m.texto}
+                            {m.hora ? <small>{m.hora}</small> : null}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+            <p className="text-right text-[12.5px] text-stone">Arraste para ver mais →</p>
+          </>
+        )}
+        {!d.depoimentos.some((dep) => midia(dep.print)) && (
+          <p className="text-[12.5px] text-stone">
+            No site final, cada conversa é o print original da cliente, com o telefone coberto.
+          </p>
+        )}
+        {numeros.length > 0 && (
+          <div className="st-panel">
+            <div className="st-photo">
+              <div className="ph">
+                <span>
+                  <b>Foto</b>Ela sorrindo, segurando o pote perto do rosto
+                </span>
+              </div>
+            </div>
+            <h3 className="st-title">Quem usa, volta.</h3>
+            <p className="st-sub">Os números da linha ALPHA.</p>
+            <div className="st-list">
+              {numeros.map((n, k) => {
+                const pct = n.sufixo?.trim() === '%'
+                const suf = !pct && n.sufixo ? ` ${n.sufixo.trim()}` : ''
+                return (
+                  <div key={n.id ?? k}>
+                    <span className="st-num" aria-label={pct ? `${n.valor}%` : `Mais de ${n.valor}${suf}`}>
+                      <Contador valor={n.valor} sufixo={suf} />
+                      <span className="st-ic" aria-hidden="true">
+                        {pct ? '%' : <Icon name="mais" />}
+                      </span>
+                    </span>
+                    <p>{n.legenda}</p>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  )
 }
