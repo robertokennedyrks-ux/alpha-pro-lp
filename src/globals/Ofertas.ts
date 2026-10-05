@@ -48,6 +48,13 @@ export const Ofertas = global({
       type: 'array',
       minRows: 1,
       maxRows: 6,
+      // Valores de exemplo do protótipo aprovado: servem até a Genesy pôr os preços reais.
+      defaultValue: [
+        { potes: 1, preco: 227, precoDe: 297, ativo: true },
+        { potes: 2, preco: 434, precoDe: 594, ativo: true },
+        { potes: 3, preco: 621, precoDe: 891, ativo: true },
+        { potes: 4, preco: 788, precoDe: 1188, ativo: true },
+      ],
       admin: { initCollapsed: true, components: { RowLabel: '@/components/admin/RowLabelOferta#RowLabelOferta' } },
       fields: [
         {
@@ -69,6 +76,13 @@ export const Ofertas = global({
           label: 'Link do checkout',
           type: 'text',
           admin: ajuda('Para onde o botão "Fazer pedido" leva com essa quantidade.'),
+        },
+        {
+          name: 'foto',
+          label: 'Foto desta quantidade',
+          type: 'upload',
+          relationTo: 'media',
+          admin: ajuda('Aparece no card da oferta e no carrinho. Sem foto, usa a foto do produto.'),
         },
         { name: 'ativo', label: 'Mostrar na página', type: 'checkbox', defaultValue: true },
       ],

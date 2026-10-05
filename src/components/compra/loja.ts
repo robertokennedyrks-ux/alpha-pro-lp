@@ -7,7 +7,7 @@ import type { Media } from '@/payload-types'
 
 export type Foto = { url: string; alt: string; w?: number; h?: number } | null
 
-export type Opcao = { potes: number; preco: number; precoDe: number | null; link: string | null }
+export type Opcao = { potes: number; preco: number; precoDe: number | null; link: string | null; foto: Foto }
 export type BonusItem = { titulo: string; descricao: string; min: number; valor: number; icone: IconName | null; foto: Foto }
 
 export type Loja = {
@@ -56,6 +56,7 @@ export function montarLoja(d: Dados): Loja {
       preco: o.preco,
       precoDe: o.precoDe ?? null,
       link: o.linkCheckout?.trim() || null,
+      foto: foto(o.foto),
     })),
     bonusOn,
     bonus: bonusOn
@@ -91,6 +92,8 @@ export const parcela = (l: Loja, t: number) => centavos(t / l.parcelas)
 export const opcaoDe = (l: Loja, n: number) => l.opcoes.find((o) => o.potes === n) ?? null
 export const totalDe = (l: Loja, n: number) => opcaoDe(l, n)?.preco ?? (l.opcoes[0] ? (l.opcoes[0].preco / l.opcoes[0].potes) * n : 0)
 export const linkDe = (l: Loja, n: number) => opcaoDe(l, n)?.link ?? null
+// Foto da quantidade escolhida; sem ela, a foto do produto.
+export const fotoDe = (l: Loja, n: number): Foto => opcaoDe(l, n)?.foto ?? l.foto
 export const potes = (n: number) => `${n} ${n === 1 ? 'pote' : 'potes'}`
 // "60 cápsulas" x 2 = "120 cápsulas"
 export const capsulasDe = (l: Loja, n: number) =>

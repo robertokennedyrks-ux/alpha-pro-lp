@@ -1,3 +1,4 @@
+import { FotoOferta } from '@/components/compra/FotoOferta'
 import { OfertaEscolha } from '@/components/compra/OfertaEscolha'
 import { montarLoja } from '@/components/compra/loja'
 import { Icon, type IconName } from '@/components/icons'
@@ -43,22 +44,7 @@ export function Oferta({ d }: { d: Dados }) {
           ) : null}
         </div>
         <div className="overflow-hidden rounded-panel border border-border bg-white shadow-[0_18px_50px_rgba(18,18,18,.07)] lg:grid lg:grid-cols-[minmax(0,.9fr)_minmax(0,1.1fr)] lg:items-stretch">
-          {loja.foto ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={loja.foto.url}
-              alt={loja.foto.alt}
-              width={loja.foto.w}
-              height={loja.foto.h}
-              className="h-full min-h-[300px] w-full object-cover"
-            />
-          ) : (
-            <div className="ph min-h-[300px] items-center justify-center rounded-none lg:min-h-full">
-              <span>
-                <b>Foto do produto</b>Pote do {loja.nome} em fundo claro
-              </span>
-            </div>
-          )}
+          <FotoOferta loja={loja} />
           <div className="flex flex-col gap-1.5 p-8 lg:p-11" id="comprar">
             <span className="pill bg-[#d6d6d6] text-graphite">{t.cardEtiqueta}</span>
             <h3 className="mt-3.5 flex items-center gap-2.5 text-[clamp(17px,5.6vw,26px)] leading-[1.15] font-semibold tracking-[-.025em] whitespace-nowrap">

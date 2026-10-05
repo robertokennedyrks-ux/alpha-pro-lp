@@ -181,11 +181,16 @@ export function OfertaEscolha({ loja }: { loja: Loja }) {
                   >
                     <Icon name="check-pequeno" />
                   </button>
-                  <span className={`ofc-pots c${cols}${sm ? ' is-sm' : ''}`} aria-hidden="true">
-                    {Array.from({ length: n }, (_, k) => (
-                      <i key={k} />
-                    ))}
-                  </span>
+                  {o.foto ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img className="ofc-foto" src={o.foto.url} alt="" aria-hidden="true" />
+                  ) : (
+                    <span className={`ofc-pots c${cols}${sm ? ' is-sm' : ''}`} aria-hidden="true">
+                      {Array.from({ length: n }, (_, k) => (
+                        <i key={k} />
+                      ))}
+                    </span>
+                  )}
                   <span className="ofc-tag" aria-label={`${n} ${n === 1 ? 'pote' : 'potes'} para ${n * loja.dias} dias`}>
                     <b>{n}X</b>
                     <span>{n * loja.dias} dias</span>

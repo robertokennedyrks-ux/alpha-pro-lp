@@ -8,7 +8,7 @@ import { brl } from '@/lib/texto'
 
 import { FreteBarra } from './FreteBarra'
 import { LinkPedido } from './LinkPedido'
-import { type Foto, type Loja, capsulasDe, linkDe, liberados, parcela, passo, potes, totalDe } from './loja'
+import { type Foto, type Loja, capsulasDe, fotoDe, linkDe, liberados, parcela, passo, potes, totalDe } from './loja'
 
 function Miniatura({ foto, children }: { foto: Foto; children: React.ReactNode }) {
   if (!foto) return <>{children}</>
@@ -175,7 +175,7 @@ export function CarrinhoPainel({ loja }: { loja: Loja }) {
         <div className="sh-scroll">
           <ul className="ct-list">
             <li className="ct-item">
-              <Miniatura foto={loja.foto}>
+              <Miniatura foto={fotoDe(loja, n)}>
                 <div className={`ct-thumb ct-pots n${Math.min(4, n)}`} aria-hidden="true">
                   {Array.from({ length: n }, (_, k) => (
                     <i key={k} />

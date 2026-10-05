@@ -424,6 +424,10 @@ export interface Oferta {
          * Para onde o botão "Fazer pedido" leva com essa quantidade.
          */
         linkCheckout?: string | null;
+        /**
+         * Aparece no card da oferta e no carrinho. Sem foto, usa a foto do produto.
+         */
+        foto?: (number | null) | Media;
         ativo?: boolean | null;
         id?: string | null;
       }[]
@@ -587,6 +591,7 @@ export interface OfertasSelect<T extends boolean = true> {
         preco?: T;
         precoDe?: T;
         linkCheckout?: T;
+        foto?: T;
         ativo?: T;
         id?: T;
       };
