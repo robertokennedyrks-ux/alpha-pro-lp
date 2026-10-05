@@ -1,10 +1,7 @@
-// Textos da página como estão no protótipo aprovado.
-// Usados em dois lugares: o seed preenche o painel com eles e os componentes
-// caem neles quando um campo do painel fica vazio (a página nunca fica sem texto).
-// Sem imports de servidor: é lido pelo seed e por componentes.
-import type { Media, Texto } from '@/payload-types'
-
-export const textosPadrao = {
+// Textos da página, como estão no protótipo aprovado (reference/alpha-pro-lp.html).
+// Estáticos: o painel só edita preços, frete e bônus.
+// Para trocar uma palavra, edite aqui. Para pôr uma foto real, veja `fotos.ts`.
+export const textos = {
   hero: {
     etiqueta: '60 cápsulas · 30 dias',
     titulo: 'Sua fome está ganhando de você.',
@@ -244,31 +241,3 @@ export const textosPadrao = {
     pedido: 'Fazer pedido',
   },
 }
-
-// Texto do painel com os vazios preenchidos pelo padrão. Listas vazias usam a lista padrão;
-// itens de lista vêm como estão no painel. Uploads e ids passam direto.
-type Cheio<T> = [NonNullable<T>] extends [string]
-  ? NonNullable<T>
-  : [NonNullable<T>] extends [(infer U)[]]
-    ? U[]
-    : [NonNullable<T>] extends [number | Media]
-      ? T
-      : NonNullable<T> extends object
-        ? { [K in keyof NonNullable<T>]-?: Cheio<NonNullable<T>[K]> }
-        : T
-
-export type Textos = Cheio<Texto>
-
-function mesclar(cms: unknown, padrao: unknown): unknown {
-  if (Array.isArray(padrao)) return Array.isArray(cms) && cms.length ? cms : padrao
-  if (typeof padrao === 'string') return typeof cms === 'string' && cms.trim() ? cms : padrao
-  if (padrao && typeof padrao === 'object') {
-    const base = cms && typeof cms === 'object' ? (cms as Record<string, unknown>) : {}
-    const out: Record<string, unknown> = { ...base }
-    for (const [k, v] of Object.entries(padrao)) out[k] = mesclar(base[k], v)
-    return out
-  }
-  return cms ?? padrao
-}
-
-export const textosDe = (cms: Texto): Textos => mesclar(cms, textosPadrao) as Textos

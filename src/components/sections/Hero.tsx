@@ -2,14 +2,11 @@ import Image from 'next/image'
 
 import type { Dados } from '@/lib/dados'
 import { Rico } from '@/lib/texto'
-import type { Media } from '@/payload-types'
-
-const midia = (m: number | Media | null | undefined) => (m && typeof m === 'object' && m.url ? m : null)
 
 // 1. Abertura: etiqueta, foto com selo, título, subtítulo, prova social e CTA.
 export function Hero({ d }: { d: Dados }) {
   const h = d.textos.hero
-  const foto = midia(h.foto)
+  const foto = d.fotos.hero
   const selo = d.prova.selo
   const alturaFoto = 'min-h-[300px] min-[720px]:min-h-[500px] md:min-h-[460px] lg:h-full lg:min-h-[600px]'
 

@@ -2,7 +2,6 @@ import { Icon, type IconName } from '@/components/icons'
 import { IngredientesCarrossel } from '@/components/prova/IngredientesCarrossel'
 import { midia } from '@/components/prova/midia'
 import type { Dados } from '@/lib/dados'
-import { textosDe } from '@/lib/textos-padrao'
 import { Rico } from '@/lib/texto'
 
 // Descrição da foto de cada ingrediente enquanto não há foto no CMS (texto do protótipo).
@@ -16,7 +15,7 @@ const FOTOS: Record<string, string> = {
 
 // 6. ingredientes: carrossel (3 por vez no PC) + "Como usar".
 export function Ingredientes({ d }: { d: Dados }) {
-  const t = textosDe(d.textos).ingredientes
+  const t = d.textos.ingredientes
   return (
     <section className="bg-paper" id="ingredientes" data-secao="ingredientes">
       <div className="wrap stack">
@@ -28,11 +27,11 @@ export function Ingredientes({ d }: { d: Dados }) {
             </h2>
           }
         >
-          {d.ingredientes.map((ing) => {
+          {d.ingredientes.map((ing, i) => {
             const foto = midia(ing.foto)
             const icone = ing.icone as IconName | null | undefined
             return (
-              <article className="ic-card" key={ing.id}>
+              <article className="ic-card" key={i}>
                 {foto ? (
                   <div className="ic-ph ic-foto">
                     {/* eslint-disable-next-line @next/next/no-img-element */}

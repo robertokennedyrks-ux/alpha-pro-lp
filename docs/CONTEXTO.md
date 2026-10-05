@@ -6,7 +6,20 @@ LP do ALPHA PRO, cliente Genesy, feita pela RK Studios (Roberto). Responda ao Ro
 
 - Protótipo aprovado, fonte da verdade visual: `reference/alpha-pro-lp.html` (landing) e `reference/legal.html` (políticas).
 - Decisões da revisão final do Roberto: `reference/decisoes-revisao.md`.
-- Fases 1 a 6 do porte prontas na `main`: base, dados e seed, todas as seções, carrinho e interações, políticas em `/<slug>`, painel do cliente (marca RK, perfis `rk`/`cliente`, Textos da página, rascunho com prévia ao vivo, revalidação ao publicar). Detalhes no `README.md`.
+- Fases 1 a 6 do porte prontas: base, dados, todas as seções, carrinho e interações, políticas em `/<slug>`, painel do cliente (marca RK, perfis `rk`/`cliente`). Detalhes no `README.md`.
+
+## Escopo (mudou em 05/10/2026)
+
+O painel edita **só três coisas**: preços/ofertas, frete grátis e bônus. Todo o resto da
+página é estático, em `src/conteudo/` — textos, fotos, listas (FAQ, ingredientes,
+depoimentos, vídeos), prova social, contato, SEO, cookies e as três políticas.
+
+Saíram junto o rascunho com autosave, o histórico de versões e a pré-visualização ao vivo:
+com três telas de configuração, não compensavam a complexidade.
+
+Banco: **SQLite em arquivo** (`@payloadcms/db-sqlite`). Não há Postgres, Docker nem
+servidor de banco. Motivo: o deploy vai para a **Hostinger no plano Business**, que roda
+aplicação Node.js mas não oferece PostgreSQL — e o Payload 3 não tem adaptador MySQL.
 
 ## Regras que não mudam
 
@@ -24,13 +37,14 @@ LP do ALPHA PRO, cliente Genesy, feita pela RK Studios (Roberto). Responda ao Ro
    - Prints saem em `.comparar/` (fora do git). Diferença esperada: a seção 3 (`nc`) ficou menor porque o card da caneta saiu.
 2. **Acessibilidade**: contraste, foco visível, navegação por teclado no carrinho, menu e abas, `aria` dos controles, textos alternativos, ordem dos títulos, `prefers-reduced-motion`.
 3. **Performance**: Lighthouse no build de produção (`pnpm build && pnpm start`), peso das imagens, fonte, JS do cliente.
-4. **Painel**: revisar com o perfil cliente, de ponta a ponta, as telas que a Genesy vai usar.
+4. **Painel**: revisar com o perfil cliente as três telas que a Genesy vai usar.
 5. **Antes do deploy**: criar as migrations do Payload (`pnpm payload migrate:create`); hoje o dev usa push automático do schema.
+
+## Deploy (Hostinger Business)
+
+- `DATABASE_URI` tem que apontar para um caminho **fora da pasta do deploy**, senão cada publicação apaga o que o cliente configurou. O mesmo vale para a pasta de uploads das mídias.
+- O build pede até 8 GB de heap (`--max-old-space-size=8000`); se o servidor não der conta, compilar local e subir o resultado.
 
 ## Pendente do cliente
 
-Plataforma e links do checkout (um por quantidade de potes), preços reais e preço "de", redes sociais, campos [entre colchetes] nas políticas, fotos e vídeos reais, hospedagem e subdomínio.
-
-## Plano completo
-
-Claude Doc com as 7 fases: https://claude.ai/code/artifact/b0dce7d3-3738-4254-8511-0d9806ccc55f
+Plataforma e links do checkout (um por quantidade de potes), preços reais e preço "de", redes sociais, campos [entre colchetes] nas políticas (`src/conteudo/politicas.ts`), fotos e vídeos reais (`src/conteudo/fotos.ts`), subdomínio.

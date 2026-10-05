@@ -1,15 +1,13 @@
-import { midiaDe } from '@/components/Foto'
 import { Icon } from '@/components/icons'
 import { Contador } from '@/components/prova/Contador'
 import { midia } from '@/components/prova/midia'
 import type { Dados } from '@/lib/dados'
-import { textosDe } from '@/lib/textos-padrao'
 
 // 5. prova social: conversas reais (ou o print original) e os números da linha.
 export function Depoimentos({ d }: { d: Dados }) {
   const numeros = d.prova.numeros ?? []
-  const t = textosDe(d.textos).depoimentos
-  const foto = midiaDe(t.foto)
+  const t = d.textos.depoimentos
+  const foto = d.fotos.depoimentos
   return (
     <section id="depoimentos" data-secao="depoimentos">
       <div className="wrap stack">
@@ -21,10 +19,10 @@ export function Depoimentos({ d }: { d: Dados }) {
         {d.depoimentos.length > 0 && (
           <>
             <div className="revs">
-              {d.depoimentos.map((dep) => {
+              {d.depoimentos.map((dep, i) => {
                 const print = midia(dep.print)
                 return (
-                  <div className="rev" key={dep.id}>
+                  <div className="rev" key={i}>
                     <h3>{dep.titulo}</h3>
                     {print ? (
                       // eslint-disable-next-line @next/next/no-img-element
@@ -43,7 +41,7 @@ export function Depoimentos({ d }: { d: Dados }) {
                           <s />
                         </div>
                         {(dep.mensagens ?? []).map((m, k) => (
-                          <div key={m.id ?? k} className={`b ${m.lado === 'loja' ? 'out' : 'in'}`}>
+                          <div key={k} className={`b ${m.lado === 'loja' ? 'out' : 'in'}`}>
                             {m.texto}
                             {m.hora ? <small>{m.hora}</small> : null}
                           </div>
@@ -83,7 +81,7 @@ export function Depoimentos({ d }: { d: Dados }) {
                 const pct = n.sufixo?.trim() === '%'
                 const suf = !pct && n.sufixo ? ` ${n.sufixo.trim()}` : ''
                 return (
-                  <div key={n.id ?? k}>
+                  <div key={k}>
                     <span className="st-num" aria-label={pct ? `${n.valor}%` : `Mais de ${n.valor}${suf}`}>
                       <Contador valor={n.valor} sufixo={suf} />
                       <span className="st-ic" aria-hidden="true">

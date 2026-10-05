@@ -8,14 +8,12 @@ import { getDados } from '@/lib/dados'
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getDados()
-  const imagem = typeof seo.imagem === 'object' && seo.imagem?.url ? seo.imagem.url : undefined
-  const favicon = typeof seo.favicon === 'object' && seo.favicon?.url ? seo.favicon.url : '/favicon.svg'
   return {
     title: seo.titulo || 'ALPHA PRO',
     description: seo.descricao || undefined,
     robots: seo.indexar === false ? { index: false, follow: false } : undefined,
-    openGraph: imagem ? { images: [imagem] } : undefined,
-    icons: { icon: favicon },
+    openGraph: seo.imagem ? { images: [seo.imagem] } : undefined,
+    icons: { icon: seo.favicon },
     metadataBase: process.env.NEXT_PUBLIC_SITE_URL ? new URL(process.env.NEXT_PUBLIC_SITE_URL) : undefined,
   }
 }

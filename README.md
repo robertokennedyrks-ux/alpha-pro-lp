@@ -1,22 +1,24 @@
 # ALPHA PRO · Landing page
 
-Next.js 16 (App Router) + Payload CMS 3 + Tailwind v4 + Postgres.
+Next.js 16 (App Router) + Payload CMS 3 + Tailwind v4 + SQLite.
 O site fica em `/` e o painel administrativo em `/admin`, no mesmo servidor.
+
+O painel edita **três coisas**: preços, frete grátis e bônus. Todo o resto da página
+é estático, em `src/conteudo/`.
 
 ## Rodar local
 
-Precisa de Node 20.9+, pnpm 10+ e Docker.
+Precisa só de Node 20.9+ e pnpm 10+. Não precisa de Docker nem de servidor de banco.
 
 ```bash
 pnpm install
 cp .env.example .env        # depois troque o PAYLOAD_SECRET
-pnpm db:up                  # sobe o Postgres em Docker
-pnpm seed                   # preenche o painel com o conteúdo do protótipo
 pnpm dev                    # http://localhost:3000 e http://localhost:3000/admin
 ```
 
-Na primeira vez que abrir `/admin`, o Payload pede para criar o primeiro usuário. Ele vira perfil **RK Studios** automaticamente.
-`pnpm seed` só roda com o banco vazio. Para apagar o conteúdo e preencher de novo: `pnpm seed:reset` (usuários e mídias ficam).
+O banco é um arquivo (`alpha-pro.db`), criado sozinho na primeira execução e fora do git.
+Na primeira vez que abrir `/admin`, o Payload pede para criar o primeiro usuário.
+Ele vira perfil **RK Studios** automaticamente.
 
 ## O que se edita no painel
 
@@ -25,33 +27,43 @@ Na primeira vez que abrir `/admin`, o Payload pede para criar o primeiro usuári
 | Loja | Ofertas e preços | produto, desconto no Pix, parcelas, opções de 1 a 4 potes (preço, preço "de", link do checkout) |
 | Loja | Frete grátis | liga/desliga, valor mínimo, segmentos da barra, textos |
 | Loja | Bônus | liga/desliga, textos da seção, cada bônus (título, descrição, a partir de quantos potes, valor riscado, ícone, imagem) |
-| Conteúdo | Textos da página | uma aba por seção, na ordem da página (topo e menu lateral, dor, "não é culpa sua", destaque, produto, depoimentos, vídeos, ingredientes, "já usa", bônus, oferta, dúvidas, final, rodapé) e os textos dos botões: títulos, tags, parágrafos, listas e as fotos de cada seção. Campo vazio volta para o texto do protótipo (`src/lib/textos-padrao.ts`) |
-| Conteúdo | Prova social | faixa de anúncios, selo da foto, números da linha |
-| Conteúdo | Depoimentos, Vídeos, Perguntas frequentes, Ingredientes | listas com ordem por arrastar e "Mostrar na página" |
-| Conteúdo | Políticas | Trocas e devoluções, Privacidade e Termos (cada uma vira uma URL) |
-| Configurações | Contato e rodapé | WhatsApp, loja física, redes (vazio esconde), grupos de links, aviso legal |
-| Configurações | SEO e compartilhamento, Aviso de cookies | título, descrição, imagem, ícone da aba (favicon); texto e botão do aviso |
+| Sistema | Mídias | as imagens dos bônus e a foto do produto |
+| Sistema | Usuários | só o perfil RK Studios vê |
 
-## Rascunho, pré-visualização e publicação
+Salvar grava direto e a página no ar é gerada de novo (revalidação). Não há rascunho,
+versões nem pré-visualização: com três telas de configuração, não compensavam a complexidade.
 
-- Tudo o que muda na página (os itens acima, menos Mídias) tem rascunho com salvamento automático.
-- O ícone de olho no topo do formulário abre a página ao lado, em celular, tablet ou computador, e ela se atualiza a cada mudança. Uma etiqueta "Pré-visualização do rascunho" aparece no canto.
-- A página no ar só muda em **Publicar alterações**, que gera a página de novo (revalidação). Itens novos nascem como rascunho e não aparecem até serem publicados.
-- "Versões" guarda as últimas 20 de cada item, para voltar atrás.
-- Por baixo: `/previa?caminho=/` liga o modo rascunho do Next (só com login no painel) e `/previa/sair` desliga.
+## O que é estático (editar no código)
+
+| Arquivo | O que tem |
+| --- | --- |
+| `src/conteudo/textos.ts` | todos os textos da página, seção por seção, na ordem em que aparecem |
+| `src/conteudo/fotos.ts` | as fotos de cada seção — um `null` por foto, trocar quando as reais chegarem |
+| `src/conteudo/listas.ts` | perguntas frequentes, ingredientes, depoimentos e vídeos |
+| `src/conteudo/site.ts` | prova social, contato e rodapé, SEO e aviso de cookies |
+| `src/conteudo/politicas.ts` | as três políticas, em markdown simples |
+
+### Pôr uma foto real
+
+1. jogue o arquivo em `public/fotos/`
+2. em `src/conteudo/fotos.ts`, troque o `null` por `{ url: '/fotos/hero.jpg', alt: '...', width: 1440, height: 1800 }`
+
+Enquanto for `null`, a seção mostra o espaço reservado do protótipo com a descrição da foto que falta.
 
 ## Perfis de acesso
 
 | Perfil | O que pode |
 | --- | --- |
 | RK Studios (`rk`) | tudo, inclusive criar, editar e apagar usuários e trocar perfis |
-| Cliente (`cliente`) | editar todo o conteúdo e a própria conta. Não vê o menu Usuários nem muda o próprio perfil |
+| Cliente (`cliente`) | editar preços, frete, bônus, mídias e a própria conta |
 
 Login bloqueia por 10 minutos depois de 5 senhas erradas.
 
 ## Marca do painel
 
-Logo, ícone e aviso do login ficam em `src/components/admin/Marca.tsx`; fonte, raios e estilos em `src/app/(payload)/custom.scss` (a fonte vem de `public/fonts`). O favicon do site é editável em SEO; sem imagem, usa `public/favicon.svg`.
+Logo, ícone e aviso do login ficam em `src/components/admin/Marca.tsx`; fonte, raios e estilos em
+`src/app/(payload)/custom.scss` (a fonte vem de `public/fonts`). O favicon do site sai de
+`src/conteudo/site.ts`.
 
 ## Estrutura
 
@@ -59,14 +71,12 @@ Logo, ícone e aviso do login ficam em `src/components/admin/Marca.tsx`; fonte, 
 src/
   app/(site)/          páginas públicas (landing e políticas)
   app/(payload)/       painel admin e API do Payload (não editar à mão)
+  conteudo/            tudo o que é estático: textos, fotos, listas, políticas
   components/sections/ seções da landing, uma por arquivo
-  components/ui/       peças reutilizáveis (botão, tag, etc.)
   components/icons/    catálogo único de ícones (Icon name="...")
-  collections/         coleções do CMS (Depoimentos, FAQ, Políticas, ...)
-  globals/             configurações únicas do CMS (Ofertas, Frete, Bônus, ...)
-  components/admin/    marca do painel (logo, ícone, login)
-  hooks/               revalidação da página ao publicar
-  seed/                dados iniciais vindos do protótipo (dados.json + políticas em .md)
+  collections/         Mídias e Usuários
+  globals/             as três telas do painel (Ofertas, Frete, Bônus)
+  hooks/               revalidação da página ao salvar
 reference/             protótipo aprovado em HTML, fonte da verdade visual
 ```
 
@@ -83,8 +93,6 @@ reference/             protótipo aprovado em HTML, fonte da verdade visual
 | Comando | O que faz |
 | --- | --- |
 | `pnpm dev` | servidor local |
-| `pnpm db:up` / `pnpm db:down` | sobe ou derruba o Postgres |
-| `pnpm seed` / `pnpm seed:reset` | preenche o painel com o conteúdo do protótipo |
 | `pnpm build` / `pnpm start` | build de produção |
 | `pnpm generate:types` | atualiza `src/payload-types.ts` |
 | `pnpm generate:importmap` | atualiza o import map do admin |
@@ -93,3 +101,15 @@ reference/             protótipo aprovado em HTML, fonte da verdade visual
 | `pnpm comparar <nome> <sel-protótipo> <sel-site>` | print de um trecho nos dois, em 390, 800 e 1440px |
 
 As comparações usam o Playwright. Na primeira vez: `pnpm exec playwright install chromium`.
+
+## Deploy (Hostinger Business)
+
+O plano Business roda aplicação Node.js. Dois cuidados:
+
+- **O banco e os uploads precisam ficar fora da pasta do deploy.** Aponte `DATABASE_URI`
+  para um caminho persistente (ex.: `file:/home/usuario/dados/alpha-pro.db`), senão cada
+  publicação de código apaga o que o cliente configurou.
+- **O build pede bastante memória** (`--max-old-space-size=8000`). Se o servidor não der conta,
+  rode `pnpm build` localmente e suba o resultado.
+
+Antes do primeiro deploy, gerar as migrations: `pnpm payload migrate:create`.

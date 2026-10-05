@@ -1,5 +1,3 @@
-import { draftMode } from 'next/headers'
-
 import { PedidoProvider } from '@/components/pedido'
 import { AvisoCookies } from '@/components/sections/AvisoCookies'
 import { Bonus } from '@/components/sections/Bonus'
@@ -10,7 +8,6 @@ import { Dor } from '@/components/sections/Dor'
 import { Duvidas } from '@/components/sections/Duvidas'
 import { Final } from '@/components/sections/Final'
 import { Hero } from '@/components/sections/Hero'
-import { Rascunho } from '@/components/Rascunho'
 import { Ingredientes } from '@/components/sections/Ingredientes'
 import { JaUsa } from '@/components/sections/JaUsa'
 import { NaoECulpa } from '@/components/sections/NaoECulpa'
@@ -21,14 +18,11 @@ import { Topo } from '@/components/sections/Topo'
 import { Videos } from '@/components/sections/Videos'
 import { getDados } from '@/lib/dados'
 
-// Gerada estática; o painel revalida ao publicar (src/hooks/revalidar.ts).
-// Na pré-visualização (modo rascunho) o Next ignora o cache e lê o rascunho.
+// Gerada estática; o painel a gera de novo ao salvar (src/hooks/revalidar.ts).
 export default async function HomePage() {
-  const { isEnabled: rascunho } = await draftMode()
-  const d = await getDados(rascunho)
+  const d = await getDados()
   return (
     <PedidoProvider>
-      {rascunho && <Rascunho serverURL={process.env.NEXT_PUBLIC_SITE_URL ?? ''} />}
       <Topo d={d} />
       <main>
         <Hero d={d} />

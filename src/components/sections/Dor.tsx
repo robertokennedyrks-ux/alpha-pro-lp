@@ -5,7 +5,6 @@ import { Trilha } from '@/components/historia/Trilha'
 import { Icon, type IconName } from '@/components/icons'
 import { FotoOuEspaco } from '@/components/Foto'
 import type { Dados } from '@/lib/dados'
-import { textosDe } from '@/lib/textos-padrao'
 
 // Posição de cada balão em volta da foto (o 2º e o 3º são escuros).
 const lugares = ['b1', 'b2 dk', 'b3 dk', 'b4']
@@ -29,7 +28,7 @@ function LinhaLetras({ texto }: { texto: string }) {
 
 // 2. espelho da dor.
 export function Dor({ d }: { d: Dados }) {
-  const t = textosDe(d.textos).dor
+  const t = d.textos.dor
   // "Toda segunda você começa." vira "começa," no computador, e a linha 2 começa com minúscula.
   const ponto = t.fecho1.trimEnd().endsWith('.')
   const l1 = ponto ? t.fecho1.trimEnd().slice(0, -1) : t.fecho1
@@ -47,7 +46,7 @@ export function Dor({ d }: { d: Dados }) {
 
         <Trilha className="tl flex flex-col gap-[14px] md:max-w-[600px] lg:col-[1]! lg:row-[4] lg:max-w-none">
           {t.dia.map((item, i) => (
-            <li key={item.id ?? i} className="relative grid grid-cols-[42px_1fr] gap-[14px]">
+            <li key={i} className="relative grid grid-cols-[42px_1fr] gap-[14px]">
               <span className="n grid size-[42px] place-items-center rounded-full bg-ink text-[17px] leading-none font-semibold text-white">
                 {i + 1}
               </span>
@@ -70,7 +69,7 @@ export function Dor({ d }: { d: Dados }) {
               aria-hidden="true"
             />
             <FotoOuEspaco
-              foto={t.foto}
+              foto={d.fotos.dor}
               titulo="Foto"
               texto="Mulher, olhar cansado"
               sizes="300px"
@@ -78,7 +77,7 @@ export function Dor({ d }: { d: Dados }) {
             />
             <Baloes className="bx-bal" aria-label="O que você vive hoje">
               {t.baloes.slice(0, lugares.length).map((b, i) => (
-                <li key={b.id ?? i} className={lugares[i]}>
+                <li key={i} className={lugares[i]}>
                   {b.texto}
                 </li>
               ))}

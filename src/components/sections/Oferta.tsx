@@ -2,7 +2,6 @@ import { OfertaEscolha } from '@/components/compra/OfertaEscolha'
 import { montarLoja } from '@/components/compra/loja'
 import { Icon, type IconName } from '@/components/icons'
 import type { Dados } from '@/lib/dados'
-import { textosDe } from '@/lib/textos-padrao'
 import { Rico, brl } from '@/lib/texto'
 
 // 8. oferta: quanto já gastou, card do produto com o carrossel de ofertas e selos de confiança.
@@ -12,7 +11,7 @@ export function Oferta({ d }: { d: Dados }) {
   // "menos de R$ 7,60": preço por dia do pote avulso, arredondado para cima nos 10 centavos.
   const porDia = avulso ? brl(Math.ceil((avulso.preco / avulso.potes / loja.dias) * 10 - 1e-9) / 10) : ''
   const fraseDia = (d.textos.oferta?.precoPorDia || '').replace('{valor}', porDia)
-  const t = textosDe(d.textos).oferta
+  const t = d.textos.oferta
   const fraseGastos = t.fraseGastos.replace(/\{produto\}/g, loja.nome).replace(/\{valor\}/g, porDia)
 
   return (
@@ -29,7 +28,7 @@ export function Oferta({ d }: { d: Dados }) {
           >
             {t.gastos.map((g, i) => (
               <li
-                key={g.id ?? i}
+                key={i}
                 className="flex min-w-0 items-center gap-2.5 text-[15px] leading-[1.3] font-semibold tracking-[-.01em] text-ink max-[380px]:flex-col max-[380px]:items-start max-[380px]:gap-1.5"
               >
                 <span className="grid size-11 flex-none place-items-center text-ink">
@@ -87,7 +86,7 @@ export function Oferta({ d }: { d: Dados }) {
         </div>
         <div className="mt-[22px] grid grid-cols-2 gap-3 lg:mt-7 lg:grid-cols-4 lg:gap-4">
           {t.confianca.map((c, i) => (
-            <div key={c.id ?? i} className="flex min-w-0 flex-col items-center gap-1.5 rounded-panel bg-white p-6 text-center">
+            <div key={i} className="flex min-w-0 flex-col items-center gap-1.5 rounded-panel bg-white p-6 text-center">
               <span className="mb-2 grid size-16 place-items-center rounded-full bg-paper text-ink">
                 {c.icone && <Icon name={c.icone as IconName} className="size-8" />}
               </span>

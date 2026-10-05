@@ -4,7 +4,6 @@ import { Icon, type IconName } from '@/components/icons'
 import { GrupoRodape } from '@/components/topo/GrupoRodape'
 import { ComQuebras } from '@/components/Foto'
 import { type Dados, whatsappUrl } from '@/lib/dados'
-import { textosDe } from '@/lib/textos-padrao'
 
 const externo = (href: string) => (/^https?:/.test(href) ? { target: '_blank', rel: 'noopener' } : {})
 
@@ -38,7 +37,7 @@ function TextoEmpresa({ texto, fone, numero }: { texto: string; fone?: string | 
 
 export function Rodape({ d }: { d: Dados }) {
   const c = d.contato
-  const t = textosDe(d.textos).rodape
+  const t = d.textos.rodape
   const bonusOn = d.bonus.ativo !== false
   const wa = whatsappUrl(d)
   const redesAtivas = redes.filter((r) => c.redes?.[r.k])
@@ -138,7 +137,7 @@ export function Rodape({ d }: { d: Dados }) {
           <div className="ft-sec mt-3.5 text-sm text-ink lg:flex lg:items-center lg:gap-6" aria-label="Compre com segurança">
             <ul className="ft-seals m-0 grid list-none grid-cols-2 gap-x-4 gap-y-3.5 p-0 lg:grid-cols-[repeat(4,auto)] lg:justify-start lg:gap-x-9 lg:gap-y-4">
               {t.selos.map((s, i) => (
-                <Selo key={s.id ?? i} icone={s.icone} titulo={s.titulo} texto={s.texto ?? ''} />
+                <Selo key={i} icone={s.icone} titulo={s.titulo} texto={s.texto ?? ''} />
               ))}
             </ul>
           </div>

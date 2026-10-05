@@ -1,14 +1,13 @@
-import { FotoCobre, midiaDe } from '@/components/Foto'
+import { FotoCobre } from '@/components/Foto'
 import { Icon } from '@/components/icons'
 import type { Dados } from '@/lib/dados'
-import { textosDe } from '@/lib/textos-padrao'
 import { Rico } from '@/lib/texto'
 
 // 10. Chamada final: foto da persona com a pergunta e as duas escolhas.
 export function Final({ d }: { d: Dados }) {
   const condicao = d.textos.hero.condicao
-  const t = textosDe(d.textos).final
-  const foto = midiaDe(t.foto)
+  const t = d.textos.final
+  const foto = d.fotos.final
   return (
     <section className="final" data-secao="final">
       <div className="wrap">

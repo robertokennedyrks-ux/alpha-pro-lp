@@ -1,16 +1,18 @@
 import Image from 'next/image'
 import React from 'react'
 
+import type { Imagem } from '@/conteudo/fotos'
 import type { Media } from '@/payload-types'
 
-export type FotoCms = number | Media | null | undefined
+export type FotoCms = number | Media | Imagem | null | undefined
 
 // Upload do CMS já populado e com URL (ou null).
-export const midiaDe = (m: FotoCms): Media | null => (m && typeof m === 'object' && m.url ? m : null)
+export const midiaDe = (m: FotoCms): Imagem | null =>
+  m && typeof m === 'object' && m.url ? { url: m.url, alt: m.alt ?? '', width: m.width ?? undefined, height: m.height ?? undefined } : null
 
 // Só a imagem, cobrindo o pai inteiro (o pai precisa ser posicionado).
-export function FotoCobre({ foto, sizes = '100vw', className = '' }: { foto: Media; sizes?: string; className?: string }) {
-  return <Image src={foto.url!} alt={foto.alt ?? ''} fill sizes={sizes} className={`object-cover ${className}`} />
+export function FotoCobre({ foto, sizes = '100vw', className = '' }: { foto: Imagem; sizes?: string; className?: string }) {
+  return <Image src={foto.url} alt={foto.alt} fill sizes={sizes} className={`object-cover ${className}`} />
 }
 
 type Props = {

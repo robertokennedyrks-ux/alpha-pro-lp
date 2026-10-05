@@ -2,7 +2,6 @@ import { FaixaFotos, type FotoFaixa } from '@/components/historia/FaixaFotos'
 import { Letras } from '@/components/historia/letras'
 import { Revelar } from '@/components/historia/Revelar'
 import type { Dados } from '@/lib/dados'
-import { textosDe } from '@/lib/textos-padrao'
 
 // Alturas da faixa de fotos, em ciclo (iguais ao protótipo).
 const ALTURAS = [260, 330, 290, 340, 280]
@@ -15,13 +14,13 @@ const Box = ({ texto }: { texto: string }) => (
 
 // 4a. "Conheça a sua real versão alpha".
 export function Destaque({ d }: { d: Dados }) {
-  const t = textosDe(d.textos).destaque
+  const t = d.textos.destaque
   const rotulo = [t.linha1, t.linha2, t.linha2b, t.linha3].join(' ').toLowerCase()
   const fotos: FotoFaixa[] = t.fotos.map((f, i) => ({
     altura: ALTURAS[i % ALTURAS.length],
     titulo: f.titulo ?? '',
     texto: f.texto ?? '',
-    foto: f.foto,
+    foto: d.fotos.destaque[i] ?? null,
   }))
   return (
     <section

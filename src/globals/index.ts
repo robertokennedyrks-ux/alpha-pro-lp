@@ -1,8 +1,3 @@
 export { Bonus } from './Bonus'
-export { Contato } from './Contato'
-export { Cookies } from './Cookies'
 export { FreteGratis } from './FreteGratis'
 export { Ofertas } from './Ofertas'
-export { ProvaSocial } from './ProvaSocial'
-export { Seo } from './Seo'
-export { Textos } from './Textos'

@@ -2,7 +2,6 @@ import { CartoesNc } from '@/components/historia/CartoesNc'
 import { Icon } from '@/components/icons'
 import { FotoOuEspaco } from '@/components/Foto'
 import type { Dados } from '@/lib/dados'
-import { textosDe } from '@/lib/textos-padrao'
 
 // Mesmo texto com versões diferentes no computador e no celular: a parte comum fica uma vez só.
 function Variante({ pc, celular }: { pc: string; celular: string }) {
@@ -23,7 +22,7 @@ function Variante({ pc, celular }: { pc: string; celular: string }) {
 
 // 3. não é culpa sua.
 export function NaoECulpa({ d }: { d: Dados }) {
-  const t = textosDe(d.textos).naoCulpa
+  const t = d.textos.naoCulpa
   // Linha 3 no celular: vazia usa a linha 3 (se a linha 3 também estiver vazia, o texto do protótipo).
   const cms = d.textos.naoCulpa
   const l3Celular = cms?.fecho3Celular?.trim() || (cms?.fecho3?.trim() ? t.fecho3 : t.fecho3Celular)
@@ -32,7 +31,7 @@ export function NaoECulpa({ d }: { d: Dados }) {
     <section className="nc overflow-x-clip" data-secao="nao-e-culpa">
       <div className="wrap stack lg:grid lg:grid-cols-[minmax(0,.9fr)_minmax(0,1.1fr)] lg:gap-x-14 lg:gap-y-[18px] lg:*:col-[2]">
         <FotoOuEspaco
-          foto={t.foto}
+          foto={d.fotos.naoCulpa}
           titulo="Foto 3"
           texto="Mulher pensativa, mão no rosto, olhar cansado, em P&B. Na mesa, desfocados: xícara de chá e cartela de remédio."
           sizes="(min-width:1024px) 45vw, 100vw"
@@ -45,7 +44,7 @@ export function NaoECulpa({ d }: { d: Dados }) {
         <div className="flex flex-wrap gap-2" aria-label="O que você já tentou">
           {t.tentativas.map((item, i) => (
             <span
-              key={item.id ?? i}
+              key={i}
               className="inline-flex items-center gap-[7px] rounded-sm border border-border bg-paper py-[9px] pr-[14px] pl-[11px] text-[14px] leading-none font-bold text-graphite"
             >
               <Icon name="x-pequeno" className="size-[13px] text-stone" />
@@ -56,7 +55,7 @@ export function NaoECulpa({ d }: { d: Dados }) {
         <CartoesNc className="mt-1.5 flex flex-col gap-2.5">
           {t.cards.map((c, i) => (
             <article
-              key={c.id ?? i}
+              key={i}
               className="nc-card relative flex min-h-[132px] flex-col justify-center gap-2 overflow-hidden rounded-card bg-paper py-[22px] pr-[110px] pl-5"
             >
               <Icon

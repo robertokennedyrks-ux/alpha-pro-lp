@@ -2,7 +2,6 @@ import { BonusLista } from '@/components/compra/BonusLista'
 import { LinkPedido } from '@/components/compra/LinkPedido'
 import { montarLoja } from '@/components/compra/loja'
 import type { Dados } from '@/lib/dados'
-import { textosDe } from '@/lib/textos-padrao'
 import { brl } from '@/lib/texto'
 
 // 7b. bônus: quanto mais potes, mais presentes. Some inteira com os bônus desligados.
@@ -12,7 +11,7 @@ export function Bonus({ d }: { d: Dados }) {
   const maxPotes = Math.max(...loja.bonus.map((b) => b.min))
   const soma = loja.bonus.reduce((a, b) => a + b.valor, 0)
   const sub = [d.bonus.subtitulo, d.bonus.entrega].filter(Boolean).join(' ')
-  const t = textosDe(d.textos).bonus
+  const t = d.textos.bonus
 
   return (
     <section className="bn" id="bonus" data-secao="bonus">

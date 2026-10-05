@@ -1,14 +1,13 @@
 import { midia } from '@/components/prova/midia'
 import { VideosCarrossel } from '@/components/prova/VideosCarrossel'
 import type { Dados } from '@/lib/dados'
-import { textosDe } from '@/lib/textos-padrao'
 
 // 5b. depoimentos em vídeo: carrossel centrado + visualizador em stories.
 export function Videos({ d }: { d: Dados }) {
   if (!d.videos.length) return null
-  const t = textosDe(d.textos).videos
-  const itens = d.videos.map((v) => ({
-    id: v.id,
+  const t = d.textos.videos
+  const itens = d.videos.map((v, i) => ({
+    id: i,
     tema: v.tema,
     nome: v.nome,
     legenda: v.legenda,

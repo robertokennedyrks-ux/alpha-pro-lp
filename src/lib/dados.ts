@@ -1,59 +1,43 @@
 import 'server-only'
 
-import { getPayload, type Where } from 'payload'
+import { getPayload } from 'payload'
 import { cache } from 'react'
 
 import config from '@payload-config'
+import { textos } from '@/conteudo/textos'
+import { fotos } from '@/conteudo/fotos'
+import { depoimentos, faq, ingredientes, videos } from '@/conteudo/listas'
+import { contato, cookies, prova, seo } from '@/conteudo/site'
+import { abasPoliticas } from '@/conteudo/politicas'
 
-// Fora da pré-visualização, só o que já foi publicado (itens novos nascem como rascunho).
-export const soPublicado = (rascunho: boolean): Where => (rascunho ? {} : { _status: { equals: 'published' } })
-
-// Tudo o que a landing lê do CMS, numa ida só ao banco por requisição/geração.
-// rascunho = true na pré-visualização do painel: lê a versão mais recente, publicada ou não.
-export const getDados = cache(async (rascunho: boolean = false) => {
+// O painel edita três coisas: preços, frete grátis e bônus. Tudo o mais é estático,
+// em `src/conteudo/`. Esta função junta as duas metades numa forma só para as seções.
+export const getDados = cache(async () => {
   const payload = await getPayload({ config })
-  const g = <S extends Parameters<typeof payload.findGlobal>[0]['slug']>(slug: S) =>
-    payload.findGlobal({ slug, depth: 1, draft: rascunho })
-  const lista = <C extends 'depoimentos' | 'videos' | 'faq' | 'ingredientes'>(collection: C) =>
-    payload
-      .find({
-        collection,
-        where: { ativo: { equals: true }, ...soPublicado(rascunho) },
-        sort: '_order',
-        limit: 100,
-        depth: 1,
-        draft: rascunho,
-      })
-      .then((r) => r.docs)
+  const [ofertas, frete, bonus] = await Promise.all([
+    payload.findGlobal({ slug: 'ofertas', depth: 1 }),
+    payload.findGlobal({ slug: 'frete-gratis', depth: 1 }),
+    payload.findGlobal({ slug: 'bonus', depth: 1 }),
+  ])
 
-  const [ofertas, frete, bonus, textos, prova, contato, seo, cookies, depoimentos, videos, faq, ingredientes, politicas] =
-    await Promise.all([
-      g('ofertas'),
-      g('frete-gratis'),
-      g('bonus'),
-      g('textos'),
-      g('prova-social'),
-      g('contato'),
-      g('seo'),
-      g('cookies'),
-      lista('depoimentos'),
-      lista('videos'),
-      lista('faq'),
-      lista('ingredientes'),
-      payload
-        .find({
-          collection: 'politicas',
-          where: soPublicado(rascunho),
-          sort: '_order',
-          limit: 20,
-          depth: 0,
-          draft: rascunho,
-          select: { titulo: true, slug: true },
-        })
-        .then((r) => r.docs),
-    ])
-
-  return { ofertas, frete, bonus, textos, prova, contato, seo, cookies, depoimentos, videos, faq, ingredientes, politicas }
+  return {
+    // do painel
+    ofertas,
+    frete,
+    bonus,
+    // de src/conteudo
+    textos,
+    fotos,
+    prova,
+    contato,
+    seo,
+    cookies,
+    depoimentos,
+    videos,
+    faq,
+    ingredientes,
+    politicas: abasPoliticas,
+  }
 })
 
 export type Dados = Awaited<ReturnType<typeof getDados>>

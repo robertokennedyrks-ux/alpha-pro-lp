@@ -50,3 +50,9 @@ node_modules/
 /playwright/.cache/
 /media
 /.comparar
+
+# Banco SQLite local
+*.db
+*.db-journal
+*.db-wal
+*.db-shm

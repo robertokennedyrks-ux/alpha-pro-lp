@@ -2,7 +2,6 @@ import { Sentir } from '@/components/historia/Sentir'
 import { Icon, type IconName } from '@/components/icons'
 import { ComQuebras } from '@/components/Foto'
 import type { Dados } from '@/lib/dados'
-import { textosDe } from '@/lib/textos-padrao'
 import { Rico } from '@/lib/texto'
 
 const cabeca =
@@ -29,7 +28,7 @@ function ItemSentir({ icone, texto, copia }: { icone?: string | null; texto: str
 
 // 4. o produto.
 export function Produto({ d }: { d: Dados }) {
-  const t = textosDe(d.textos).produto
+  const t = d.textos.produto
   const sem = t.tabelaSem
   const com = t.tabelaCom
   return (
@@ -53,10 +52,10 @@ export function Produto({ d }: { d: Dados }) {
           </p>
           <ul className="mt-[26px] grid grid-cols-2 gap-x-3 gap-y-[26px] md:grid-cols-4 lg:mt-10 lg:flex lg:w-max lg:gap-0">
             {t.sentir.map((s, i) => (
-              <ItemSentir key={s.id ?? i} icone={s.icone} texto={s.texto} />
+              <ItemSentir key={i} icone={s.icone} texto={s.texto} />
             ))}
             {t.sentir.map((s, i) => (
-              <ItemSentir key={`cl-${s.id ?? i}`} icone={s.icone} texto={s.texto} copia />
+              <ItemSentir key={`cl-${i}`} icone={s.icone} texto={s.texto} copia />
             ))}
           </ul>
         </Sentir>
@@ -87,7 +86,7 @@ export function Produto({ d }: { d: Dados }) {
             </div>
             {t.tabela.map((l, i) => (
               <div
-                key={l.id ?? i}
+                key={i}
                 className="cmp-row grid grid-cols-[minmax(0,1fr)_76px_76px] md:grid-cols-[minmax(0,1fr)_112px_112px]"
                 role="row"
               >

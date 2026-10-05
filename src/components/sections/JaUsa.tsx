@@ -1,11 +1,10 @@
 import { Icon } from '@/components/icons'
 import { JaUsaComparacao } from '@/components/prova/JaUsaComparacao'
 import type { Dados } from '@/lib/dados'
-import { textosDe } from '@/lib/textos-padrao'
 
 // 7. "Já usa ALPHA?": convite para quem já é cliente.
 export function JaUsa({ d }: { d: Dados }) {
-  const t = textosDe(d.textos).jaUsa
+  const t = d.textos.jaUsa
   return (
     <section className="jc" id="ja-usa" data-secao="ja-usa">
       <div className="wrap">
@@ -32,13 +31,13 @@ export function JaUsa({ d }: { d: Dados }) {
         <p className="jc-sub">{t.subtitulo}</p>
         <ul className="jc-list">
           {t.vantagens.map((v, i) => (
-            <li key={v.id ?? i}>
+            <li key={i}>
               <Icon name="check" />
               {v.texto}
             </li>
           ))}
         </ul>
-        <JaUsaComparacao forte={t.forte} rotulo={t.tickerRotulo} itens={t.ticker.map((v) => ({ texto: v.texto, foto: v.foto }))} />
+        <JaUsaComparacao forte={t.forte} rotulo={t.tickerRotulo} itens={t.ticker.map((v, i) => ({ texto: v.texto, foto: d.fotos.ticker[i] ?? null }))} />
         <div className="cta">
           <a className="btn" href="#comprar">
             {d.textos.botoes?.produto || 'Quero meu ALPHA PRO'} <span className="arr">→</span>
