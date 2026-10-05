@@ -89,3 +89,7 @@ reference/             protótipo aprovado em HTML, fonte da verdade visual
 | `pnpm generate:types` | atualiza `src/payload-types.ts` |
 | `pnpm generate:importmap` | atualiza o import map do admin |
 | `pnpm lint` / `pnpm typecheck` | checagens |
+| `pnpm comparar:alturas` | altura de cada seção e print da página inteira, protótipo x site |
+| `pnpm comparar <nome> <sel-protótipo> <sel-site>` | print de um trecho nos dois, em 390, 800 e 1440px |
+
+As comparações usam o Playwright. Na primeira vez: `pnpm exec playwright install chromium`.
