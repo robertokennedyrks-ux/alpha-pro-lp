@@ -1,34 +1,51 @@
-import Link from 'next/link'
+import { PedidoProvider } from '@/components/pedido'
+import { Anuncios } from '@/components/sections/Anuncios'
+import { AvisoCookies } from '@/components/sections/AvisoCookies'
+import { Bonus } from '@/components/sections/Bonus'
+import { Carrinho } from '@/components/sections/Carrinho'
+import { Depoimentos } from '@/components/sections/Depoimentos'
+import { Destaque } from '@/components/sections/Destaque'
+import { Dor } from '@/components/sections/Dor'
+import { Duvidas } from '@/components/sections/Duvidas'
+import { Final } from '@/components/sections/Final'
+import { Hero } from '@/components/sections/Hero'
+import { Ingredientes } from '@/components/sections/Ingredientes'
+import { JaUsa } from '@/components/sections/JaUsa'
+import { NaoECulpa } from '@/components/sections/NaoECulpa'
+import { Oferta } from '@/components/sections/Oferta'
+import { Produto } from '@/components/sections/Produto'
+import { Rodape } from '@/components/sections/Rodape'
+import { Topo } from '@/components/sections/Topo'
+import { Videos } from '@/components/sections/Videos'
+import { getDados } from '@/lib/dados'
 
-import { Icon } from '@/components/icons'
+// Gerada estática; o painel revalida ao salvar (src/hooks/revalidar.ts).
+export const dynamic = 'force-static'
 
-// Fase 1: página base. As seções do protótipo (reference/alpha-pro-lp.html)
-// entram em src/components/sections na fase 3.
-export default function HomePage() {
+export default async function HomePage() {
+  const d = await getDados()
   return (
-    <main className="wrap flex min-h-dvh flex-col items-start justify-center gap-6 py-16">
-      <span className="rounded-sm bg-mist px-3 py-2 text-xs font-bold uppercase tracking-[.06em] text-graphite">
-        Ambiente local
-      </span>
-      <h1 className="text-[clamp(30px,8.2vw,40px)] font-semibold leading-[1.06] tracking-[-.035em]">
-        ALPHA PRO <span className="font-light">em construção</span>
-      </h1>
-      <p className="max-w-xl text-graphite">
-        Base Next.js + Payload + Tailwind rodando. O protótipo aprovado está em{' '}
-        <code className="rounded-sm bg-paper px-1.5 py-0.5 text-[15px]">reference/</code>.
-      </p>
-      <div className="flex flex-wrap gap-3">
-        <Link
-          href="/admin"
-          className="inline-flex min-h-[52px] items-center gap-2 whitespace-nowrap rounded-md bg-ink px-6 text-[14.5px] font-semibold uppercase tracking-[.04em] text-white"
-        >
-          <Icon name="sacola" className="size-5" />
-          Abrir painel
-        </Link>
-        <span className="inline-flex min-h-[52px] items-center rounded-md bg-ok-bg px-4 text-[14.5px] font-semibold text-ok">
-          Frete Grátis
-        </span>
-      </div>
-    </main>
+    <PedidoProvider>
+      <Anuncios d={d} />
+      <Topo d={d} />
+      <main>
+        <Hero d={d} />
+        <Dor d={d} />
+        <NaoECulpa d={d} />
+        <Destaque d={d} />
+        <Produto d={d} />
+        <Depoimentos d={d} />
+        <Videos d={d} />
+        <Ingredientes d={d} />
+        <JaUsa d={d} />
+        <Bonus d={d} />
+        <Oferta d={d} />
+        <Duvidas d={d} />
+        <Final d={d} />
+      </main>
+      <Rodape d={d} />
+      <Carrinho d={d} />
+      <AvisoCookies d={d} />
+    </PedidoProvider>
   )
 }

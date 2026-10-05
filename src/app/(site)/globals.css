@@ -1,7 +1,9 @@
 @import 'tailwindcss';
 
 /* Tokens do protótipo (reference/alpha-pro-lp.html, :root). Só tons de cinza;
-   verde apenas em "Grátis", "Liberado" e frete grátis. Raios: 8, 12 ou 16px. */
+   verde apenas em "Grátis", "Liberado" e frete grátis.
+   Raios de botões, tags e áreas clicáveis: 8, 12 ou 16px (rounded-sm/md/lg).
+   Painéis decorativos seguem o protótipo (28px = rounded-panel). */
 @theme {
   --font-sans: 'Plus Jakarta Sans Variable', 'Helvetica Neue', Arial, sans-serif;
 
@@ -12,6 +14,7 @@
   --color-stone: #8a8a8a;
   --color-graphite: #4a4a4a;
   --color-ink: #121212;
+  --color-ink-hover: #2a2a2a;
   --color-border: rgb(18 18 18 / 0.1);
   --color-ok: #1e7a46;
   --color-ok-bg: #e3f3e9;
@@ -19,20 +22,13 @@
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
+  --radius-card: 18px;
+  --radius-panel: 28px;
 
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
 
-  --container-page: 1240px;
-
   --ease-soft: cubic-bezier(0.65, 0, 0.35, 1);
-
-  --animate-roll: roll 26s linear infinite;
-  @keyframes roll {
-    to {
-      transform: translateX(-50%);
-    }
-  }
 }
 
 @layer base {
@@ -46,10 +42,47 @@
     font-size: 16.5px;
     line-height: 1.6;
   }
+  img {
+    max-width: 100%;
+    display: block;
+  }
   h1,
   h2,
   h3 {
+    margin: 0;
     text-wrap: balance;
+    color: var(--color-ink);
+  }
+  h2 {
+    font-size: clamp(30px, 8.2vw, 40px);
+    font-weight: 600;
+    line-height: 1.06;
+    letter-spacing: -0.035em;
+  }
+  h2 .l {
+    font-weight: 300;
+  }
+  section {
+    padding-block: 52px;
+  }
+  #comprar {
+    scroll-margin-top: 16px;
+  }
+  @media (min-width: 768px) {
+    section {
+      padding-block: 72px;
+    }
+    h2 {
+      font-size: clamp(34px, 5vw, 46px);
+    }
+  }
+  @media (min-width: 1024px) {
+    section {
+      padding-block: 96px;
+    }
+    h2 {
+      font-size: 48px;
+    }
   }
   @media (prefers-reduced-motion: reduce) {
     html {
@@ -64,8 +97,140 @@
   }
 }
 
-/* Largura da página: 1240px com 60px de respiro lateral no desktop, 24px no celular. */
+/* ===== Peças comuns do protótipo, como utilitários do Tailwind ===== */
+
+/* Largura do conteúdo: 600px no celular (24px de respiro), 720px no tablet
+   e 1240px no desktop (60px de respiro). */
 @utility wrap {
-  @apply mx-auto w-full max-w-page px-6 lg:px-[60px];
-  max-width: calc(var(--container-page) + 120px);
+  margin-inline: auto;
+  width: 100%;
+  max-width: 600px;
+  padding-inline: 24px;
+  @media (min-width: 768px) {
+    max-width: 840px;
+    padding-inline: 60px;
+  }
+  @media (min-width: 1024px) {
+    max-width: 1360px;
+  }
 }
+
+@utility stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  @media (min-width: 1024px) {
+    gap: 20px;
+  }
+}
+
+/* Tag de seção ("Você se reconhece?"). */
+@utility pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  align-self: flex-start;
+  padding: 7px 13px;
+  border-radius: 8px;
+  background: var(--color-mist);
+  font: 700 12px/1 var(--font-sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-graphite);
+}
+
+/* CTA principal: preto, uma linha, raio 16px. */
+@utility btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 58px;
+  padding: 14px 18px;
+  border-radius: 16px;
+  white-space: nowrap;
+  background: var(--color-ink);
+  color: var(--color-white);
+  text-decoration: none;
+  font: 600 clamp(13px, 3.9vw, 16px) / 1.1 var(--font-sans);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  transition:
+    transform 0.15s,
+    background 0.15s;
+  &:hover {
+    background: var(--color-ink-hover);
+    transform: translateY(-1px);
+  }
+  &:focus-visible {
+    outline: 3px solid var(--color-stone);
+    outline-offset: 3px;
+  }
+}
+
+/* CTA secundário: contorno. */
+@utility btn2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 12px 26px;
+  border-radius: 16px;
+  border: 1.5px solid var(--color-ink);
+  background: transparent;
+  color: var(--color-ink);
+  text-decoration: none;
+  white-space: nowrap;
+  font: 600 14.5px/1 var(--font-sans);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition:
+    background 0.15s,
+    color 0.15s;
+  &:hover {
+    background: var(--color-ink);
+    color: var(--color-white);
+  }
+  &:focus-visible {
+    outline: 3px solid var(--color-stone);
+    outline-offset: 3px;
+  }
+}
+
+/* Espaço reservado para foto (wireframe). */
+@utility ph {
+  position: relative;
+  border-radius: 28px;
+  background:
+    repeating-linear-gradient(135deg, rgb(18 18 18 / 0.035) 0 14px, transparent 14px 28px),
+    var(--color-mist);
+  display: flex;
+  align-items: flex-end;
+  padding: 14px;
+  min-height: 200px;
+  overflow: hidden;
+  & > span {
+    font: 500 12.5px/1.4 var(--font-sans);
+    color: var(--color-graphite);
+    background: rgb(255 255 255 / 0.9);
+    padding: 8px 11px;
+    border-radius: 12px;
+    max-width: 32ch;
+  }
+  & > span b {
+    display: block;
+    color: var(--color-ink);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 10.5px;
+    margin-bottom: 2px;
+  }
+}
+
+/* Estilos próprios de cada seção (keyframes, seletores que o Tailwind não cobre bem). */
+@import '../../styles/topo.css';
+@import '../../styles/historia.css';
+@import '../../styles/prova.css';
+@import '../../styles/compra.css';
+@import '../../styles/politicas.css';
