@@ -126,6 +126,10 @@
   text-align: right;
   font-size: 10px;
   color: var(--color-stone);
+}
+/* No balão escuro o cinza do texto precisa clarear, não escurecer (6,65:1 sobre o #121212). */
+.chat .b.out small {
+  color: #9a9a9a;
   margin-top: 2px;
 }
 
