@@ -18,7 +18,7 @@ export function Depoimentos({ d }: { d: Dados }) {
         <p className="text-graphite">{t.subtitulo}</p>
         {d.depoimentos.length > 0 && (
           <>
-            <div className="revs">
+            <div className="revs" tabIndex={0} role="group" aria-label="Conversas de clientes (role de lado)">
               {d.depoimentos.map((dep, i) => {
                 const print = midia(dep.print)
                 return (

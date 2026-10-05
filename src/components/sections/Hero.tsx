@@ -45,7 +45,7 @@ export function Hero({ d }: { d: Dados }) {
           )}
           <div
             className="pot-wf absolute right-[18px] bottom-[18px] flex w-[104px] flex-col gap-1 min-[720px]:w-[140px]"
-            aria-label="Espaço para a foto do pote"
+            aria-hidden="true"
           >
             <span className="lid h-[22px] rounded-[7px_7px_2px_2px] border-[1.5px] border-dashed border-stone bg-white/50" />
           </div>

@@ -228,13 +228,13 @@ export function Cabecalho({ faixa, menu }: { faixa: React.ReactNode; menu: MenuL
 
   return (
     <>
-      <div
+      <header
         ref={topRef}
         id="topbar"
         className={`topbar sticky top-0 z-12 ${escondido ? 'is-hidden' : ''} ${flutua ? 'is-float' : ''}`}
       >
         {faixa}
-        <header
+        <div
           id="hdr"
           className="hdr relative grid grid-cols-[88px_1fr_88px] items-center gap-2 border-b border-border bg-white px-3 py-2 md:px-12"
         >
@@ -274,8 +274,8 @@ export function Cabecalho({ faixa, menu }: { faixa: React.ReactNode; menu: MenuL
               </span>
             </button>
           </div>
-        </header>
-      </div>
+        </div>
+      </header>
 
       <div
         ref={drRef}

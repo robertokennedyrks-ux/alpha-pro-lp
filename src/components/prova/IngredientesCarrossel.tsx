@@ -206,7 +206,7 @@ export function IngredientesCarrossel({ titulo, children }: { titulo: ReactNode;
           </button>
         </div>
       </div>
-      <div className="ic-list" id="ic-list" ref={listRef}>
+      <div className="ic-list" id="ic-list" ref={listRef} tabIndex={0} role="group" aria-label="Ingredientes (role de lado)">
         {children}
       </div>
       <div className="ic-pg" id="ic-pg" role="group" aria-label="Posição no carrossel de ingredientes">

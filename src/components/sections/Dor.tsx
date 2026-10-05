@@ -88,8 +88,8 @@ export function Dor({ d }: { d: Dados }) {
         <Revelar
           modo="fecho"
           className="hero-close text-center text-[50px] leading-[1.1] font-semibold tracking-[-.04em] text-balance text-ink py-6 lg:pt-14 lg:pb-4 lg:text-[clamp(52px,5.4vw,68px)]"
-          aria-label={[t.fecho1, t.fecho2, t.fecho3].join(' ')}
         >
+          <span className="sr-only">{[t.fecho1, t.fecho2, t.fecho3].join(' ')}</span>
           <span className="block lg:whitespace-nowrap">
             <Letras ocultar texto={l1} />
             {ponto && (

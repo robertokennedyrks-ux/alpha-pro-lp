@@ -63,12 +63,12 @@ export function Produto({ d }: { d: Dados }) {
         <div className="cmp rounded-[24px] border border-border bg-white p-6 lg:col-[2]! lg:flex lg:items-center lg:p-8">
           <div className="mx-auto w-full max-w-[440px] md:max-w-none" role="table" aria-label={`${sem} e ${com.charAt(0).toLowerCase()}${com.slice(1)}`}>
             <div className="cmp-head grid grid-cols-[minmax(0,1fr)_76px_76px] md:grid-cols-[minmax(0,1fr)_112px_112px]" role="row">
-              <h3
+              <div
                 className="self-center py-2 pr-2 pl-0.5 text-[clamp(21px,6.8vw,30px)] leading-[1.02] font-semibold tracking-[-.045em] text-ink"
                 role="columnheader"
               >
                 {t.tabelaTitulo}
-              </h3>
+              </div>
               <span className={`${cabeca} text-graphite`} role="columnheader">
                 <Icon name="rosto-triste" className="size-[34px] text-stone" />
                 {sem}

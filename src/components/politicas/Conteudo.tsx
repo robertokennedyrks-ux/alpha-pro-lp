@@ -94,7 +94,7 @@ function Corpo({ markdown, abas, atual }: { markdown: string; abas: Aba[]; atual
 
 export function Conteudo({ p, abas }: { p: Politica; abas: Aba[] }) {
   return (
-    <article className="pol-doc" id="doc" role="tabpanel" tabIndex={-1} aria-labelledby={`tab-${p.slug}`}>
+    <div className="pol-doc" id="doc" role="tabpanel" tabIndex={-1} aria-labelledby={`tab-${p.slug}`}>
       <h1>{p.titulo}</h1>
       {p.atualizado ? <p className="upd">Última atualização: {p.atualizado}</p> : null}
       {p.intro ? (
@@ -103,6 +103,6 @@ export function Conteudo({ p, abas }: { p: Politica; abas: Aba[] }) {
         </p>
       ) : null}
       <Corpo markdown={p.corpo} abas={abas} atual={p.slug} />
-    </article>
+    </div>
   )
 }
