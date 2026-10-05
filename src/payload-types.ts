@@ -67,8 +67,13 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    users: User;
+    depoimentos: Depoimento;
+    videos: Video;
+    faq: Faq;
+    ingredientes: Ingrediente;
+    politicas: Politica;
     media: Media;
+    users: User;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -76,8 +81,13 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    users: UsersSelect<false> | UsersSelect<true>;
+    depoimentos: DepoimentosSelect<false> | DepoimentosSelect<true>;
+    videos: VideosSelect<false> | VideosSelect<true>;
+    faq: FaqSelect<false> | FaqSelect<true>;
+    ingredientes: IngredientesSelect<false> | IngredientesSelect<true>;
+    politicas: PoliticasSelect<false> | PoliticasSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -87,8 +97,26 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    ofertas: Oferta;
+    'frete-gratis': FreteGrati;
+    bonus: Bonus;
+    textos: Texto;
+    'prova-social': ProvaSocial;
+    contato: Contato;
+    seo: Seo;
+    cookies: Cooky;
+  };
+  globalsSelect: {
+    ofertas: OfertasSelect<false> | OfertasSelect<true>;
+    'frete-gratis': FreteGratisSelect<false> | FreteGratisSelect<true>;
+    bonus: BonusSelect<false> | BonusSelect<true>;
+    textos: TextosSelect<false> | TextosSelect<true>;
+    'prova-social': ProvaSocialSelect<false> | ProvaSocialSelect<true>;
+    contato: ContatoSelect<false> | ContatoSelect<true>;
+    seo: SeoSelect<false> | SeoSelect<true>;
+    cookies: CookiesSelect<false> | CookiesSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -119,10 +147,239 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "depoimentos".
+ */
+export interface Depoimento {
+  id: number;
+  _order?: string | null;
+  titulo: string;
+  /**
+   * Opcional. Com print, ele substitui as mensagens abaixo. Cubra o telefone.
+   */
+  print?: (number | null) | Media;
+  mensagens?:
+    | {
+        texto: string;
+        hora?: string | null;
+        lado?: ('cliente' | 'loja') | null;
+        id?: string | null;
+      }[]
+    | null;
+  ativo?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  /**
+   * Descreva a imagem para quem usa leitor de tela.
+   */
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumb?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    card?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    hero?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos".
+ */
+export interface Video {
+  id: number;
+  _order?: string | null;
+  tema: string;
+  nome: string;
+  legenda?: string | null;
+  video?: (number | null) | Media;
+  /**
+   * Opcional. Imagem antes do vídeo carregar.
+   */
+  capa?: (number | null) | Media;
+  ativo?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faq".
+ */
+export interface Faq {
+  id: number;
+  _order?: string | null;
+  pergunta: string;
+  resposta: string;
+  aberta?: boolean | null;
+  ativo?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ingredientes".
+ */
+export interface Ingrediente {
+  id: number;
+  _order?: string | null;
+  nome: string;
+  beneficio: string;
+  dosagem?: string | null;
+  foto?: (number | null) | Media;
+  icone?:
+    | (
+        | 'menu'
+        | 'caminhao'
+        | 'sacola'
+        | 'fechar'
+        | 'brilho'
+        | 'chevron-cima'
+        | 'seta-direita'
+        | 'presente'
+        | 'trocar'
+        | 'ajuda'
+        | 'prato'
+        | 'bala'
+        | 'biscoito-mordido'
+        | 'lua'
+        | 'calendario'
+        | 'pulso'
+        | 'x-pequeno'
+        | 'rosto-triste-grande'
+        | 'bala-riscada'
+        | 'lua-grande'
+        | 'tigela-quente'
+        | 'raio'
+        | 'rosto-triste'
+        | 'x-circulo'
+        | 'check-circulo'
+        | 'mais'
+        | 'molecula'
+        | 'sementes'
+        | 'grao-cafe'
+        | 'raiz'
+        | 'sol-vitamina'
+        | 'chevron-esquerda'
+        | 'chevron-direita'
+        | 'gota'
+        | 'relogio'
+        | 'escudo-alerta'
+        | 'selo'
+        | 'info'
+        | 'estrela'
+        | 'check'
+        | 'pote'
+        | 'livro'
+        | 'check-pequeno'
+        | 'cadeado'
+        | 'prato-talheres'
+        | 'balao-conversa'
+        | 'caneta-injecao'
+        | 'delivery'
+        | 'cupcake'
+        | 'biscoito-grande'
+        | 'sacola-grande'
+        | 'loja'
+        | 'recibo'
+        | 'whatsapp'
+        | 'tendencia-alta'
+        | 'x-negrito'
+        | 'check-negrito'
+        | 'tema-escuro'
+        | 'tema-claro'
+        | 'pausar'
+        | 'tocar'
+        | 'som'
+        | 'mudo'
+        | 'mais-botao'
+        | 'instagram'
+        | 'tiktok'
+        | 'facebook'
+        | 'youtube'
+        | 'escudo-check'
+        | 'cadeado-24'
+        | 'chevron-baixo'
+        | 'nota-fiscal'
+      )
+    | null;
+  ativo?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "politicas".
+ */
+export interface Politica {
+  id: number;
+  _order?: string | null;
+  titulo: string;
+  /**
+   * Parte final da URL, ex.: politica-de-privacidade
+   */
+  slug: string;
+  atualizado?: string | null;
+  intro?: string | null;
+  conteudo: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
   id: number;
+  nome?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -142,25 +399,6 @@ export interface User {
     | null;
   password?: string | null;
   collection: 'users';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: number;
-  alt: string;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -187,12 +425,32 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: 'users';
-        value: number | User;
+        relationTo: 'depoimentos';
+        value: number | Depoimento;
+      } | null)
+    | ({
+        relationTo: 'videos';
+        value: number | Video;
+      } | null)
+    | ({
+        relationTo: 'faq';
+        value: number | Faq;
+      } | null)
+    | ({
+        relationTo: 'ingredientes';
+        value: number | Ingrediente;
+      } | null)
+    | ({
+        relationTo: 'politicas';
+        value: number | Politica;
       } | null)
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'users';
+        value: number | User;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -238,26 +496,80 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users_select".
+ * via the `definition` "depoimentos_select".
  */
-export interface UsersSelect<T extends boolean = true> {
-  updatedAt?: T;
-  createdAt?: T;
-  email?: T;
-  resetPasswordToken?: T;
-  resetPasswordExpiration?: T;
-  salt?: T;
-  hash?: T;
-  resetPasswordRequestedAt?: T;
-  loginAttempts?: T;
-  lockUntil?: T;
-  sessions?:
+export interface DepoimentosSelect<T extends boolean = true> {
+  _order?: T;
+  titulo?: T;
+  print?: T;
+  mensagens?:
     | T
     | {
+        texto?: T;
+        hora?: T;
+        lado?: T;
         id?: T;
-        createdAt?: T;
-        expiresAt?: T;
       };
+  ativo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos_select".
+ */
+export interface VideosSelect<T extends boolean = true> {
+  _order?: T;
+  tema?: T;
+  nome?: T;
+  legenda?: T;
+  video?: T;
+  capa?: T;
+  ativo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faq_select".
+ */
+export interface FaqSelect<T extends boolean = true> {
+  _order?: T;
+  pergunta?: T;
+  resposta?: T;
+  aberta?: T;
+  ativo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ingredientes_select".
+ */
+export interface IngredientesSelect<T extends boolean = true> {
+  _order?: T;
+  nome?: T;
+  beneficio?: T;
+  dosagem?: T;
+  foto?: T;
+  icone?: T;
+  ativo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "politicas_select".
+ */
+export interface PoliticasSelect<T extends boolean = true> {
+  _order?: T;
+  titulo?: T;
+  slug?: T;
+  atualizado?: T;
+  intro?: T;
+  conteudo?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -276,6 +588,64 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumb?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        card?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        hero?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users_select".
+ */
+export interface UsersSelect<T extends boolean = true> {
+  nome?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  resetPasswordRequestedAt?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -316,6 +686,528 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ofertas".
+ */
+export interface Oferta {
+  id: number;
+  produto: {
+    nome: string;
+    capsulas?: string | null;
+    diasPorPote?: number | null;
+    foto?: (number | null) | Media;
+  };
+  pagamento?: {
+    descontoPix?: number | null;
+    parcelas?: number | null;
+  };
+  /**
+   * Só para referência, ex.: Yampi, B4You, Shopify.
+   */
+  plataformaCheckout?: string | null;
+  opcoes?:
+    | {
+        potes: number;
+        preco: number;
+        /**
+         * Riscado ao lado do preço. Vazio esconde.
+         */
+        precoDe?: number | null;
+        /**
+         * Para onde o botão "Fazer pedido" leva com essa quantidade.
+         */
+        linkCheckout?: string | null;
+        ativo?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * A barra no carrinho é só visual. O checkout precisa aplicar a mesma regra (subtotal a partir do valor mínimo = frete zero).
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "frete-gratis".
+ */
+export interface FreteGrati {
+  id: number;
+  /**
+   * Desligado, some do carrinho e das ofertas.
+   */
+  ativo?: boolean | null;
+  valorMinimo?: number | null;
+  segmentos?: number | null;
+  textoProgresso?: string | null;
+  textoLiberado?: string | null;
+  /**
+   * {falta} vira o valor que falta.
+   */
+  subtextoProgresso?: string | null;
+  subtextoLiberado?: string | null;
+  comemorar?: boolean | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bonus".
+ */
+export interface Bonus {
+  id: number;
+  /**
+   * Desligado, a seção, os selos e os bônus do carrinho somem.
+   */
+  ativo?: boolean | null;
+  subtitulo?: string | null;
+  entrega?: string | null;
+  itens?:
+    | {
+        titulo: string;
+        descricao?: string | null;
+        potesMinimos: number;
+        valorDe?: number | null;
+        icone?:
+          | (
+              | 'menu'
+              | 'caminhao'
+              | 'sacola'
+              | 'fechar'
+              | 'brilho'
+              | 'chevron-cima'
+              | 'seta-direita'
+              | 'presente'
+              | 'trocar'
+              | 'ajuda'
+              | 'prato'
+              | 'bala'
+              | 'biscoito-mordido'
+              | 'lua'
+              | 'calendario'
+              | 'pulso'
+              | 'x-pequeno'
+              | 'rosto-triste-grande'
+              | 'bala-riscada'
+              | 'lua-grande'
+              | 'tigela-quente'
+              | 'raio'
+              | 'rosto-triste'
+              | 'x-circulo'
+              | 'check-circulo'
+              | 'mais'
+              | 'molecula'
+              | 'sementes'
+              | 'grao-cafe'
+              | 'raiz'
+              | 'sol-vitamina'
+              | 'chevron-esquerda'
+              | 'chevron-direita'
+              | 'gota'
+              | 'relogio'
+              | 'escudo-alerta'
+              | 'selo'
+              | 'info'
+              | 'estrela'
+              | 'check'
+              | 'pote'
+              | 'livro'
+              | 'check-pequeno'
+              | 'cadeado'
+              | 'prato-talheres'
+              | 'balao-conversa'
+              | 'caneta-injecao'
+              | 'delivery'
+              | 'cupcake'
+              | 'biscoito-grande'
+              | 'sacola-grande'
+              | 'loja'
+              | 'recibo'
+              | 'whatsapp'
+              | 'tendencia-alta'
+              | 'x-negrito'
+              | 'check-negrito'
+              | 'tema-escuro'
+              | 'tema-claro'
+              | 'pausar'
+              | 'tocar'
+              | 'som'
+              | 'mudo'
+              | 'mais-botao'
+              | 'instagram'
+              | 'tiktok'
+              | 'facebook'
+              | 'youtube'
+              | 'escudo-check'
+              | 'cadeado-24'
+              | 'chevron-baixo'
+              | 'nota-fiscal'
+            )
+          | null;
+        /**
+         * Usada no carrinho. Sem imagem, usa o ícone.
+         */
+        imagem?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "textos".
+ */
+export interface Texto {
+  id: number;
+  hero: {
+    etiqueta?: string | null;
+    titulo: string;
+    tituloLeve?: string | null;
+    /**
+     * Use **texto** para negrito.
+     */
+    subtitulo?: string | null;
+    /**
+     * Use **texto** para negrito.
+     */
+    condicao?: string | null;
+    foto?: (number | null) | Media;
+  };
+  botoes?: {
+    principal?: string | null;
+    produto?: string | null;
+    bonus?: string | null;
+    pedido?: string | null;
+  };
+  oferta?: {
+    garantia?: string | null;
+    /**
+     * {valor} vira o preço por dia do pote avulso.
+     */
+    precoPorDia?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "prova-social".
+ */
+export interface ProvaSocial {
+  id: number;
+  anuncios?:
+    | {
+        texto: string;
+        id?: string | null;
+      }[]
+    | null;
+  selo?: {
+    numero?: string | null;
+    texto?: string | null;
+  };
+  /**
+   * Use **texto** para negrito.
+   */
+  provaHero?: string | null;
+  numeros?:
+    | {
+        valor: number;
+        sufixo?: string | null;
+        legenda: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contato".
+ */
+export interface Contato {
+  id: number;
+  whatsapp?: string | null;
+  whatsappExibicao?: string | null;
+  whatsappMensagem?: string | null;
+  lojaTexto?: string | null;
+  lojaMaps?: string | null;
+  redes?: {
+    /**
+     * Vazio esconde o ícone.
+     */
+    instagram?: string | null;
+    /**
+     * Vazio esconde o ícone.
+     */
+    tiktok?: string | null;
+    /**
+     * Vazio esconde o ícone.
+     */
+    facebook?: string | null;
+    /**
+     * Vazio esconde o ícone.
+     */
+    youtube?: string | null;
+  };
+  /**
+   * O grupo Atendimento (WhatsApp, loja e políticas) é montado sozinho com os dados acima.
+   */
+  grupos?:
+    | {
+        titulo: string;
+        links?:
+          | {
+              rotulo: string;
+              href: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  formasPagamento?: ('Visa' | 'Mastercard' | 'Amex' | 'Elo' | 'Hipercard' | 'Diners' | 'Pix')[] | null;
+  avisoLegal?: string | null;
+  /**
+   * Razão social, CNPJ, endereço e SAC.
+   */
+  empresa?: string | null;
+  copyright?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "seo".
+ */
+export interface Seo {
+  id: number;
+  titulo?: string | null;
+  descricao?: string | null;
+  /**
+   * 1200 × 630 px.
+   */
+  imagem?: (number | null) | Media;
+  indexar?: boolean | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cookies".
+ */
+export interface Cooky {
+  id: number;
+  ativo?: boolean | null;
+  /**
+   * O link para a Política de privacidade entra no final, automaticamente.
+   */
+  texto?: string | null;
+  botao?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ofertas_select".
+ */
+export interface OfertasSelect<T extends boolean = true> {
+  produto?:
+    | T
+    | {
+        nome?: T;
+        capsulas?: T;
+        diasPorPote?: T;
+        foto?: T;
+      };
+  pagamento?:
+    | T
+    | {
+        descontoPix?: T;
+        parcelas?: T;
+      };
+  plataformaCheckout?: T;
+  opcoes?:
+    | T
+    | {
+        potes?: T;
+        preco?: T;
+        precoDe?: T;
+        linkCheckout?: T;
+        ativo?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "frete-gratis_select".
+ */
+export interface FreteGratisSelect<T extends boolean = true> {
+  ativo?: T;
+  valorMinimo?: T;
+  segmentos?: T;
+  textoProgresso?: T;
+  textoLiberado?: T;
+  subtextoProgresso?: T;
+  subtextoLiberado?: T;
+  comemorar?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bonus_select".
+ */
+export interface BonusSelect<T extends boolean = true> {
+  ativo?: T;
+  subtitulo?: T;
+  entrega?: T;
+  itens?:
+    | T
+    | {
+        titulo?: T;
+        descricao?: T;
+        potesMinimos?: T;
+        valorDe?: T;
+        icone?: T;
+        imagem?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "textos_select".
+ */
+export interface TextosSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        etiqueta?: T;
+        titulo?: T;
+        tituloLeve?: T;
+        subtitulo?: T;
+        condicao?: T;
+        foto?: T;
+      };
+  botoes?:
+    | T
+    | {
+        principal?: T;
+        produto?: T;
+        bonus?: T;
+        pedido?: T;
+      };
+  oferta?:
+    | T
+    | {
+        garantia?: T;
+        precoPorDia?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "prova-social_select".
+ */
+export interface ProvaSocialSelect<T extends boolean = true> {
+  anuncios?:
+    | T
+    | {
+        texto?: T;
+        id?: T;
+      };
+  selo?:
+    | T
+    | {
+        numero?: T;
+        texto?: T;
+      };
+  provaHero?: T;
+  numeros?:
+    | T
+    | {
+        valor?: T;
+        sufixo?: T;
+        legenda?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contato_select".
+ */
+export interface ContatoSelect<T extends boolean = true> {
+  whatsapp?: T;
+  whatsappExibicao?: T;
+  whatsappMensagem?: T;
+  lojaTexto?: T;
+  lojaMaps?: T;
+  redes?:
+    | T
+    | {
+        instagram?: T;
+        tiktok?: T;
+        facebook?: T;
+        youtube?: T;
+      };
+  grupos?:
+    | T
+    | {
+        titulo?: T;
+        links?:
+          | T
+          | {
+              rotulo?: T;
+              href?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  formasPagamento?: T;
+  avisoLegal?: T;
+  empresa?: T;
+  copyright?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "seo_select".
+ */
+export interface SeoSelect<T extends boolean = true> {
+  titulo?: T;
+  descricao?: T;
+  imagem?: T;
+  indexar?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cookies_select".
+ */
+export interface CookiesSelect<T extends boolean = true> {
+  ativo?: T;
+  texto?: T;
+  botao?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -15,7 +15,9 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
     "db:up": "docker compose up -d db",
     "db:down": "docker compose down",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "seed": "cross-env NODE_OPTIONS=--no-deprecation payload run src/seed/index.ts",
+    "seed:reset": "cross-env SEED_RESET=1 NODE_OPTIONS=--no-deprecation payload run src/seed/index.ts"
   },
   "dependencies": {
     "@fontsource-variable/plus-jakarta-sans": "^5.3.0",
