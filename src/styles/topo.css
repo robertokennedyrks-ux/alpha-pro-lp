@@ -168,6 +168,10 @@ body.drawer-open {
 .fn-photo > span {
   max-width: 26ch;
 }
+/* foto do painel: o mesmo escurecido embaixo, para o título continuar legível */
+.fn-veu {
+  background: linear-gradient(180deg, transparent 30%, color-mix(in srgb, var(--color-ink) 70%, transparent) 68%, var(--color-ink) 100%);
+}
 
 /* ===== rodapé ===== */
 .ft-grp summary::-webkit-details-marker {

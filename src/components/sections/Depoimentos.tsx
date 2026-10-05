@@ -1,19 +1,23 @@
+import { midiaDe } from '@/components/Foto'
 import { Icon } from '@/components/icons'
 import { Contador } from '@/components/prova/Contador'
 import { midia } from '@/components/prova/midia'
 import type { Dados } from '@/lib/dados'
+import { textosDe } from '@/lib/textos-padrao'
 
 // 5. prova social: conversas reais (ou o print original) e os números da linha.
 export function Depoimentos({ d }: { d: Dados }) {
   const numeros = d.prova.numeros ?? []
+  const t = textosDe(d.textos).depoimentos
+  const foto = midiaDe(t.foto)
   return (
     <section id="depoimentos" data-secao="depoimentos">
       <div className="wrap stack">
-        <span className="pill">Clientes reais</span>
+        <span className="pill">{t.etiqueta}</span>
         <h2>
-          Elas também achavam que <span className="l">nada funcionava.</span>
+          {t.titulo} {t.tituloLeve && <span className="l">{t.tituloLeve}</span>}
         </h2>
-        <p className="text-graphite">Mensagens reais de clientes, do jeito que chegaram no nosso WhatsApp e no Instagram.</p>
+        <p className="text-graphite">{t.subtitulo}</p>
         {d.depoimentos.length > 0 && (
           <>
             <div className="revs">
@@ -61,14 +65,19 @@ export function Depoimentos({ d }: { d: Dados }) {
         {numeros.length > 0 && (
           <div className="st-panel">
             <div className="st-photo">
-              <div className="ph">
-                <span>
-                  <b>Foto</b>Ela sorrindo, segurando o pote perto do rosto
-                </span>
-              </div>
+              {foto ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={foto.url!} alt={foto.alt ?? ''} width={foto.width ?? undefined} height={foto.height ?? undefined} loading="lazy" />
+              ) : (
+                <div className="ph">
+                  <span>
+                    <b>Foto</b>Ela sorrindo, segurando o pote perto do rosto
+                  </span>
+                </div>
+              )}
             </div>
-            <h3 className="st-title">Quem usa, volta.</h3>
-            <p className="st-sub">Os números da linha ALPHA.</p>
+            <h3 className="st-title">{t.painelTitulo}</h3>
+            <p className="st-sub">{t.painelSubtitulo}</p>
             <div className="st-list">
               {numeros.map((n, k) => {
                 const pct = n.sufixo?.trim() === '%'

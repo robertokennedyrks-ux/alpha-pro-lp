@@ -1,48 +1,44 @@
 import { Icon } from '@/components/icons'
 import { JaUsaComparacao } from '@/components/prova/JaUsaComparacao'
 import type { Dados } from '@/lib/dados'
-
-const VANTAGENS = [
-  'Mais potente na fome e na vontade de doce',
-  'Para quem quer ainda mais controle',
-  'Mesma marca, mesmo atendimento, mesma nota fiscal',
-]
+import { textosDe } from '@/lib/textos-padrao'
 
 // 7. "Já usa ALPHA?": convite para quem já é cliente.
 export function JaUsa({ d }: { d: Dados }) {
+  const t = textosDe(d.textos).jaUsa
   return (
     <section className="jc" id="ja-usa" data-secao="ja-usa">
       <div className="wrap">
         <p className="jc-eye">
           <Icon name="estrela" />
-          Já é cliente?
+          {t.etiqueta}
         </p>
         <h2 className="jc-title">
-          <svg className="jc-svg" viewBox="0 0 400 172" role="img" aria-label="Já usa ALPHA? Conheça a versão PRO.">
+          <svg className="jc-svg" viewBox="0 0 400 172" role="img" aria-label={[t.titulo1, t.titulo2, t.titulo3].join(' ')}>
             <g style={{ fontFamily: "var(--font-sans)" }} fontWeight="600" fontSize="50" fill="#121212">
               <text x="0" y="52" textLength="400" lengthAdjust="spacingAndGlyphs">
-                JÁ USA ALPHA?
+                {t.titulo1.toUpperCase()}
               </text>
               <rect x="1" y="70" width="44" height="44" rx="10" fill="#e7e7e7" stroke="#8a8a8a" strokeWidth="1.5" strokeDasharray="4 3" />
               <text x="56" y="110" textLength="344" lengthAdjust="spacingAndGlyphs">
-                CONHEÇA A
+                {t.titulo2.toUpperCase()}
               </text>
               <text x="0" y="168" textLength="400" lengthAdjust="spacingAndGlyphs">
-                VERSÃO PRO.
+                {t.titulo3.toUpperCase()}
               </text>
             </g>
           </svg>
         </h2>
-        <p className="jc-sub">Você já confia na linha. O PRO é o próximo passo.</p>
+        <p className="jc-sub">{t.subtitulo}</p>
         <ul className="jc-list">
-          {VANTAGENS.map((v) => (
-            <li key={v}>
+          {t.vantagens.map((v, i) => (
+            <li key={v.id ?? i}>
               <Icon name="check" />
-              {v}
+              {v.texto}
             </li>
           ))}
         </ul>
-        <JaUsaComparacao />
+        <JaUsaComparacao forte={t.forte} rotulo={t.tickerRotulo} itens={t.ticker.map((v) => ({ texto: v.texto, foto: v.foto }))} />
         <div className="cta">
           <a className="btn" href="#comprar">
             {d.textos.botoes?.produto || 'Quero meu ALPHA PRO'} <span className="arr">→</span>

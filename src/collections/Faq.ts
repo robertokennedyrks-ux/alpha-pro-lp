@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
-import { logado, publico } from '@/access'
+import { logado, publicadoOuLogado } from '@/access'
+import { versoes } from '@/globals/base'
 import { revalidarAoApagar, revalidarColecao } from '@/hooks/revalidar'
 
 export const Faq: CollectionConfig = {
@@ -8,7 +9,8 @@ export const Faq: CollectionConfig = {
   labels: { singular: 'Pergunta', plural: 'Perguntas frequentes' },
   orderable: true,
   admin: { useAsTitle: 'pergunta', group: 'Conteúdo', defaultColumns: ['pergunta', 'ativo'] },
-  access: { read: publico, create: logado, update: logado, delete: logado },
+  access: { read: publicadoOuLogado, create: logado, update: logado, delete: logado },
+  versions: versoes,
   hooks: { afterChange: [revalidarColecao], afterDelete: [revalidarAoApagar] },
   fields: [
     { name: 'pergunta', label: 'Pergunta', type: 'text', required: true },

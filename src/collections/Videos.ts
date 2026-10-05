@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
-import { logado, publico } from '@/access'
+import { logado, publicadoOuLogado } from '@/access'
+import { versoes } from '@/globals/base'
 import { revalidarAoApagar, revalidarColecao } from '@/hooks/revalidar'
 
 // Depoimentos em vídeo (grade + stories).
@@ -9,7 +10,8 @@ export const Videos: CollectionConfig = {
   labels: { singular: 'Vídeo', plural: 'Vídeos' },
   orderable: true,
   admin: { useAsTitle: 'tema', group: 'Conteúdo', defaultColumns: ['tema', 'nome', 'ativo'] },
-  access: { read: publico, create: logado, update: logado, delete: logado },
+  access: { read: publicadoOuLogado, create: logado, update: logado, delete: logado },
+  versions: versoes,
   hooks: { afterChange: [revalidarColecao], afterDelete: [revalidarAoApagar] },
   fields: [
     { name: 'tema', label: 'Tema', type: 'text', required: true, admin: { placeholder: 'A primeira semana' } },

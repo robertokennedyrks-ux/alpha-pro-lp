@@ -1,10 +1,12 @@
 import { midia } from '@/components/prova/midia'
 import { VideosCarrossel } from '@/components/prova/VideosCarrossel'
 import type { Dados } from '@/lib/dados'
+import { textosDe } from '@/lib/textos-padrao'
 
 // 5b. depoimentos em vídeo: carrossel centrado + visualizador em stories.
 export function Videos({ d }: { d: Dados }) {
   if (!d.videos.length) return null
+  const t = textosDe(d.textos).videos
   const itens = d.videos.map((v) => ({
     id: v.id,
     tema: v.tema,
@@ -16,11 +18,11 @@ export function Videos({ d }: { d: Dados }) {
   return (
     <section className="vd pt-0" id="videos" data-secao="videos">
       <div className="wrap stack">
-        <span className="pill">Em vídeo</span>
+        <span className="pill">{t.etiqueta}</span>
         <h2>
-          Quem toma, <span className="l">conta.</span>
+          {t.titulo} {t.tituloLeve && <span className="l">{t.tituloLeve}</span>}
         </h2>
-        <p className="text-graphite">Clientes contando com as próprias palavras como foi. Toque para ouvir.</p>
+        <p className="text-graphite">{t.subtitulo}</p>
         <VideosCarrossel itens={itens} />
       </div>
     </section>

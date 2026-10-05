@@ -168,6 +168,7 @@ export interface Depoimento {
   ativo?: boolean | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -235,6 +236,7 @@ export interface Video {
   ativo?: boolean | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -249,6 +251,7 @@ export interface Faq {
   ativo?: boolean | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -340,6 +343,7 @@ export interface Ingrediente {
   ativo?: boolean | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -372,6 +376,7 @@ export interface Politica {
   };
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -380,6 +385,7 @@ export interface Politica {
 export interface User {
   id: number;
   nome?: string | null;
+  papel: 'rk' | 'cliente';
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -513,6 +519,7 @@ export interface DepoimentosSelect<T extends boolean = true> {
   ativo?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -528,6 +535,7 @@ export interface VideosSelect<T extends boolean = true> {
   ativo?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -541,6 +549,7 @@ export interface FaqSelect<T extends boolean = true> {
   ativo?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -556,6 +565,7 @@ export interface IngredientesSelect<T extends boolean = true> {
   ativo?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -570,6 +580,7 @@ export interface PoliticasSelect<T extends boolean = true> {
   conteudo?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -629,6 +640,7 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface UsersSelect<T extends boolean = true> {
   nome?: T;
+  papel?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -723,6 +735,7 @@ export interface Oferta {
         id?: string | null;
       }[]
     | null;
+  _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -748,6 +761,7 @@ export interface FreteGrati {
   subtextoProgresso?: string | null;
   subtextoLiberado?: string | null;
   comemorar?: boolean | null;
+  _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -852,6 +866,7 @@ export interface Bonus {
         id?: string | null;
       }[]
     | null;
+  _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -874,6 +889,1041 @@ export interface Texto {
      */
     condicao?: string | null;
     foto?: (number | null) | Media;
+    /**
+     * O menu que abre no ícone ☰ do topo. Links são âncoras de seção, como #oferta.
+     */
+    menu?: {
+      destaque?: {
+        texto?: string | null;
+        link?: string | null;
+        icone?:
+          | (
+              | 'menu'
+              | 'caminhao'
+              | 'sacola'
+              | 'fechar'
+              | 'brilho'
+              | 'chevron-cima'
+              | 'seta-direita'
+              | 'presente'
+              | 'trocar'
+              | 'ajuda'
+              | 'prato'
+              | 'bala'
+              | 'biscoito-mordido'
+              | 'lua'
+              | 'calendario'
+              | 'pulso'
+              | 'x-pequeno'
+              | 'rosto-triste-grande'
+              | 'bala-riscada'
+              | 'lua-grande'
+              | 'tigela-quente'
+              | 'raio'
+              | 'rosto-triste'
+              | 'x-circulo'
+              | 'check-circulo'
+              | 'mais'
+              | 'molecula'
+              | 'sementes'
+              | 'grao-cafe'
+              | 'raiz'
+              | 'sol-vitamina'
+              | 'chevron-esquerda'
+              | 'chevron-direita'
+              | 'gota'
+              | 'relogio'
+              | 'escudo-alerta'
+              | 'selo'
+              | 'info'
+              | 'estrela'
+              | 'check'
+              | 'pote'
+              | 'livro'
+              | 'check-pequeno'
+              | 'cadeado'
+              | 'prato-talheres'
+              | 'balao-conversa'
+              | 'caneta-injecao'
+              | 'delivery'
+              | 'cupcake'
+              | 'biscoito-grande'
+              | 'sacola-grande'
+              | 'loja'
+              | 'recibo'
+              | 'whatsapp'
+              | 'tendencia-alta'
+              | 'x-negrito'
+              | 'check-negrito'
+              | 'tema-escuro'
+              | 'tema-claro'
+              | 'pausar'
+              | 'tocar'
+              | 'som'
+              | 'mudo'
+              | 'mais-botao'
+              | 'instagram'
+              | 'tiktok'
+              | 'facebook'
+              | 'youtube'
+              | 'escudo-check'
+              | 'cadeado-24'
+              | 'chevron-baixo'
+              | 'nota-fiscal'
+            )
+          | null;
+      };
+      conheca?: {
+        titulo?: string | null;
+        icone?:
+          | (
+              | 'menu'
+              | 'caminhao'
+              | 'sacola'
+              | 'fechar'
+              | 'brilho'
+              | 'chevron-cima'
+              | 'seta-direita'
+              | 'presente'
+              | 'trocar'
+              | 'ajuda'
+              | 'prato'
+              | 'bala'
+              | 'biscoito-mordido'
+              | 'lua'
+              | 'calendario'
+              | 'pulso'
+              | 'x-pequeno'
+              | 'rosto-triste-grande'
+              | 'bala-riscada'
+              | 'lua-grande'
+              | 'tigela-quente'
+              | 'raio'
+              | 'rosto-triste'
+              | 'x-circulo'
+              | 'check-circulo'
+              | 'mais'
+              | 'molecula'
+              | 'sementes'
+              | 'grao-cafe'
+              | 'raiz'
+              | 'sol-vitamina'
+              | 'chevron-esquerda'
+              | 'chevron-direita'
+              | 'gota'
+              | 'relogio'
+              | 'escudo-alerta'
+              | 'selo'
+              | 'info'
+              | 'estrela'
+              | 'check'
+              | 'pote'
+              | 'livro'
+              | 'check-pequeno'
+              | 'cadeado'
+              | 'prato-talheres'
+              | 'balao-conversa'
+              | 'caneta-injecao'
+              | 'delivery'
+              | 'cupcake'
+              | 'biscoito-grande'
+              | 'sacola-grande'
+              | 'loja'
+              | 'recibo'
+              | 'whatsapp'
+              | 'tendencia-alta'
+              | 'x-negrito'
+              | 'check-negrito'
+              | 'tema-escuro'
+              | 'tema-claro'
+              | 'pausar'
+              | 'tocar'
+              | 'som'
+              | 'mudo'
+              | 'mais-botao'
+              | 'instagram'
+              | 'tiktok'
+              | 'facebook'
+              | 'youtube'
+              | 'escudo-check'
+              | 'cadeado-24'
+              | 'chevron-baixo'
+              | 'nota-fiscal'
+            )
+          | null;
+        cards?:
+          | {
+              linha1?: string | null;
+              linha2?: string | null;
+              link?: string | null;
+              /**
+               * Sem foto, aparece o espaço reservado.
+               */
+              foto?: (number | null) | Media;
+              id?: string | null;
+            }[]
+          | null;
+      };
+      /**
+       * O item com link #bonus some quando os bônus estão desligados.
+       */
+      itens?:
+        | {
+            texto: string;
+            link: string;
+            icone?:
+              | (
+                  | 'menu'
+                  | 'caminhao'
+                  | 'sacola'
+                  | 'fechar'
+                  | 'brilho'
+                  | 'chevron-cima'
+                  | 'seta-direita'
+                  | 'presente'
+                  | 'trocar'
+                  | 'ajuda'
+                  | 'prato'
+                  | 'bala'
+                  | 'biscoito-mordido'
+                  | 'lua'
+                  | 'calendario'
+                  | 'pulso'
+                  | 'x-pequeno'
+                  | 'rosto-triste-grande'
+                  | 'bala-riscada'
+                  | 'lua-grande'
+                  | 'tigela-quente'
+                  | 'raio'
+                  | 'rosto-triste'
+                  | 'x-circulo'
+                  | 'check-circulo'
+                  | 'mais'
+                  | 'molecula'
+                  | 'sementes'
+                  | 'grao-cafe'
+                  | 'raiz'
+                  | 'sol-vitamina'
+                  | 'chevron-esquerda'
+                  | 'chevron-direita'
+                  | 'gota'
+                  | 'relogio'
+                  | 'escudo-alerta'
+                  | 'selo'
+                  | 'info'
+                  | 'estrela'
+                  | 'check'
+                  | 'pote'
+                  | 'livro'
+                  | 'check-pequeno'
+                  | 'cadeado'
+                  | 'prato-talheres'
+                  | 'balao-conversa'
+                  | 'caneta-injecao'
+                  | 'delivery'
+                  | 'cupcake'
+                  | 'biscoito-grande'
+                  | 'sacola-grande'
+                  | 'loja'
+                  | 'recibo'
+                  | 'whatsapp'
+                  | 'tendencia-alta'
+                  | 'x-negrito'
+                  | 'check-negrito'
+                  | 'tema-escuro'
+                  | 'tema-claro'
+                  | 'pausar'
+                  | 'tocar'
+                  | 'som'
+                  | 'mudo'
+                  | 'mais-botao'
+                  | 'instagram'
+                  | 'tiktok'
+                  | 'facebook'
+                  | 'youtube'
+                  | 'escudo-check'
+                  | 'cadeado-24'
+                  | 'chevron-baixo'
+                  | 'nota-fiscal'
+                )
+              | null;
+            id?: string | null;
+          }[]
+        | null;
+      rodape?: string | null;
+    };
+  };
+  dor?: {
+    /**
+     * Texto curto: fica sempre em uma linha.
+     */
+    etiqueta?: string | null;
+    titulo?: string | null;
+    /**
+     * Continua o título com letra fina.
+     */
+    tituloLeve?: string | null;
+    chamada?: string | null;
+    dia?:
+      | {
+          titulo: string;
+          texto: string;
+          icone?:
+            | (
+                | 'menu'
+                | 'caminhao'
+                | 'sacola'
+                | 'fechar'
+                | 'brilho'
+                | 'chevron-cima'
+                | 'seta-direita'
+                | 'presente'
+                | 'trocar'
+                | 'ajuda'
+                | 'prato'
+                | 'bala'
+                | 'biscoito-mordido'
+                | 'lua'
+                | 'calendario'
+                | 'pulso'
+                | 'x-pequeno'
+                | 'rosto-triste-grande'
+                | 'bala-riscada'
+                | 'lua-grande'
+                | 'tigela-quente'
+                | 'raio'
+                | 'rosto-triste'
+                | 'x-circulo'
+                | 'check-circulo'
+                | 'mais'
+                | 'molecula'
+                | 'sementes'
+                | 'grao-cafe'
+                | 'raiz'
+                | 'sol-vitamina'
+                | 'chevron-esquerda'
+                | 'chevron-direita'
+                | 'gota'
+                | 'relogio'
+                | 'escudo-alerta'
+                | 'selo'
+                | 'info'
+                | 'estrela'
+                | 'check'
+                | 'pote'
+                | 'livro'
+                | 'check-pequeno'
+                | 'cadeado'
+                | 'prato-talheres'
+                | 'balao-conversa'
+                | 'caneta-injecao'
+                | 'delivery'
+                | 'cupcake'
+                | 'biscoito-grande'
+                | 'sacola-grande'
+                | 'loja'
+                | 'recibo'
+                | 'whatsapp'
+                | 'tendencia-alta'
+                | 'x-negrito'
+                | 'check-negrito'
+                | 'tema-escuro'
+                | 'tema-claro'
+                | 'pausar'
+                | 'tocar'
+                | 'som'
+                | 'mudo'
+                | 'mais-botao'
+                | 'instagram'
+                | 'tiktok'
+                | 'facebook'
+                | 'youtube'
+                | 'escudo-check'
+                | 'cadeado-24'
+                | 'chevron-baixo'
+                | 'nota-fiscal'
+              )
+            | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Sem foto, aparece o espaço reservado.
+     */
+    foto?: (number | null) | Media;
+    /**
+     * Até 4. Cada posição tem seu lugar fixo em volta da foto.
+     */
+    baloes?:
+      | {
+          texto: string;
+          id?: string | null;
+        }[]
+      | null;
+    fecho1?: string | null;
+    fecho2?: string | null;
+    fecho3?: string | null;
+  };
+  naoCulpa?: {
+    /**
+     * Sem foto, aparece o espaço reservado.
+     */
+    foto?: (number | null) | Media;
+    /**
+     * Texto curto: fica sempre em uma linha.
+     */
+    etiqueta?: string | null;
+    titulo?: string | null;
+    /**
+     * Continua o título com letra fina.
+     */
+    tituloLeve?: string | null;
+    tentativas?:
+      | {
+          texto: string;
+          id?: string | null;
+        }[]
+      | null;
+    cards?:
+      | {
+          titulo: string;
+          texto?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    destaque?: string | null;
+    destaqueTag?: string | null;
+    destaqueTexto?: string | null;
+    fecho1?: string | null;
+    fecho2?: string | null;
+    fecho3?: string | null;
+    /**
+     * Vazio usa a linha 3.
+     */
+    fecho3Celular?: string | null;
+    /**
+     * Repete em loop na faixa preta.
+     */
+    faixa?: string | null;
+  };
+  destaque?: {
+    linha1?: string | null;
+    linha2?: string | null;
+    linha2b?: string | null;
+    linha3?: string | null;
+    subtitulo?: string | null;
+    /**
+     * As fotos passam em loop. As alturas variam sozinhas.
+     */
+    fotos?:
+      | {
+          /**
+           * Sem foto, aparece o espaço reservado.
+           */
+          foto?: (number | null) | Media;
+          titulo?: string | null;
+          /**
+           * Aparece no espaço enquanto não há foto.
+           */
+          texto?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  produto?: {
+    /**
+     * Use **texto** para negrito.
+     */
+    paragrafo1?: string | null;
+    /**
+     * Use **texto** para negrito.
+     */
+    paragrafo2?: string | null;
+    sentirTitulo?: string | null;
+    sentirTexto?: string | null;
+    sentir?:
+      | {
+          /**
+           * Aperte Enter onde a linha deve quebrar.
+           */
+          texto: string;
+          icone?:
+            | (
+                | 'menu'
+                | 'caminhao'
+                | 'sacola'
+                | 'fechar'
+                | 'brilho'
+                | 'chevron-cima'
+                | 'seta-direita'
+                | 'presente'
+                | 'trocar'
+                | 'ajuda'
+                | 'prato'
+                | 'bala'
+                | 'biscoito-mordido'
+                | 'lua'
+                | 'calendario'
+                | 'pulso'
+                | 'x-pequeno'
+                | 'rosto-triste-grande'
+                | 'bala-riscada'
+                | 'lua-grande'
+                | 'tigela-quente'
+                | 'raio'
+                | 'rosto-triste'
+                | 'x-circulo'
+                | 'check-circulo'
+                | 'mais'
+                | 'molecula'
+                | 'sementes'
+                | 'grao-cafe'
+                | 'raiz'
+                | 'sol-vitamina'
+                | 'chevron-esquerda'
+                | 'chevron-direita'
+                | 'gota'
+                | 'relogio'
+                | 'escudo-alerta'
+                | 'selo'
+                | 'info'
+                | 'estrela'
+                | 'check'
+                | 'pote'
+                | 'livro'
+                | 'check-pequeno'
+                | 'cadeado'
+                | 'prato-talheres'
+                | 'balao-conversa'
+                | 'caneta-injecao'
+                | 'delivery'
+                | 'cupcake'
+                | 'biscoito-grande'
+                | 'sacola-grande'
+                | 'loja'
+                | 'recibo'
+                | 'whatsapp'
+                | 'tendencia-alta'
+                | 'x-negrito'
+                | 'check-negrito'
+                | 'tema-escuro'
+                | 'tema-claro'
+                | 'pausar'
+                | 'tocar'
+                | 'som'
+                | 'mudo'
+                | 'mais-botao'
+                | 'instagram'
+                | 'tiktok'
+                | 'facebook'
+                | 'youtube'
+                | 'escudo-check'
+                | 'cadeado-24'
+                | 'chevron-baixo'
+                | 'nota-fiscal'
+              )
+            | null;
+          id?: string | null;
+        }[]
+      | null;
+    tabelaTitulo?: string | null;
+    tabelaSem?: string | null;
+    tabelaCom?: string | null;
+    tabela?:
+      | {
+          texto: string;
+          id?: string | null;
+        }[]
+      | null;
+    fecho?: string | null;
+    fechoLeve?: string | null;
+  };
+  depoimentos?: {
+    /**
+     * Texto curto: fica sempre em uma linha.
+     */
+    etiqueta?: string | null;
+    titulo?: string | null;
+    /**
+     * Continua o título com letra fina.
+     */
+    tituloLeve?: string | null;
+    subtitulo?: string | null;
+    /**
+     * Sem foto, aparece o espaço reservado.
+     */
+    foto?: (number | null) | Media;
+    painelTitulo?: string | null;
+    painelSubtitulo?: string | null;
+  };
+  videos?: {
+    /**
+     * Texto curto: fica sempre em uma linha.
+     */
+    etiqueta?: string | null;
+    titulo?: string | null;
+    /**
+     * Continua o título com letra fina.
+     */
+    tituloLeve?: string | null;
+    subtitulo?: string | null;
+  };
+  ingredientes?: {
+    /**
+     * Texto curto: fica sempre em uma linha.
+     */
+    etiqueta?: string | null;
+    titulo?: string | null;
+    /**
+     * Continua o título com letra fina.
+     */
+    tituloLeve?: string | null;
+    porcao?: string | null;
+    /**
+     * Use **texto** para negrito.
+     */
+    comoUsar?: string | null;
+  };
+  jaUsa?: {
+    etiqueta?: string | null;
+    titulo1?: string | null;
+    titulo2?: string | null;
+    titulo3?: string | null;
+    subtitulo?: string | null;
+    vantagens?:
+      | {
+          texto: string;
+          id?: string | null;
+        }[]
+      | null;
+    forte?: string | null;
+    tickerRotulo?: string | null;
+    /**
+     * Texto e foto trocam juntos a cada 2,6 s.
+     */
+    ticker?:
+      | {
+          texto: string;
+          /**
+           * Sem foto, aparece o espaço reservado.
+           */
+          foto?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  bonus?: {
+    /**
+     * Texto curto: fica sempre em uma linha.
+     */
+    etiqueta?: string | null;
+    titulo?: string | null;
+    /**
+     * Continua o título com letra fina.
+     */
+    tituloLeve?: string | null;
+  };
+  oferta?: {
+    /**
+     * Texto curto: fica sempre em uma linha.
+     */
+    etiqueta?: string | null;
+    titulo?: string | null;
+    /**
+     * Continua o título com letra fina.
+     */
+    tituloLeve?: string | null;
+    gastos?:
+      | {
+          texto: string;
+          icone?:
+            | (
+                | 'menu'
+                | 'caminhao'
+                | 'sacola'
+                | 'fechar'
+                | 'brilho'
+                | 'chevron-cima'
+                | 'seta-direita'
+                | 'presente'
+                | 'trocar'
+                | 'ajuda'
+                | 'prato'
+                | 'bala'
+                | 'biscoito-mordido'
+                | 'lua'
+                | 'calendario'
+                | 'pulso'
+                | 'x-pequeno'
+                | 'rosto-triste-grande'
+                | 'bala-riscada'
+                | 'lua-grande'
+                | 'tigela-quente'
+                | 'raio'
+                | 'rosto-triste'
+                | 'x-circulo'
+                | 'check-circulo'
+                | 'mais'
+                | 'molecula'
+                | 'sementes'
+                | 'grao-cafe'
+                | 'raiz'
+                | 'sol-vitamina'
+                | 'chevron-esquerda'
+                | 'chevron-direita'
+                | 'gota'
+                | 'relogio'
+                | 'escudo-alerta'
+                | 'selo'
+                | 'info'
+                | 'estrela'
+                | 'check'
+                | 'pote'
+                | 'livro'
+                | 'check-pequeno'
+                | 'cadeado'
+                | 'prato-talheres'
+                | 'balao-conversa'
+                | 'caneta-injecao'
+                | 'delivery'
+                | 'cupcake'
+                | 'biscoito-grande'
+                | 'sacola-grande'
+                | 'loja'
+                | 'recibo'
+                | 'whatsapp'
+                | 'tendencia-alta'
+                | 'x-negrito'
+                | 'check-negrito'
+                | 'tema-escuro'
+                | 'tema-claro'
+                | 'pausar'
+                | 'tocar'
+                | 'som'
+                | 'mudo'
+                | 'mais-botao'
+                | 'instagram'
+                | 'tiktok'
+                | 'facebook'
+                | 'youtube'
+                | 'escudo-check'
+                | 'cadeado-24'
+                | 'chevron-baixo'
+                | 'nota-fiscal'
+              )
+            | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * {produto} vira o nome do produto e {valor} o preço por dia.
+     */
+    fraseGastos?: string | null;
+    cardEtiqueta?: string | null;
+    escolha?: string | null;
+    /**
+     * Use **texto** para negrito.
+     */
+    garantia?: string | null;
+    /**
+     * {valor} vira o preço por dia do pote avulso.
+     */
+    precoPorDia?: string | null;
+    confianca?:
+      | {
+          titulo: string;
+          texto?: string | null;
+          icone?:
+            | (
+                | 'menu'
+                | 'caminhao'
+                | 'sacola'
+                | 'fechar'
+                | 'brilho'
+                | 'chevron-cima'
+                | 'seta-direita'
+                | 'presente'
+                | 'trocar'
+                | 'ajuda'
+                | 'prato'
+                | 'bala'
+                | 'biscoito-mordido'
+                | 'lua'
+                | 'calendario'
+                | 'pulso'
+                | 'x-pequeno'
+                | 'rosto-triste-grande'
+                | 'bala-riscada'
+                | 'lua-grande'
+                | 'tigela-quente'
+                | 'raio'
+                | 'rosto-triste'
+                | 'x-circulo'
+                | 'check-circulo'
+                | 'mais'
+                | 'molecula'
+                | 'sementes'
+                | 'grao-cafe'
+                | 'raiz'
+                | 'sol-vitamina'
+                | 'chevron-esquerda'
+                | 'chevron-direita'
+                | 'gota'
+                | 'relogio'
+                | 'escudo-alerta'
+                | 'selo'
+                | 'info'
+                | 'estrela'
+                | 'check'
+                | 'pote'
+                | 'livro'
+                | 'check-pequeno'
+                | 'cadeado'
+                | 'prato-talheres'
+                | 'balao-conversa'
+                | 'caneta-injecao'
+                | 'delivery'
+                | 'cupcake'
+                | 'biscoito-grande'
+                | 'sacola-grande'
+                | 'loja'
+                | 'recibo'
+                | 'whatsapp'
+                | 'tendencia-alta'
+                | 'x-negrito'
+                | 'check-negrito'
+                | 'tema-escuro'
+                | 'tema-claro'
+                | 'pausar'
+                | 'tocar'
+                | 'som'
+                | 'mudo'
+                | 'mais-botao'
+                | 'instagram'
+                | 'tiktok'
+                | 'facebook'
+                | 'youtube'
+                | 'escudo-check'
+                | 'cadeado-24'
+                | 'chevron-baixo'
+                | 'nota-fiscal'
+              )
+            | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  duvidas?: {
+    titulo?: string | null;
+    /**
+     * Continua o título com letra fina.
+     */
+    tituloLeve?: string | null;
+    /**
+     * Sem imagem, aparece o espaço reservado.
+     */
+    ilustracao?: (number | null) | Media;
+    avisosTitulo?: string | null;
+    avisosTexto?: string | null;
+    /**
+     * Trocam sozinhos a cada 5 s.
+     */
+    avisos?:
+      | {
+          rotulo?: string | null;
+          icone?:
+            | (
+                | 'menu'
+                | 'caminhao'
+                | 'sacola'
+                | 'fechar'
+                | 'brilho'
+                | 'chevron-cima'
+                | 'seta-direita'
+                | 'presente'
+                | 'trocar'
+                | 'ajuda'
+                | 'prato'
+                | 'bala'
+                | 'biscoito-mordido'
+                | 'lua'
+                | 'calendario'
+                | 'pulso'
+                | 'x-pequeno'
+                | 'rosto-triste-grande'
+                | 'bala-riscada'
+                | 'lua-grande'
+                | 'tigela-quente'
+                | 'raio'
+                | 'rosto-triste'
+                | 'x-circulo'
+                | 'check-circulo'
+                | 'mais'
+                | 'molecula'
+                | 'sementes'
+                | 'grao-cafe'
+                | 'raiz'
+                | 'sol-vitamina'
+                | 'chevron-esquerda'
+                | 'chevron-direita'
+                | 'gota'
+                | 'relogio'
+                | 'escudo-alerta'
+                | 'selo'
+                | 'info'
+                | 'estrela'
+                | 'check'
+                | 'pote'
+                | 'livro'
+                | 'check-pequeno'
+                | 'cadeado'
+                | 'prato-talheres'
+                | 'balao-conversa'
+                | 'caneta-injecao'
+                | 'delivery'
+                | 'cupcake'
+                | 'biscoito-grande'
+                | 'sacola-grande'
+                | 'loja'
+                | 'recibo'
+                | 'whatsapp'
+                | 'tendencia-alta'
+                | 'x-negrito'
+                | 'check-negrito'
+                | 'tema-escuro'
+                | 'tema-claro'
+                | 'pausar'
+                | 'tocar'
+                | 'som'
+                | 'mudo'
+                | 'mais-botao'
+                | 'instagram'
+                | 'tiktok'
+                | 'facebook'
+                | 'youtube'
+                | 'escudo-check'
+                | 'cadeado-24'
+                | 'chevron-baixo'
+                | 'nota-fiscal'
+              )
+            | null;
+          titulo: string;
+          texto?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  final?: {
+    /**
+     * Sem foto, aparece o espaço reservado.
+     */
+    foto?: (number | null) | Media;
+    chamada?: string | null;
+    titulo?: string | null;
+    /**
+     * Continua o título com letra fina.
+     */
+    tituloLeve?: string | null;
+    /**
+     * Use **texto** para negrito.
+     */
+    opcaoNao?: string | null;
+    /**
+     * Use **texto** para negrito.
+     */
+    opcaoSim?: string | null;
+    frase?: string | null;
+  };
+  rodape?: {
+    /**
+     * Aperte Enter onde a linha deve quebrar.
+     */
+    faixa?: string | null;
+    tituloAtendimento?: string | null;
+    tituloPagamento?: string | null;
+    selos?:
+      | {
+          titulo: string;
+          texto?: string | null;
+          icone?:
+            | (
+                | 'menu'
+                | 'caminhao'
+                | 'sacola'
+                | 'fechar'
+                | 'brilho'
+                | 'chevron-cima'
+                | 'seta-direita'
+                | 'presente'
+                | 'trocar'
+                | 'ajuda'
+                | 'prato'
+                | 'bala'
+                | 'biscoito-mordido'
+                | 'lua'
+                | 'calendario'
+                | 'pulso'
+                | 'x-pequeno'
+                | 'rosto-triste-grande'
+                | 'bala-riscada'
+                | 'lua-grande'
+                | 'tigela-quente'
+                | 'raio'
+                | 'rosto-triste'
+                | 'x-circulo'
+                | 'check-circulo'
+                | 'mais'
+                | 'molecula'
+                | 'sementes'
+                | 'grao-cafe'
+                | 'raiz'
+                | 'sol-vitamina'
+                | 'chevron-esquerda'
+                | 'chevron-direita'
+                | 'gota'
+                | 'relogio'
+                | 'escudo-alerta'
+                | 'selo'
+                | 'info'
+                | 'estrela'
+                | 'check'
+                | 'pote'
+                | 'livro'
+                | 'check-pequeno'
+                | 'cadeado'
+                | 'prato-talheres'
+                | 'balao-conversa'
+                | 'caneta-injecao'
+                | 'delivery'
+                | 'cupcake'
+                | 'biscoito-grande'
+                | 'sacola-grande'
+                | 'loja'
+                | 'recibo'
+                | 'whatsapp'
+                | 'tendencia-alta'
+                | 'x-negrito'
+                | 'check-negrito'
+                | 'tema-escuro'
+                | 'tema-claro'
+                | 'pausar'
+                | 'tocar'
+                | 'som'
+                | 'mudo'
+                | 'mais-botao'
+                | 'instagram'
+                | 'tiktok'
+                | 'facebook'
+                | 'youtube'
+                | 'escudo-check'
+                | 'cadeado-24'
+                | 'chevron-baixo'
+                | 'nota-fiscal'
+              )
+            | null;
+          id?: string | null;
+        }[]
+      | null;
   };
   botoes?: {
     principal?: string | null;
@@ -881,13 +1931,7 @@ export interface Texto {
     bonus?: string | null;
     pedido?: string | null;
   };
-  oferta?: {
-    garantia?: string | null;
-    /**
-     * {valor} vira o preço por dia do pote avulso.
-     */
-    precoPorDia?: string | null;
-  };
+  _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -919,6 +1963,7 @@ export interface ProvaSocial {
         id?: string | null;
       }[]
     | null;
+  _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -974,6 +2019,7 @@ export interface Contato {
    */
   empresa?: string | null;
   copyright?: string | null;
+  _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -989,7 +2035,12 @@ export interface Seo {
    * 1200 × 630 px.
    */
   imagem?: (number | null) | Media;
+  /**
+   * Imagem quadrada, PNG ou SVG. Vazio usa o "A" da ALPHA.
+   */
+  favicon?: (number | null) | Media;
   indexar?: boolean | null;
+  _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1005,6 +2056,7 @@ export interface Cooky {
    */
   texto?: string | null;
   botao?: string | null;
+  _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1038,6 +2090,7 @@ export interface OfertasSelect<T extends boolean = true> {
         ativo?: T;
         id?: T;
       };
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1055,6 +2108,7 @@ export interface FreteGratisSelect<T extends boolean = true> {
   subtextoProgresso?: T;
   subtextoLiberado?: T;
   comemorar?: T;
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1078,6 +2132,7 @@ export interface BonusSelect<T extends boolean = true> {
         imagem?: T;
         id?: T;
       };
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1096,6 +2151,269 @@ export interface TextosSelect<T extends boolean = true> {
         subtitulo?: T;
         condicao?: T;
         foto?: T;
+        menu?:
+          | T
+          | {
+              destaque?:
+                | T
+                | {
+                    texto?: T;
+                    link?: T;
+                    icone?: T;
+                  };
+              conheca?:
+                | T
+                | {
+                    titulo?: T;
+                    icone?: T;
+                    cards?:
+                      | T
+                      | {
+                          linha1?: T;
+                          linha2?: T;
+                          link?: T;
+                          foto?: T;
+                          id?: T;
+                        };
+                  };
+              itens?:
+                | T
+                | {
+                    texto?: T;
+                    link?: T;
+                    icone?: T;
+                    id?: T;
+                  };
+              rodape?: T;
+            };
+      };
+  dor?:
+    | T
+    | {
+        etiqueta?: T;
+        titulo?: T;
+        tituloLeve?: T;
+        chamada?: T;
+        dia?:
+          | T
+          | {
+              titulo?: T;
+              texto?: T;
+              icone?: T;
+              id?: T;
+            };
+        foto?: T;
+        baloes?:
+          | T
+          | {
+              texto?: T;
+              id?: T;
+            };
+        fecho1?: T;
+        fecho2?: T;
+        fecho3?: T;
+      };
+  naoCulpa?:
+    | T
+    | {
+        foto?: T;
+        etiqueta?: T;
+        titulo?: T;
+        tituloLeve?: T;
+        tentativas?:
+          | T
+          | {
+              texto?: T;
+              id?: T;
+            };
+        cards?:
+          | T
+          | {
+              titulo?: T;
+              texto?: T;
+              id?: T;
+            };
+        destaque?: T;
+        destaqueTag?: T;
+        destaqueTexto?: T;
+        fecho1?: T;
+        fecho2?: T;
+        fecho3?: T;
+        fecho3Celular?: T;
+        faixa?: T;
+      };
+  destaque?:
+    | T
+    | {
+        linha1?: T;
+        linha2?: T;
+        linha2b?: T;
+        linha3?: T;
+        subtitulo?: T;
+        fotos?:
+          | T
+          | {
+              foto?: T;
+              titulo?: T;
+              texto?: T;
+              id?: T;
+            };
+      };
+  produto?:
+    | T
+    | {
+        paragrafo1?: T;
+        paragrafo2?: T;
+        sentirTitulo?: T;
+        sentirTexto?: T;
+        sentir?:
+          | T
+          | {
+              texto?: T;
+              icone?: T;
+              id?: T;
+            };
+        tabelaTitulo?: T;
+        tabelaSem?: T;
+        tabelaCom?: T;
+        tabela?:
+          | T
+          | {
+              texto?: T;
+              id?: T;
+            };
+        fecho?: T;
+        fechoLeve?: T;
+      };
+  depoimentos?:
+    | T
+    | {
+        etiqueta?: T;
+        titulo?: T;
+        tituloLeve?: T;
+        subtitulo?: T;
+        foto?: T;
+        painelTitulo?: T;
+        painelSubtitulo?: T;
+      };
+  videos?:
+    | T
+    | {
+        etiqueta?: T;
+        titulo?: T;
+        tituloLeve?: T;
+        subtitulo?: T;
+      };
+  ingredientes?:
+    | T
+    | {
+        etiqueta?: T;
+        titulo?: T;
+        tituloLeve?: T;
+        porcao?: T;
+        comoUsar?: T;
+      };
+  jaUsa?:
+    | T
+    | {
+        etiqueta?: T;
+        titulo1?: T;
+        titulo2?: T;
+        titulo3?: T;
+        subtitulo?: T;
+        vantagens?:
+          | T
+          | {
+              texto?: T;
+              id?: T;
+            };
+        forte?: T;
+        tickerRotulo?: T;
+        ticker?:
+          | T
+          | {
+              texto?: T;
+              foto?: T;
+              id?: T;
+            };
+      };
+  bonus?:
+    | T
+    | {
+        etiqueta?: T;
+        titulo?: T;
+        tituloLeve?: T;
+      };
+  oferta?:
+    | T
+    | {
+        etiqueta?: T;
+        titulo?: T;
+        tituloLeve?: T;
+        gastos?:
+          | T
+          | {
+              texto?: T;
+              icone?: T;
+              id?: T;
+            };
+        fraseGastos?: T;
+        cardEtiqueta?: T;
+        escolha?: T;
+        garantia?: T;
+        precoPorDia?: T;
+        confianca?:
+          | T
+          | {
+              titulo?: T;
+              texto?: T;
+              icone?: T;
+              id?: T;
+            };
+      };
+  duvidas?:
+    | T
+    | {
+        titulo?: T;
+        tituloLeve?: T;
+        ilustracao?: T;
+        avisosTitulo?: T;
+        avisosTexto?: T;
+        avisos?:
+          | T
+          | {
+              rotulo?: T;
+              icone?: T;
+              titulo?: T;
+              texto?: T;
+              id?: T;
+            };
+      };
+  final?:
+    | T
+    | {
+        foto?: T;
+        chamada?: T;
+        titulo?: T;
+        tituloLeve?: T;
+        opcaoNao?: T;
+        opcaoSim?: T;
+        frase?: T;
+      };
+  rodape?:
+    | T
+    | {
+        faixa?: T;
+        tituloAtendimento?: T;
+        tituloPagamento?: T;
+        selos?:
+          | T
+          | {
+              titulo?: T;
+              texto?: T;
+              icone?: T;
+              id?: T;
+            };
       };
   botoes?:
     | T
@@ -1105,12 +2423,7 @@ export interface TextosSelect<T extends boolean = true> {
         bonus?: T;
         pedido?: T;
       };
-  oferta?:
-    | T
-    | {
-        garantia?: T;
-        precoPorDia?: T;
-      };
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1141,6 +2454,7 @@ export interface ProvaSocialSelect<T extends boolean = true> {
         legenda?: T;
         id?: T;
       };
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1180,6 +2494,7 @@ export interface ContatoSelect<T extends boolean = true> {
   avisoLegal?: T;
   empresa?: T;
   copyright?: T;
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1192,7 +2507,9 @@ export interface SeoSelect<T extends boolean = true> {
   titulo?: T;
   descricao?: T;
   imagem?: T;
+  favicon?: T;
   indexar?: T;
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1205,6 +2522,7 @@ export interface CookiesSelect<T extends boolean = true> {
   ativo?: T;
   texto?: T;
   botao?: T;
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
-import { logado, publico } from '@/access'
+import { logado, publicadoOuLogado } from '@/access'
+import { versoes } from '@/globals/base'
 import { revalidarAoApagar, revalidarColecao } from '@/hooks/revalidar'
 
 // Prints de conversa da seção "Clientes reais".
@@ -13,7 +14,8 @@ export const Depoimentos: CollectionConfig = {
     group: 'Conteúdo',
     defaultColumns: ['titulo', 'ativo'],
   },
-  access: { read: publico, create: logado, update: logado, delete: logado },
+  access: { read: publicadoOuLogado, create: logado, update: logado, delete: logado },
+  versions: versoes,
   hooks: { afterChange: [revalidarColecao], afterDelete: [revalidarAoApagar] },
   fields: [
     { name: 'titulo', label: 'Título do card', type: 'text', required: true },

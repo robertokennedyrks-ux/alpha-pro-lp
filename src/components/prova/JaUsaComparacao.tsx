@@ -2,11 +2,12 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+import { type FotoCms, FotoOuEspaco } from '@/components/Foto'
 import { Icon } from '@/components/icons'
 
 import { semMovimento } from './midia'
 
-const VALORES = ['Mais controle da fome', 'Menos vontade de doce', 'A mesma nota fiscal']
+// Descrição de cada espaço de foto enquanto não há foto no painel (texto do protótipo).
 const FOTOS = [
   ['Foto 1', 'O pote ALPHA ao lado do ALPHA PRO'],
   ['Foto 2', 'Mão afastando um prato de doces, sem esforço'],
@@ -14,7 +15,10 @@ const FOTOS = [
 ]
 
 /* "Da sua ALPHA para o PRO": texto, foto e bolinha trocam juntos a cada 2,6s; as setas reiniciam o tempo. */
-export function JaUsaComparacao() {
+type Item = { texto: string; foto?: FotoCms }
+
+export function JaUsaComparacao({ forte, rotulo, itens }: { forte: string; rotulo: string; itens: Item[] }) {
+  const n = itens.length
   const [i, setI] = useState(0) // foto
   const [txt, setTxt] = useState(0) // texto e bolinha (trocam depois do fade)
   const [vis, setVis] = useState(true)
@@ -23,9 +27,9 @@ export function JaUsaComparacao() {
   const fade = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
   const goRef = useRef<(n: number) => void>(() => {})
 
-  const go = useCallback((n: number) => {
+  const go = useCallback((num: number) => {
     const still = semMovimento()
-    const k = (n + VALORES.length) % VALORES.length
+    const k = ((num % n) + n) % n
     iRef.current = k
     setI(k)
     setVis(false)
@@ -39,7 +43,7 @@ export function JaUsaComparacao() {
     )
     clearInterval(timer.current)
     if (!still) timer.current = setInterval(() => goRef.current(iRef.current + 1), 2600)
-  }, [])
+  }, [n])
 
   useEffect(() => {
     goRef.current = go
@@ -54,18 +58,18 @@ export function JaUsaComparacao() {
     <div className="jc-grid">
       <div className="jc-left">
         <Icon name="pote" className="jc-ico" />
-        <p className="jc-strong">Só que mais forte.</p>
+        <p className="jc-strong">{forte}</p>
         <div className="jc-ticker">
-          <span className="jc-lbl">Da sua ALPHA para o PRO:</span>
+          <span className="jc-lbl">{rotulo}</span>
           <span className="jc-val" aria-live="polite" style={{ opacity: vis ? 1 : 0 }}>
-            {VALORES[txt]}
+            {itens[txt]?.texto}
           </span>
           <span className="jc-ctl">
             <button type="button" className="pv-arr" aria-label="Opção anterior" onClick={() => go(iRef.current - 1)}>
               <Icon name="chevron-esquerda" />
             </button>
             <span className="jc-dots" aria-hidden="true">
-              {VALORES.map((_, k) => (
+              {itens.map((_, k) => (
                 <i key={k} className={k === txt ? 'on' : undefined} />
               ))}
             </span>
@@ -76,13 +80,15 @@ export function JaUsaComparacao() {
         </div>
       </div>
       <div className="jc-ph">
-        {FOTOS.map(([t, s], k) => (
-          <div key={k} className={`ph jc-slide${k === i ? ' is-on' : ''}`}>
-            <span>
-              <b>{t}</b>
-              {s}
-            </span>
-          </div>
+        {itens.map((item, k) => (
+          <FotoOuEspaco
+            key={k}
+            foto={item.foto}
+            titulo={FOTOS[k]?.[0] ?? `Foto ${k + 1}`}
+            texto={FOTOS[k]?.[1] ?? item.texto}
+            sizes="(min-width:1024px) 50vw, 100vw"
+            className={`jc-slide${k === i ? ' is-on' : ''}`}
+          />
         ))}
       </div>
     </div>

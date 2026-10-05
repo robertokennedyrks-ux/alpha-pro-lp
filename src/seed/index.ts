@@ -10,6 +10,8 @@ import { getPayload } from 'payload'
 
 import config from '@payload-config'
 
+import { textosPadrao } from '@/lib/textos-padrao'
+
 import dados from './dados.json'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -55,7 +57,7 @@ async function seed() {
   const criar = async <T extends (typeof colecoes)[number]>(collection: T, itens: Record<string, unknown>[]) => {
     for (const data of itens) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await payload.create({ collection, data: data as any, context: ctx })
+      await payload.create({ collection, data: { ...data, _status: 'published' } as any, context: ctx })
     }
     payload.logger.info(`${collection}: ${itens.length}`)
   }
@@ -98,26 +100,8 @@ async function seed() {
       entrega: dados.bonusConfig.entrega,
       itens: dados.bonus,
     },
-    textos: {
-      hero: {
-        etiqueta: '60 cápsulas · 30 dias',
-        titulo: 'Sua fome está ganhando de você.',
-        tituloLeve: 'Todo santo dia.',
-        subtitulo:
-          'A do doce. A da noite. A da ansiedade. A do beliscar o dia inteiro. O ALPHA PRO foi feito para **desligar essa fome** e devolver o controle para você.',
-        condicao: '**5x sem juros** ou **5% de desconto no Pix**',
-      },
-      botoes: {
-        principal: 'Desligar minha fome',
-        produto: 'Quero meu ALPHA PRO',
-        bonus: 'Escolher minha oferta',
-        pedido: 'Fazer pedido',
-      },
-      oferta: {
-        garantia: '**Garantia de 7 dias.** Desistiu? Devolvemos o seu dinheiro.',
-        precoPorDia: 'Menos de {valor} por dia.',
-      },
-    },
+    // todos os textos da página, iguais ao protótipo (a mesma fonte é o padrão dos componentes)
+    textos: textosPadrao,
     'prova-social': {
       anuncios: dados.anuncios.map((texto) => ({ texto })),
       selo: { numero: '+25 mil', texto: 'vendas da linha ALPHA' },
@@ -183,7 +167,7 @@ async function seed() {
 
   for (const [slug, data] of Object.entries(globais)) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    await payload.updateGlobal({ slug: slug as any, data: data as any, context: ctx })
+    await payload.updateGlobal({ slug: slug as any, data: { ...data, _status: 'published' } as any, context: ctx })
     payload.logger.info(`global ${slug}`)
   }
 

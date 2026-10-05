@@ -2,7 +2,9 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
-import { Icon } from '@/components/icons'
+import Image from 'next/image'
+
+import { Icon, type IconName } from '@/components/icons'
 import { usePedido } from '@/components/pedido'
 
 const FECHAR_MS = 640
@@ -22,7 +24,23 @@ function Marca({ className = '' }: { className?: string }) {
   )
 }
 
-export function Cabecalho({ faixa, bonusAtivo }: { faixa: React.ReactNode; bonusAtivo: boolean }) {
+type ItemMenu = { texto: string; link: string; icone: string | null }
+export type MenuLateral = {
+  destaque: ItemMenu
+  conheca: {
+    titulo: string
+    icone: string | null
+    cards: { l1: string; l2: string; link: string; foto: { url: string; alt: string } | null }[]
+  }
+  // Já sem o item de bônus quando os bônus estão desligados.
+  itens: ItemMenu[]
+  rodape: string
+}
+
+const Ico = ({ name, className }: { name: string | null; className?: string }) =>
+  name ? <Icon name={name as IconName} className={className} /> : null
+
+export function Cabecalho({ faixa, menu }: { faixa: React.ReactNode; menu: MenuLateral }) {
   const { qtd, abrirCarrinho, carrinhoAberto } = usePedido()
 
   // ===== header: some ao descer, volta ao subir, sombra quando flutua =====
@@ -292,9 +310,9 @@ export function Cabecalho({ faixa, bonusAtivo }: { faixa: React.ReactNode; bonus
           </div>
           <ul className="dr-list m-0 flex list-none flex-col gap-1 p-0">
             <li>
-              <a className={`${drRow} is-hl`} href="#oferta">
-                <Icon name="sacola" />
-                <span>Escolher minha oferta</span>
+              <a className={`${drRow} is-hl`} href={menu.destaque.link}>
+                <Ico name={menu.destaque.icone} />
+                <span>{menu.destaque.texto}</span>
               </a>
             </li>
             <li className={`dr-acc ${conhecaAberto ? 'is-open' : ''}`}>
@@ -305,40 +323,29 @@ export function Cabecalho({ faixa, bonusAtivo }: { faixa: React.ReactNode; bonus
                 aria-controls="dr-know"
                 onClick={() => setConhecaAberto((o) => !o)}
               >
-                <Icon name="brilho" />
-                <span>Conheça o ALPHA PRO</span>
+                <Ico name={menu.conheca.icone} />
+                <span>{menu.conheca.titulo}</span>
                 <Icon name="chevron-cima" className="dr-chev" />
               </button>
               <div className="dr-sub" id="dr-know">
                 <div className="dr-sub-in grid min-h-0 grid-cols-2 gap-3 overflow-hidden">
-                  <CartaoMenu href="#depoimentos" l1="Clientes" l2="reais" />
-                  <CartaoMenu href="#ingredientes" l1="O que tem" l2="dentro" />
+                  {menu.conheca.cards.map((c, i) => (
+                    <CartaoMenu key={i} href={c.link} l1={c.l1} l2={c.l2} foto={c.foto} />
+                  ))}
                 </div>
               </div>
             </li>
-            {bonusAtivo && (
-              <li>
-                <a className={drRow} href="#bonus">
-                  <Icon name="presente" />
-                  <span>Bônus exclusivos</span>
+            {menu.itens.map((item, i) => (
+              <li key={i}>
+                <a className={drRow} href={item.link}>
+                  <Ico name={item.icone} />
+                  <span>{item.texto}</span>
                 </a>
               </li>
-            )}
-            <li>
-              <a className={drRow} href="#ja-usa">
-                <Icon name="trocar" />
-                <span>Já usa ALPHA?</span>
-              </a>
-            </li>
-            <li>
-              <a className={drRow} href="#duvidas">
-                <Icon name="ajuda" />
-                <span>Perguntas frequentes</span>
-              </a>
-            </li>
+            ))}
           </ul>
           <p className="dr-foot mt-auto px-6 pt-7 text-center text-[12.5px] text-stone">
-            5x sem juros no cartão · 5% de desconto no Pix
+            {menu.rodape}
           </p>
         </nav>
       </div>
@@ -346,13 +353,27 @@ export function Cabecalho({ faixa, bonusAtivo }: { faixa: React.ReactNode; bonus
   )
 }
 
-function CartaoMenu({ href, l1, l2 }: { href: string; l1: string; l2: string }) {
+function CartaoMenu({
+  href,
+  l1,
+  l2,
+  foto,
+}: {
+  href: string
+  l1: string
+  l2: string
+  foto: { url: string; alt: string } | null
+}) {
   return (
     <a
       className="dr-card relative flex aspect-square flex-col justify-between overflow-hidden rounded-lg border border-border bg-paper p-3.5 text-ink no-underline active:scale-[.98]"
       href={href}
     >
-      <span className="dr-ph absolute inset-0" />
+      {foto ? (
+        <Image src={foto.url} alt={foto.alt} fill sizes="200px" className="object-cover" />
+      ) : (
+        <span className="dr-ph absolute inset-0" />
+      )}
       <b className="relative text-sm leading-[1.15] font-bold tracking-[.04em] uppercase">
         {l1}
         <br />

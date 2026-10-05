@@ -1,0 +1,274 @@
+// Textos da página como estão no protótipo aprovado.
+// Usados em dois lugares: o seed preenche o painel com eles e os componentes
+// caem neles quando um campo do painel fica vazio (a página nunca fica sem texto).
+// Sem imports de servidor: é lido pelo seed e por componentes.
+import type { Media, Texto } from '@/payload-types'
+
+export const textosPadrao = {
+  hero: {
+    etiqueta: '60 cápsulas · 30 dias',
+    titulo: 'Sua fome está ganhando de você.',
+    tituloLeve: 'Todo santo dia.',
+    subtitulo:
+      'A do doce. A da noite. A da ansiedade. A do beliscar o dia inteiro. O ALPHA PRO foi feito para **desligar essa fome** e devolver o controle para você.',
+    condicao: '**5x sem juros** ou **5% de desconto no Pix**',
+    menu: {
+      destaque: { texto: 'Escolher minha oferta', link: '#oferta', icone: 'sacola' },
+      conheca: {
+        titulo: 'Conheça o ALPHA PRO',
+        icone: 'brilho',
+        cards: [
+          { linha1: 'Clientes', linha2: 'reais', link: '#depoimentos' },
+          { linha1: 'O que tem', linha2: 'dentro', link: '#ingredientes' },
+        ],
+      },
+      itens: [
+        { texto: 'Bônus exclusivos', link: '#bonus', icone: 'presente' },
+        { texto: 'Já usa ALPHA?', link: '#ja-usa', icone: 'trocar' },
+        { texto: 'Perguntas frequentes', link: '#duvidas', icone: 'ajuda' },
+      ],
+      rodape: '5x sem juros no cartão · 5% de desconto no Pix',
+    },
+  },
+  dor: {
+    etiqueta: 'Você se reconhece?',
+    titulo: 'Você sabe exatamente o que deveria comer.',
+    tituloLeve: 'Não adianta.',
+    chamada: 'O seu dia com a fome no comando:',
+    dia: [
+      { icone: 'prato', titulo: 'A fome chega antes da razão', texto: 'Você come o prato inteiro. Meia hora depois, já está com fome de novo.' },
+      { icone: 'bala', titulo: 'Depois do almoço, o doce chama', texto: 'E um doce chama outro.' },
+      { icone: 'biscoito-mordido', titulo: 'O beliscar que não para', texto: 'O dia inteiro é um biscoito, um pedaço, uma mordida. Não é refeição.' },
+      { icone: 'lua', titulo: 'E aí chega a noite', texto: 'Casa em silêncio, cansaço, geladeira aberta às 23h. O pacote de bolacha que "era só uma".' },
+      { icone: 'calendario', titulo: 'A semana da TPM', texto: 'Aquela semana em que nada segura.' },
+      { icone: 'pulso', titulo: 'Ansiedade, estresse, tédio', texto: 'Tudo termina na comida.' },
+    ],
+    baloes: [
+      { texto: 'Você come escondido' },
+      { texto: 'A calça não fecha' },
+      { texto: 'Evita fotos' },
+      { texto: 'Ignora o provador' },
+    ],
+    fecho1: 'Toda segunda você começa.',
+    fecho2: 'Toda quarta a fome vence.',
+    fecho3: 'Quantas segundas-feiras mais?',
+  },
+  naoCulpa: {
+    etiqueta: 'Não é culpa sua',
+    titulo: 'Você não é fraca.',
+    tituloLeve: 'Você está lutando contra a fome sozinha.',
+    tentativas: [{ texto: 'Dieta' }, { texto: 'Chá' }, { texto: 'Remédio' }, { texto: 'Academia' }],
+    cards: [
+      { titulo: 'A dieta', texto: 'Quem largou a dieta viu a fome voltar.' },
+      {
+        titulo: 'Chá, remédio, academia',
+        texto: 'Cada tentativa que não deu certo virou mais uma prova, na sua cabeça, de que "o problema sou eu".',
+      },
+    ],
+    destaque: 'O problema é que nada até agora segurou a sua fome.',
+    destaqueTag: 'A fome nunca foi embora',
+    destaqueTexto: 'Ela só estava esperando.',
+    fecho1: 'Apenas a força',
+    fecho2: 'de vontade',
+    fecho3: 'não desliga sua fome',
+    fecho3Celular: 'não desliga fome.',
+    faixa: 'Mas dá para desligar!',
+  },
+  destaque: {
+    linha1: 'CONHEÇA',
+    linha2: 'A SUA',
+    linha2b: 'REAL',
+    linha3: 'VERSÃO ALPHA',
+    subtitulo: 'A que manda na própria fome.',
+    fotos: [
+      { titulo: 'Noite', texto: 'Na cozinha à noite, passando direto pela geladeira' },
+      { titulo: 'Espelho', texto: 'Se olhando no espelho, sorrindo' },
+      { titulo: 'Provador', texto: 'No provador, à vontade' },
+      { titulo: 'Rotina', texto: 'Rindo com as amigas, leve' },
+      { titulo: 'Foto', texto: 'Segurando o pote, olhar firme' },
+    ],
+  },
+  produto: {
+    paragrafo1:
+      'O ALPHA PRO é a versão mais forte da linha ALPHA, feita para atacar a fome por todos os lados: **a vontade de doce, o estômago que nunca enche e o beliscar que não para.**',
+    paragrafo2:
+      'Você não precisa esperar semanas para saber se funciona. A maioria das clientes sente a fome diminuir **já no primeiro ou no segundo dia**. E o efeito aumenta com o uso.',
+    sentirTitulo: 'O que você vai sentir',
+    sentirTexto: 'A vontade de doce, o estômago que nunca enche e o beliscar que não para.',
+    sentir: [
+      { icone: 'bala-riscada', texto: 'Menos vontade\nde comer doce' },
+      { icone: 'lua-grande', texto: 'Não ataca mais\na geladeira à noite' },
+      { icone: 'tigela-quente', texto: 'Barriga cheia por mais tempo' },
+      { icone: 'raio', texto: 'Mais disposição\npara o seu dia' },
+    ],
+    tabelaTitulo: 'A decisão muda tudo',
+    tabelaSem: 'Sem Alpha PRO',
+    tabelaCom: 'Com Alpha PRO',
+    tabela: [
+      { texto: 'Para de recomeçar a dieta toda segunda' },
+      { texto: 'Não depende só da força de vontade' },
+      { texto: 'Menos beliscos ao longo do dia' },
+      { texto: 'Sente que voltou a ter o controle' },
+      { texto: 'Só 2 cápsulas por dia, sem complicação' },
+    ],
+    fecho: 'Com a fome sob controle,',
+    fechoLeve: 'fica mais fácil seguir firme.',
+  },
+  depoimentos: {
+    etiqueta: 'Clientes reais',
+    titulo: 'Elas também achavam que',
+    tituloLeve: 'nada funcionava.',
+    subtitulo: 'Mensagens reais de clientes, do jeito que chegaram no nosso WhatsApp e no Instagram.',
+    painelTitulo: 'Quem usa, volta.',
+    painelSubtitulo: 'Os números da linha ALPHA.',
+  },
+  videos: {
+    etiqueta: 'Em vídeo',
+    titulo: 'Quem toma,',
+    tituloLeve: 'conta.',
+    subtitulo: 'Clientes contando com as próprias palavras como foi. Toque para ouvir.',
+  },
+  ingredientes: {
+    etiqueta: 'O que tem dentro',
+    titulo: 'Ingredientes que você conhece.',
+    tituloLeve: 'Efeito que você sente.',
+    porcao: '1 porção = 2 cápsulas',
+    comoUsar:
+      '**Como usar:** 2 cápsulas por dia, antes das refeições principais, de preferência de manhã e à tarde. Com bastante água.',
+  },
+  jaUsa: {
+    etiqueta: 'Já é cliente?',
+    titulo1: 'Já usa ALPHA?',
+    titulo2: 'Conheça a',
+    titulo3: 'versão PRO.',
+    subtitulo: 'Você já confia na linha. O PRO é o próximo passo.',
+    vantagens: [
+      { texto: 'Mais potente na fome e na vontade de doce' },
+      { texto: 'Para quem quer ainda mais controle' },
+      { texto: 'Mesma marca, mesmo atendimento, mesma nota fiscal' },
+    ],
+    forte: 'Só que mais forte.',
+    tickerRotulo: 'Da sua ALPHA para o PRO:',
+    ticker: [
+      { texto: 'Mais controle da fome' },
+      { texto: 'Menos vontade de doce' },
+      { texto: 'A mesma nota fiscal' },
+    ],
+  },
+  bonus: {
+    etiqueta: 'Bônus exclusivos',
+    titulo: 'Quanto mais potes,',
+    tituloLeve: 'mais presentes.',
+  },
+  oferta: {
+    garantia: '**Garantia de 7 dias.** Desistiu? Devolvemos o seu dinheiro.',
+    precoPorDia: 'Menos de {valor} por dia.',
+    etiqueta: 'Oferta',
+    titulo: 'Quanto você já gastou tentando',
+    tituloLeve: 'segurar essa fome?',
+    gastos: [
+      { icone: 'prato-talheres', texto: 'Em dietas que não duraram' },
+      { icone: 'delivery', texto: 'No delivery da noite' },
+      { icone: 'cupcake', texto: 'No doce do meio da tarde' },
+      { icone: 'biscoito-grande', texto: 'No biscoitinho à noite' },
+    ],
+    fraseGastos: 'Com o {produto}, são menos de {valor} por dia para manter a fome sob controle.',
+    cardEtiqueta: 'Versão mais forte da linha',
+    escolha: 'Escolha a sua oferta:',
+    confianca: [
+      { icone: 'loja', titulo: 'Loja física', texto: 'Endereço em Marília/SP. Você sabe de onde vem.' },
+      { icone: 'recibo', titulo: 'Nota fiscal', texto: 'Emitida em toda compra, do jeito certo.' },
+      { icone: 'whatsapp', titulo: 'Atendimento no WhatsApp', texto: 'Tire suas dúvidas direto com a equipe.' },
+      { icone: 'tendencia-alta', titulo: '+25 mil vendas', texto: 'Da linha ALPHA, com clientes que voltam a comprar.' },
+    ],
+  },
+  duvidas: {
+    titulo: 'Ainda com',
+    tituloLeve: 'dúvida?',
+    avisosTitulo: 'Para usar com tranquilidade',
+    avisosTexto: 'O ALPHA PRO é intenso e entrega resultados, mas não é para todo mundo:',
+    avisos: [
+      {
+        icone: 'gota',
+        rotulo: 'Hidratação',
+        titulo: 'Beba mais água',
+        texto: 'Ele pede bastante água. Algumas clientes sentem mais sede e boca seca, e o intestino costuma funcionar melhor.',
+      },
+      {
+        icone: 'relogio',
+        rotulo: 'Melhor horário',
+        titulo: 'De manhã ou à tarde',
+        texto: 'Tome de manhã ou à tarde. À noite, ele pode deixar você com um pouco mais de energia na hora de dormir.',
+      },
+      {
+        icone: 'escudo-alerta',
+        rotulo: 'Cuidado',
+        titulo: 'Quem deve esperar',
+        texto: 'Não é indicado para gestantes, lactantes e menores de 19 anos. Nesses casos, espere o momento certo.',
+      },
+      {
+        icone: 'selo',
+        rotulo: 'Qualidade',
+        titulo: 'Seguro e notificado',
+        texto: 'Sem glúten e sem lactose, e notificado na ANVISA (nº 25351118192202606). Você sabe o que está tomando.',
+      },
+      {
+        icone: 'info',
+        rotulo: 'Alergias',
+        titulo: 'Se você tem alergia',
+        texto: 'Pode conter derivados de crustáceos (caranguejo), soja e pinoli. A cápsula é feita de colágeno bovino.',
+      },
+    ],
+  },
+  final: {
+    chamada: 'Toda segunda, a mesma promessa.',
+    titulo: 'Quantas segundas-feiras',
+    tituloLeve: 'mais?',
+    opcaoNao: 'Deixar a fome **mandar**',
+    opcaoSim: 'Desligar a fome e **voltar a mandar**',
+    frase: 'Sua versão alpha está a um clique.',
+  },
+  rodape: {
+    faixa: 'Conheça a sua\nreal versão Alpha.',
+    tituloAtendimento: 'Atendimento',
+    tituloPagamento: 'Formas de pagamento:',
+    selos: [
+      { icone: 'cadeado-24', titulo: 'Site seguro', texto: 'Certificado SSL' },
+      { icone: 'escudo-check', titulo: 'Google', texto: 'Navegação segura' },
+    ],
+  },
+  botoes: {
+    principal: 'Desligar minha fome',
+    produto: 'Quero meu ALPHA PRO',
+    bonus: 'Escolher minha oferta',
+    pedido: 'Fazer pedido',
+  },
+}
+
+// Texto do painel com os vazios preenchidos pelo padrão. Listas vazias usam a lista padrão;
+// itens de lista vêm como estão no painel. Uploads e ids passam direto.
+type Cheio<T> = [NonNullable<T>] extends [string]
+  ? NonNullable<T>
+  : [NonNullable<T>] extends [(infer U)[]]
+    ? U[]
+    : [NonNullable<T>] extends [number | Media]
+      ? T
+      : NonNullable<T> extends object
+        ? { [K in keyof NonNullable<T>]-?: Cheio<NonNullable<T>[K]> }
+        : T
+
+export type Textos = Cheio<Texto>
+
+function mesclar(cms: unknown, padrao: unknown): unknown {
+  if (Array.isArray(padrao)) return Array.isArray(cms) && cms.length ? cms : padrao
+  if (typeof padrao === 'string') return typeof cms === 'string' && cms.trim() ? cms : padrao
+  if (padrao && typeof padrao === 'object') {
+    const base = cms && typeof cms === 'object' ? (cms as Record<string, unknown>) : {}
+    const out: Record<string, unknown> = { ...base }
+    for (const [k, v] of Object.entries(padrao)) out[k] = mesclar(base[k], v)
+    return out
+  }
+  return cms ?? padrao
+}
+
+export const textosDe = (cms: Texto): Textos => mesclar(cms, textosPadrao) as Textos

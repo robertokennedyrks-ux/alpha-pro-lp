@@ -2,7 +2,9 @@ import React from 'react'
 
 import { Icon, type IconName } from '@/components/icons'
 import { GrupoRodape } from '@/components/topo/GrupoRodape'
+import { ComQuebras } from '@/components/Foto'
 import { type Dados, whatsappUrl } from '@/lib/dados'
+import { textosDe } from '@/lib/textos-padrao'
 
 const externo = (href: string) => (/^https?:/.test(href) ? { target: '_blank', rel: 'noopener' } : {})
 
@@ -36,6 +38,7 @@ function TextoEmpresa({ texto, fone, numero }: { texto: string; fone?: string | 
 
 export function Rodape({ d }: { d: Dados }) {
   const c = d.contato
+  const t = textosDe(d.textos).rodape
   const bonusOn = d.bonus.ativo !== false
   const wa = whatsappUrl(d)
   const redesAtivas = redes.filter((r) => c.redes?.[r.k])
@@ -50,7 +53,7 @@ export function Rodape({ d }: { d: Dados }) {
       titulo: g.titulo,
       links: (g.links ?? []).filter((l) => bonusOn || l.href !== '#bonus'),
     })),
-    { titulo: 'Atendimento', links: atendimento },
+    { titulo: t.tituloAtendimento, links: atendimento },
   ]
 
   return (
@@ -64,9 +67,7 @@ export function Rodape({ d }: { d: Dados }) {
             A
           </span>
           <p className="ft-tag absolute bottom-5 left-5 text-xl leading-[1.15] font-semibold tracking-[-.02em] text-white lg:bottom-10 lg:left-10 lg:text-[40px]">
-            Conheça a sua
-            <br />
-            real versão Alpha.
+            <ComQuebras texto={t.faixa} />
           </p>
         </div>
 
@@ -112,7 +113,7 @@ export function Rodape({ d }: { d: Dados }) {
         {(c.formasPagamento?.length ?? 0) > 0 && (
           <div className="ft-row pt-6 lg:flex lg:items-center lg:gap-6 lg:pt-7">
             <p className="ft-h mb-3 text-sm leading-[1.2] font-bold tracking-[.02em] text-ink lg:m-0 lg:flex-[0_0_200px]">
-              Formas de pagamento:
+              {t.tituloPagamento}
             </p>
             <ul className="ft-pay m-0 flex list-none flex-wrap gap-2 p-0">
               {c.formasPagamento!.map((f) => (
@@ -136,8 +137,9 @@ export function Rodape({ d }: { d: Dados }) {
           )}
           <div className="ft-sec mt-3.5 text-sm text-ink lg:flex lg:items-center lg:gap-6" aria-label="Compre com segurança">
             <ul className="ft-seals m-0 grid list-none grid-cols-2 gap-x-4 gap-y-3.5 p-0 lg:grid-cols-[repeat(4,auto)] lg:justify-start lg:gap-x-9 lg:gap-y-4">
-              <Selo icone="cadeado-24" titulo="Site seguro" texto="Certificado SSL" />
-              <Selo icone="escudo-check" titulo="Google" texto="Navegação segura" />
+              {t.selos.map((s, i) => (
+                <Selo key={s.id ?? i} icone={s.icone} titulo={s.titulo} texto={s.texto ?? ''} />
+              ))}
             </ul>
           </div>
           <div className="ft-copy mt-1.5 flex items-center gap-2.5 text-stone">
@@ -152,10 +154,10 @@ export function Rodape({ d }: { d: Dados }) {
   )
 }
 
-function Selo({ icone, titulo, texto }: { icone: IconName; titulo: string; texto: string }) {
+function Selo({ icone, titulo, texto }: { icone?: string | null; titulo: string; texto: string }) {
   return (
     <li className="flex items-center gap-2 text-ink">
-      <Icon name={icone} className="size-[26px] flex-none" />
+      {icone && <Icon name={icone as IconName} className="size-[26px] flex-none" />}
       <span className="flex flex-col text-[11px] leading-[1.2] font-medium text-graphite">
         <b className="text-[13px] leading-[1.15] font-bold text-ink">{titulo}</b>
         {texto}

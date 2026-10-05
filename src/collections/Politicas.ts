@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
-import { logado, publico } from '@/access'
+import { logado, publicadoOuLogado } from '@/access'
+import { versoes } from '@/globals/base'
 import { revalidarAoApagar, revalidarColecao } from '@/hooks/revalidar'
 
 // Trocas e devoluções, Política de privacidade e Termos de uso.
@@ -10,7 +11,8 @@ export const Politicas: CollectionConfig = {
   labels: { singular: 'Política', plural: 'Políticas' },
   orderable: true,
   admin: { useAsTitle: 'titulo', group: 'Conteúdo', defaultColumns: ['titulo', 'slug', 'atualizado'] },
-  access: { read: publico, create: logado, update: logado, delete: logado },
+  access: { read: publicadoOuLogado, create: logado, update: logado, delete: logado },
+  versions: versoes,
   hooks: { afterChange: [revalidarColecao], afterDelete: [revalidarAoApagar] },
   fields: [
     { name: 'titulo', label: 'Título', type: 'text', required: true },

@@ -1,18 +1,29 @@
 import 'server-only'
 
-import { getPayload } from 'payload'
+import { getPayload, type Where } from 'payload'
 import { cache } from 'react'
 
 import config from '@payload-config'
 
+// Fora da pré-visualização, só o que já foi publicado (itens novos nascem como rascunho).
+export const soPublicado = (rascunho: boolean): Where => (rascunho ? {} : { _status: { equals: 'published' } })
+
 // Tudo o que a landing lê do CMS, numa ida só ao banco por requisição/geração.
-export const getDados = cache(async () => {
+// rascunho = true na pré-visualização do painel: lê a versão mais recente, publicada ou não.
+export const getDados = cache(async (rascunho: boolean = false) => {
   const payload = await getPayload({ config })
   const g = <S extends Parameters<typeof payload.findGlobal>[0]['slug']>(slug: S) =>
-    payload.findGlobal({ slug, depth: 1 })
+    payload.findGlobal({ slug, depth: 1, draft: rascunho })
   const lista = <C extends 'depoimentos' | 'videos' | 'faq' | 'ingredientes'>(collection: C) =>
     payload
-      .find({ collection, where: { ativo: { equals: true } }, sort: '_order', limit: 100, depth: 1 })
+      .find({
+        collection,
+        where: { ativo: { equals: true }, ...soPublicado(rascunho) },
+        sort: '_order',
+        limit: 100,
+        depth: 1,
+        draft: rascunho,
+      })
       .then((r) => r.docs)
 
   const [ofertas, frete, bonus, textos, prova, contato, seo, cookies, depoimentos, videos, faq, ingredientes, politicas] =
@@ -30,7 +41,15 @@ export const getDados = cache(async () => {
       lista('faq'),
       lista('ingredientes'),
       payload
-        .find({ collection: 'politicas', sort: '_order', limit: 20, depth: 0, select: { titulo: true, slug: true } })
+        .find({
+          collection: 'politicas',
+          where: soPublicado(rascunho),
+          sort: '_order',
+          limit: 20,
+          depth: 0,
+          draft: rascunho,
+          select: { titulo: true, slug: true },
+        })
         .then((r) => r.docs),
     ])
 

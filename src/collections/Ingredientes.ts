@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
-import { logado, publico } from '@/access'
+import { logado, publicadoOuLogado } from '@/access'
+import { versoes } from '@/globals/base'
 import { revalidarAoApagar, revalidarColecao } from '@/hooks/revalidar'
 import { campoIcone } from '@/fields/icone'
 
@@ -9,7 +10,8 @@ export const Ingredientes: CollectionConfig = {
   labels: { singular: 'Ingrediente', plural: 'Ingredientes' },
   orderable: true,
   admin: { useAsTitle: 'nome', group: 'Conteúdo', defaultColumns: ['nome', 'dosagem', 'ativo'] },
-  access: { read: publico, create: logado, update: logado, delete: logado },
+  access: { read: publicadoOuLogado, create: logado, update: logado, delete: logado },
+  versions: versoes,
   hooks: { afterChange: [revalidarColecao], afterDelete: [revalidarAoApagar] },
   fields: [
     { name: 'nome', label: 'Nome', type: 'text', required: true },

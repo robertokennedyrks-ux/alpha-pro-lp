@@ -12,13 +12,19 @@ const revalidarTudo = (context: Record<string, unknown>) => {
   }
 }
 
-export const revalidarGlobal: GlobalAfterChangeHook = ({ doc, req }) => {
-  revalidarTudo(req.context)
+// O salvamento automático grava rascunho e não mexe na página no ar: só revalida
+// ao publicar ou ao despublicar o que estava no ar.
+type ComStatus = { _status?: 'draft' | 'published' | null } | undefined
+const mudouOQueEstaNoAr = (doc: ComStatus, anterior: ComStatus) =>
+  doc?._status !== 'draft' || anterior?._status === 'published'
+
+export const revalidarGlobal: GlobalAfterChangeHook = ({ doc, previousDoc, req }) => {
+  if (mudouOQueEstaNoAr(doc, previousDoc)) revalidarTudo(req.context)
   return doc
 }
 
-export const revalidarColecao: CollectionAfterChangeHook = ({ doc, req }) => {
-  revalidarTudo(req.context)
+export const revalidarColecao: CollectionAfterChangeHook = ({ doc, previousDoc, req }) => {
+  if (mudouOQueEstaNoAr(doc, previousDoc)) revalidarTudo(req.context)
   return doc
 }
 

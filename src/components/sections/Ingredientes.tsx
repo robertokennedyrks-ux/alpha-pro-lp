@@ -2,6 +2,8 @@ import { Icon, type IconName } from '@/components/icons'
 import { IngredientesCarrossel } from '@/components/prova/IngredientesCarrossel'
 import { midia } from '@/components/prova/midia'
 import type { Dados } from '@/lib/dados'
+import { textosDe } from '@/lib/textos-padrao'
+import { Rico } from '@/lib/texto'
 
 // Descrição da foto de cada ingrediente enquanto não há foto no CMS (texto do protótipo).
 const FOTOS: Record<string, string> = {
@@ -14,14 +16,15 @@ const FOTOS: Record<string, string> = {
 
 // 6. ingredientes: carrossel (3 por vez no PC) + "Como usar".
 export function Ingredientes({ d }: { d: Dados }) {
+  const t = textosDe(d.textos).ingredientes
   return (
     <section className="bg-paper" id="ingredientes" data-secao="ingredientes">
       <div className="wrap stack">
-        <span className="pill">O que tem dentro</span>
+        <span className="pill">{t.etiqueta}</span>
         <IngredientesCarrossel
           titulo={
             <h2>
-              Ingredientes que você conhece. <span className="l">Efeito que você sente.</span>
+              {t.titulo} {t.tituloLeve && <span className="l">{t.tituloLeve}</span>}
             </h2>
           }
         >
@@ -66,11 +69,10 @@ export function Ingredientes({ d }: { d: Dados }) {
                 <i />
                 <i />
               </span>
-              1 porção = 2 cápsulas
+              {t.porcao}
             </span>
             <p>
-              <strong>Como usar:</strong> 2 cápsulas por dia, antes das refeições principais, de preferência de manhã e
-              à tarde. Com bastante água.
+              <Rico texto={t.comoUsar} />
             </p>
           </div>
         </div>

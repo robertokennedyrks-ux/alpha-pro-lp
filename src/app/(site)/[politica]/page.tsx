@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
+import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 
 import { PedidoProvider } from '@/components/pedido'
+import { Rascunho } from '@/components/Rascunho'
 import { Abas } from '@/components/politicas/Abas'
 import { Conteudo } from '@/components/politicas/Conteudo'
 import { getListaPoliticas, getPolitica } from '@/components/politicas/dados'
@@ -25,11 +27,17 @@ export async function generateMetadata({ params }: PageProps<'/[politica]'>): Pr
 
 export default async function PoliticaPage({ params }: PageProps<'/[politica]'>) {
   const { politica } = await params
-  const [p, abas, d] = await Promise.all([getPolitica(politica), getListaPoliticas(), getDados()])
+  const { isEnabled: rascunho } = await draftMode()
+  const [p, abas, d] = await Promise.all([
+    getPolitica(politica, rascunho),
+    getListaPoliticas(rascunho),
+    getDados(rascunho),
+  ])
   if (!p) notFound()
 
   return (
     <PedidoProvider>
+      {rascunho && <Rascunho serverURL={process.env.NEXT_PUBLIC_SITE_URL ?? ''} />}
       <Topo d={d} />
       <div className="bg-paper pt-6 md:pt-10">
         <main className="mx-auto max-w-[1240px] px-4 pb-12 text-base leading-[1.65] md:px-[60px]">

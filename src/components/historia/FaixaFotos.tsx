@@ -2,10 +2,12 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 
+import { type FotoCms, FotoOuEspaco } from '@/components/Foto'
+
 // Faixa de fotos em loop sem emenda: o conjunto se repete até passar da largura da tela,
 // a faixa tem esse bloco duas vezes e a animação anda -50%. A velocidade fica fixa
 // (um conjunto a cada 40s), quantas cópias a tela pedir.
-export type FotoFaixa = { altura: number; titulo: string; texto: string }
+export type FotoFaixa = { altura: number; titulo: string; texto: string; foto?: FotoCms }
 
 export function FaixaFotos({ itens }: { itens: FotoFaixa[] }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -45,17 +47,16 @@ export function FaixaFotos({ itens }: { itens: FotoFaixa[] }) {
     for (let i = 0; i < itens.length; i++) {
       const f = itens[i]
       copias.push(
-        <div
+        <FotoOuEspaco
           key={`${r}-${i}`}
           aria-hidden={r > 0 || undefined}
-          className="ph w-[170px] flex-none rounded-card! min-h-0! md:w-[200px] lg:w-[230px] [&>span]:max-w-none! [&>span]:text-[11.5px]!"
+          foto={f.foto}
+          titulo={f.titulo}
+          texto={f.texto}
+          sizes="230px"
+          className="w-[170px] flex-none rounded-card! min-h-0! md:w-[200px] lg:w-[230px] [&>span]:max-w-none! [&>span]:text-[11.5px]!"
           style={{ height: f.altura }}
-        >
-          <span>
-            <b>{f.titulo}</b>
-            {f.texto}
-          </span>
-        </div>,
+        />,
       )
     }
   }
