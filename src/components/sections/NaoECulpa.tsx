@@ -3,7 +3,7 @@ import { Icon } from '@/components/icons'
 import type { Dados } from '@/lib/dados'
 
 // Textos fixos (não existem no CMS), iguais ao protótipo.
-const tentativas = ['Dieta', 'Chá', 'Remédio', 'Academia', 'Até caneta']
+const tentativas = ['Dieta', 'Chá', 'Remédio', 'Academia']
 
 const cards = [
   { titulo: 'A dieta', texto: 'Quem largou a dieta viu a fome voltar.' },
@@ -11,7 +11,6 @@ const cards = [
     titulo: 'Chá, remédio, academia',
     texto: 'Cada tentativa que não deu certo virou mais uma prova, na sua cabeça, de que "o problema sou eu".',
   },
-  { titulo: 'Até a caneta', texto: 'Quem parou a caneta viu a fome voltar com tudo.' },
 ]
 
 const faixa = Array.from({ length: 12 }, () => 'Mas dá para desligar!')
@@ -42,11 +41,11 @@ export function NaoECulpa(_props: { d: Dados }) {
             </span>
           ))}
         </div>
-        <CartoesNc className="mt-1.5 flex flex-col gap-2.5 md:grid md:grid-cols-2 lg:grid-cols-1">
-          {cards.map((c, i) => (
+        <CartoesNc className="mt-1.5 flex flex-col gap-2.5">
+          {cards.map((c) => (
             <article
               key={c.titulo}
-              className={`nc-card relative flex min-h-[132px] flex-col justify-center gap-2 overflow-hidden rounded-card bg-paper py-[22px] pr-[110px] pl-5 ${i === cards.length - 1 ? 'md:col-span-full lg:col-auto' : ''}`}
+              className="nc-card relative flex min-h-[132px] flex-col justify-center gap-2 overflow-hidden rounded-card bg-paper py-[22px] pr-[110px] pl-5"
             >
               <Icon
                 name="rosto-triste-grande"
