@@ -50,7 +50,7 @@ export function Dor({ d }: { d: Dados }) {
               <span className="n grid size-[42px] place-items-center rounded-full bg-brand/10 text-[17px] leading-none font-semibold text-brand-ink">
                 {i + 1}
               </span>
-              <div className="tc flex min-w-0 flex-col gap-2 rounded-card border border-border bg-card p-8 shadow-[0_1px_2px_rgba(18,18,18,.04),0_8px_24px_rgba(18,18,18,.05)]">
+              <div className="tc flex min-w-0 flex-col gap-2 rounded-card border border-border p-8">
                 <span className="mb-1.5 grid size-[34px] flex-none place-items-center rounded-[11px] border border-border bg-paper text-ink">
                   {item.icone && <Icon name={item.icone as IconName} className="size-[17px]" />}
                 </span>
