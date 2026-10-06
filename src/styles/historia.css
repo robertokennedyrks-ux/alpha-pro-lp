@@ -43,11 +43,37 @@
   transform: translateX(18px);
   transition:
     opacity 0.45s ease,
-    transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.5s ease,
+    box-shadow 0.5s ease;
 }
 .pain .tl.anim > li.on-c .tc {
   opacity: 1;
   transform: none;
+}
+
+/* Card "quente": borda vermelha e brilho em volta. Quem põe e tira a classe é a
+   rolagem (Trilha.tsx) — ela sai quando o próximo card chega ao meio da tela. */
+.pain .tl > li.quente .tc,
+.pain .tl.anim > li.on-c.quente .tc {
+  border-color: var(--color-brand);
+  box-shadow:
+    0 0 0 1px rgb(229 9 20 / 0.22),
+    0 0 30px -6px rgb(229 9 20 / 0.55);
+}
+
+/* No computador, o mouse acende o mesmo estado, com tempo próprio (mais curto). */
+@media (hover: hover) and (pointer: fine) {
+  .pain .tl > li .tc:hover,
+  .pain .tl.anim > li.on-c .tc:hover {
+    border-color: var(--color-brand);
+    box-shadow:
+      0 0 0 1px rgb(229 9 20 / 0.22),
+      0 0 30px -6px rgb(229 9 20 / 0.55);
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
 }
 .pain .tl.anim > li:not(:last-child)::before {
   clip-path: inset(0 0 calc((1 - var(--l, 0)) * 100%) 0);
@@ -58,6 +84,10 @@
     opacity: 1;
     transform: none;
     transition: none;
+  }
+  .pain .tl > li.quente .tc,
+  .pain .tl.anim > li.on-c.quente .tc {
+    box-shadow: none;
   }
   .pain .tl.anim > li:not(:last-child)::before {
     clip-path: none;

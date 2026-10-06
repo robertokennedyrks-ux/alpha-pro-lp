@@ -4,6 +4,8 @@ import React, { useEffect, useRef } from 'react'
 
 // Linha do tempo da dor: conforme cada item passa de 70% da altura da tela,
 // o número aparece, depois o card, e a linha tracejada até o próximo vai se desenhando.
+// O card recém-revelado fica "quente" (borda vermelha e brilho) e só esfria quando o
+// próximo chega ao meio da tela — ou seja, quem manda é a rolagem, não um cronômetro.
 export function Trilha({ className, children }: { className?: string; children: React.ReactNode }) {
   const ref = useRef<HTMLOListElement>(null)
 
@@ -17,13 +19,22 @@ export function Trilha({ className, children }: { className?: string; children: 
     const atualiza = () => {
       tick = false
       const ancora = window.innerHeight * 0.7
-      for (const li of itens) {
+      const centro = window.innerHeight / 2
+      const noCentro = (el: HTMLElement) => {
+        const r = el.getBoundingClientRect()
+        return r.top + r.height / 2 <= centro
+      }
+      itens.forEach((li, i) => {
         const r = li.getBoundingClientRect()
         const p = (ancora - r.top) / (r.height + gap)
+        const revelado = p > 0.12
         li.classList.toggle('on-n', p > 0)
-        li.classList.toggle('on-c', p > 0.12)
+        li.classList.toggle('on-c', revelado)
+        // Esfria quando o próximo chega ao meio da tela. O último não tem próximo,
+        // então usa a si mesmo e esfria ao passar do meio.
+        li.classList.toggle('quente', revelado && !noCentro(itens[i + 1] ?? li))
         li.style.setProperty('--l', Math.max(0, Math.min(1, (p - 0.3) / 0.7)).toFixed(3))
-      }
+      })
     }
     const pede = () => {
       if (!tick) {
