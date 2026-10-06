@@ -578,3 +578,27 @@
 .sel-linha.pronta::after {
   opacity: 1;
 }
+
+/* Trecho apagado com um risco vermelho passando por cima. A opacidade vai na cor do
+   texto, e não no elemento: com opacity o risco (filho) desbotaria junto. */
+.rabisco {
+  position: relative;
+  color: rgb(255 255 255 / 0.3);
+  transition: color 0.4s ease;
+}
+.rabisco::after {
+  content: '';
+  position: absolute;
+  left: -0.04em;
+  right: -0.04em;
+  top: 54%;
+  height: 0.075em;
+  border-radius: 999px;
+  background: #db2525;
+  transform: scaleX(0) rotate(-1.4deg);
+  transform-origin: left center;
+  transition: transform 0.5s var(--ease-soft) 0.15s;
+}
+.rabisco.pronta::after {
+  transform: scaleX(1) rotate(-1.4deg);
+}

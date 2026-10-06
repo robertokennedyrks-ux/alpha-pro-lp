@@ -1,19 +1,20 @@
 import { CartoesNc } from '@/components/historia/CartoesNc'
-import { SelecaoParcial } from '@/components/historia/Selecao'
+import { RabiscoParcial, SelecaoParcial } from '@/components/historia/Selecao'
 import { Icon } from '@/components/icons'
 import { FotoOuEspaco } from '@/components/Foto'
 import type { Dados } from '@/lib/dados'
 
 // Mesmo texto com versões diferentes no computador e no celular: a parte comum fica uma vez só.
-function Variante({ pc, celular }: { pc: string; celular: string }) {
-  if (pc === celular) return <>{pc}</>
+function Variante({ pc, celular, rabisco }: { pc: string; celular: string; rabisco?: string }) {
+  const marcar = (txt: string) => (rabisco ? <RabiscoParcial texto={txt} alvo={rabisco} /> : <>{txt}</>)
+  if (pc === celular) return marcar(pc)
   let a = 0
   while (a < pc.length && a < celular.length && pc[a] === celular[a]) a++
   let z = 0
   while (z < pc.length - a && z < celular.length - a && pc[pc.length - 1 - z] === celular[celular.length - 1 - z]) z++
   return (
     <>
-      {pc.slice(0, a)}
+      {marcar(pc.slice(0, a))}
       <i className="pd not-italic">{pc.slice(a, pc.length - z)}</i>
       <i className="pm not-italic">{celular.slice(a, celular.length - z)}</i>
       {pc.slice(pc.length - z)}
@@ -80,7 +81,7 @@ export function NaoECulpa({ d }: { d: Dados }) {
         <p className="nc-close mx-auto mt-[30px] text-center text-[clamp(28px,8.2vw,36px)] leading-[1.08] font-semibold tracking-[-.045em] text-ink *:block *:whitespace-nowrap lg:col-span-full! lg:mt-12 lg:text-[52px] lg:*:inline">
           <span>{t.fecho1}</span> <span>{t.fecho2}</span>{' '}
           <span className="lg:block!">
-            <Variante pc={t.fecho3} celular={l3Celular} />
+            <Variante pc={t.fecho3} celular={l3Celular} rabisco="não desliga" />
           </span>
         </p>
       </div>

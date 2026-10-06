@@ -2,11 +2,9 @@
 
 import React, { useEffect, useRef } from 'react'
 
-// Destaque em forma de seleção de texto para trechos que não passam pelo <Revelar>.
-// Acende quando entra na tela e apaga ao sair, para o efeito se repetir na volta.
-export function Selecao({ children }: { children: React.ReactNode }) {
-  const ref = useRef<HTMLSpanElement>(null)
-
+// Acende a marca quando o trecho entra na tela e apaga ao sair, para o efeito se
+// repetir na volta. Usado pelos destaques que não passam pelo <Revelar>.
+function useAcende(ref: React.RefObject<HTMLSpanElement | null>) {
   useEffect(() => {
     const el = ref.current
     if (!el || !('IntersectionObserver' in window)) return
@@ -19,8 +17,13 @@ export function Selecao({ children }: { children: React.ReactNode }) {
     })
     io.observe(el)
     return () => io.disconnect()
-  }, [])
+  }, [ref])
+}
 
+// Destaque em forma de seleção de texto.
+export function Selecao({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLSpanElement>(null)
+  useAcende(ref)
   return (
     <span ref={ref} className="sel-linha">
       {children}
@@ -36,6 +39,30 @@ export function SelecaoParcial({ texto, alvo }: { texto: string; alvo: string })
     <>
       {texto.slice(0, i)}
       <Selecao>{alvo}</Selecao>
+      {texto.slice(i + alvo.length)}
+    </>
+  )
+}
+
+// Trecho apagado com um risco vermelho passando por cima.
+export function Rabisco({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLSpanElement>(null)
+  useAcende(ref)
+  return (
+    <span ref={ref} className="rabisco">
+      {children}
+    </span>
+  )
+}
+
+// Rabisca só um trecho da frase.
+export function RabiscoParcial({ texto, alvo }: { texto: string; alvo: string }) {
+  const i = texto.indexOf(alvo)
+  if (i < 0) return <>{texto}</>
+  return (
+    <>
+      {texto.slice(0, i)}
+      <Rabisco>{alvo}</Rabisco>
       {texto.slice(i + alvo.length)}
     </>
   )
