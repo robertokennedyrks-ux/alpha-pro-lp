@@ -290,6 +290,7 @@ export function Cabecalho({ faixa, menu }: { faixa: React.ReactNode; menu: MenuL
         <nav
           ref={panelRef}
           className="dr-panel absolute inset-0 flex flex-col overflow-y-auto bg-card pt-2 pb-7 text-ink"
+          data-lenis-prevent
         >
           <div className="dr-head grid grid-cols-[44px_1fr_44px] items-center gap-2 px-3 pb-7">
             <button ref={fecharRef} type="button" className={hdrBtn} data-dr-close aria-label="Fechar menu" onClick={fechar}>

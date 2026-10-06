@@ -4,6 +4,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import React from 'react'
 
+import { RolagemSuave } from '@/components/RolagemSuave'
 import { getDados } from '@/lib/dados'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -21,7 +22,10 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR">
-      <body>{children}</body>
+      <body>
+        <RolagemSuave />
+        {children}
+      </body>
     </html>
   )
 }

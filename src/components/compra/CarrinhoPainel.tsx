@@ -172,7 +172,7 @@ export function CarrinhoPainel({ loja }: { loja: Loja }) {
             <Icon name="x-negrito" />
           </button>
         </div>
-        <div className="sh-scroll">
+        <div className="sh-scroll" data-lenis-prevent>
           <ul className="ct-list">
             <li className="ct-item">
               <Miniatura foto={fotoDe(loja, n)}>
