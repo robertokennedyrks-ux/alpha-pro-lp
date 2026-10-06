@@ -30,6 +30,15 @@ export function Revelar({ modo, as: Tag = 'p', className, children, ...rest }: P
       cap: e.classList.contains('cap'),
     }))
     const N = itens.length
+    // Cada trecho destacado (.sel) acende quando a SUA última letra termina de aparecer,
+    // e não quando a frase inteira acaba — senão a marca chegaria tarde demais.
+    const marcas = Array.from(el.querySelectorAll<HTMLElement>('.sel')).map((m) => {
+      let ultima = -1
+      itens.forEach((it, i) => {
+        if (m.contains(it.el)) ultima = i
+      })
+      return { el: m, ultima }
+    })
     const W = titulo ? 10 : 12
     const VMAX = titulo ? 0.4 : 0.28
     let Pd = 0,
@@ -62,6 +71,7 @@ export function Revelar({ modo, as: Tag = 'p', className, children, ...rest }: P
         const g = eio(Math.min(1, Pd))
         el.style.transform = g >= 1 ? 'none' : `scale(${(2 - g).toFixed(3)})`
       }
+      for (const m of marcas) m.el.classList.toggle('pronta', m.ultima >= 0 && head - m.ultima >= W)
     }
     const passo = (agora: number) => {
       const dt = Math.min(0.05, (agora - last) / 1000 || 0.016)
