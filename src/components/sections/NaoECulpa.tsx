@@ -67,7 +67,7 @@ export function NaoECulpa({ d }: { d: Dados }) {
             </article>
           ))}
         </CartoesNc>
-        <div className="mt-1.5 flex flex-col items-start gap-[18px] rounded-panel border border-border bg-white px-[22px] pt-[30px] pb-8 lg:col-span-full! lg:mt-7 lg:flex-row lg:flex-wrap lg:items-center lg:gap-x-7 lg:gap-y-4 lg:px-11 lg:py-10">
+        <div className="mt-1.5 flex flex-col items-start gap-[18px] rounded-panel border border-border bg-card px-[22px] pt-[30px] pb-8 lg:col-span-full! lg:mt-7 lg:flex-row lg:flex-wrap lg:items-center lg:gap-x-7 lg:gap-y-4 lg:px-11 lg:py-10">
           <p className="text-[clamp(26px,7.6vw,32px)] leading-[1.15] font-semibold tracking-[-.035em] text-balance text-ink lg:flex-[1_1_420px] lg:text-[36px]">
             {t.destaque}
           </p>
@@ -84,7 +84,7 @@ export function NaoECulpa({ d }: { d: Dados }) {
         </p>
       </div>
       <div
-        className="mx-[-5%] mt-[30px] mb-2.5 w-[110%] -rotate-4 overflow-hidden bg-ink py-[14px] lg:mt-12"
+        className="mx-[-5%] mt-[30px] mb-2.5 w-[110%] -rotate-4 overflow-hidden bg-mist py-[14px] lg:mt-12"
         role="text"
         aria-label={t.faixa}
       >

@@ -38,7 +38,7 @@ export function Hero({ d }: { d: Dados }) {
             </div>
           )}
           {(selo?.numero || selo?.texto) && (
-            <div className="chip absolute bottom-[18px] left-3.5 flex flex-col gap-0.5 rounded-card bg-white px-3.5 py-[11px] shadow-[0_8px_24px_rgba(18,18,18,.08)]">
+            <div className="chip absolute bottom-[18px] left-3.5 flex flex-col gap-0.5 rounded-card bg-card px-3.5 py-[11px] shadow-[0_8px_24px_rgba(18,18,18,.08)]">
               {selo.numero && <b className="text-[22px] leading-none font-semibold tracking-[-.03em]">{selo.numero}</b>}
               {selo.texto && <span className="text-[11.5px] font-semibold text-stone">{selo.texto}</span>}
             </div>
@@ -47,7 +47,7 @@ export function Hero({ d }: { d: Dados }) {
             className="pot-wf absolute right-[18px] bottom-[18px] flex w-[104px] flex-col gap-1 min-[720px]:w-[140px]"
             aria-hidden="true"
           >
-            <span className="lid h-[22px] rounded-[7px_7px_2px_2px] border-[1.5px] border-dashed border-stone bg-white/50" />
+            <span className="lid h-[22px] rounded-[7px_7px_2px_2px] border-[1.5px] border-dashed border-white/22 bg-white/8" />
           </div>
         </div>
 

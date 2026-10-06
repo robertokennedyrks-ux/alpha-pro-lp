@@ -22,7 +22,7 @@ export function Bonus({ d }: { d: Dados }) {
         </h2>
         {sub ? <p className="mt-3 max-w-[34ch] text-[16.5px] text-graphite lg:[grid-area:sub]">{sub}</p> : null}
         <BonusLista loja={loja} />
-        <div className="mt-5 flex flex-col gap-3.5 rounded-[24px] bg-[color-mix(in_srgb,var(--color-ink)_4%,var(--color-white))] p-5 text-center lg:mt-8 lg:self-start lg:text-left lg:[grid-area:sum]">
+        <div className="mt-5 flex flex-col gap-3.5 rounded-[24px] bg-[color-mix(in_srgb,var(--color-ink)_6%,var(--color-card))] p-5 text-center lg:mt-8 lg:self-start lg:text-left lg:[grid-area:sum]">
           <p className="text-[16px] leading-[1.35] font-medium text-graphite">
             Com {maxPotes} potes você leva <b className="font-semibold text-ink">{brl(soma)}</b> em bônus de graça.
           </p>

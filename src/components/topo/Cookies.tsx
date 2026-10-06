@@ -45,7 +45,7 @@ export function Cookies({
 
   return (
     <div
-      className="ck fixed right-2 bottom-2 left-2 z-60 flex items-center gap-3 rounded-lg border border-border bg-white px-4 py-3.5 text-sm leading-[1.4] text-ink shadow-[0_18px_50px_rgba(18,18,18,.16)] lg:right-auto lg:max-w-[440px]"
+      className="ck fixed right-2 bottom-2 left-2 z-60 flex items-center gap-3 rounded-lg border border-border bg-card px-4 py-3.5 text-sm leading-[1.4] text-ink shadow-[0_18px_50px_rgba(18,18,18,.16)] lg:right-auto lg:max-w-[440px]"
       id="ck"
       data-aviso-cookies
       role="region"
@@ -70,7 +70,7 @@ export function Cookies({
       <button
         type="button"
         id="ck-ok"
-        className="h-11 flex-none cursor-pointer rounded-md border-0 bg-ink px-[18px] text-sm leading-none font-semibold text-white"
+        className="h-11 flex-none cursor-pointer rounded-md border-0 bg-ink px-[18px] text-sm leading-none font-semibold text-on-ink"
         onClick={aceitar}
       >
         {botao}

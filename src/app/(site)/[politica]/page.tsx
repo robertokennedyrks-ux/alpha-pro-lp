@@ -33,7 +33,7 @@ export default async function PoliticaPage({ params }: PageProps<'/[politica]'>)
       <Topo d={d} />
       <div className="bg-paper pt-6 md:pt-10">
         <main className="mx-auto max-w-[1240px] px-4 pb-12 text-base leading-[1.65] md:px-[60px]">
-          <div className="overflow-hidden rounded-lg border border-border bg-white lg:grid lg:min-h-[70vh] lg:grid-cols-[280px_minmax(0,1fr)] lg:items-start">
+          <div className="overflow-hidden rounded-lg border border-border bg-card lg:grid lg:min-h-[70vh] lg:grid-cols-[280px_minmax(0,1fr)] lg:items-start">
             <Abas abas={abasPoliticas} atual={p.slug} />
             <Conteudo p={p} abas={abasPoliticas} />
           </div>

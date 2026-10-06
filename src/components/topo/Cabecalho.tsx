@@ -12,7 +12,7 @@ const FECHAR_MS = 640
 const hdrBtn =
   'hdr-btn relative grid size-11 cursor-pointer place-items-center rounded-md border-0 bg-transparent text-ink focus-visible:outline-3 focus-visible:-outline-offset-3 focus-visible:outline-stone'
 const badge =
-  'hdr-badge absolute top-1 right-0.5 box-content h-[18px] min-w-[18px] rounded-[999px] border-2 border-white bg-ink px-[5px] text-center text-[11px] leading-[18px] font-bold text-white tabular-nums'
+  'hdr-badge absolute top-1 right-0.5 box-content h-[18px] min-w-[18px] rounded-[999px] border-2 border-paper bg-ink px-[5px] text-center text-[11px] leading-[18px] font-bold text-white tabular-nums'
 const drRow =
   'dr-row flex w-full cursor-pointer items-center gap-3.5 border-0 bg-transparent px-6 py-[17px] text-left text-[19px] leading-[1.2] font-semibold tracking-[-.01em] text-ink no-underline [&>span]:flex-1 [&>svg]:size-[22px] [&>svg]:flex-none [&>svg]:opacity-90'
 
@@ -236,7 +236,7 @@ export function Cabecalho({ faixa, menu }: { faixa: React.ReactNode; menu: MenuL
         {faixa}
         <div
           id="hdr"
-          className="hdr relative grid grid-cols-[88px_1fr_88px] items-center gap-2 border-b border-border bg-white px-3 py-2 md:px-12"
+          className="hdr relative grid grid-cols-[88px_1fr_88px] items-center gap-2 border-b border-border bg-card px-3 py-2 md:px-12"
         >
           <button
             ref={menuBtnRef}
@@ -289,7 +289,7 @@ export function Cabecalho({ faixa, menu }: { faixa: React.ReactNode; menu: MenuL
       >
         <nav
           ref={panelRef}
-          className="dr-panel absolute inset-0 flex flex-col overflow-y-auto bg-white pt-2 pb-7 text-ink"
+          className="dr-panel absolute inset-0 flex flex-col overflow-y-auto bg-card pt-2 pb-7 text-ink"
         >
           <div className="dr-head grid grid-cols-[44px_1fr_44px] items-center gap-2 px-3 pb-7">
             <button ref={fecharRef} type="button" className={hdrBtn} data-dr-close aria-label="Fechar menu" onClick={fechar}>
@@ -380,7 +380,7 @@ function CartaoMenu({
         {l2}
       </b>
       <span
-        className="dr-go relative grid size-8 place-items-center rounded-sm bg-ink text-white [&>svg]:size-4"
+        className="dr-go relative grid size-8 place-items-center rounded-sm bg-ink text-on-ink [&>svg]:size-4"
         aria-hidden="true"
       >
         <Icon name="seta-direita" />

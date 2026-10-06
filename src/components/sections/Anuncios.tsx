@@ -8,7 +8,7 @@ export function FaixaAnuncios({ d }: { d: Dados }) {
   if (!textos.length) return null
   return (
     <div
-      className="ann overflow-hidden bg-ink text-[12.5px] leading-none font-semibold tracking-[.04em] whitespace-nowrap text-white"
+      className="ann overflow-hidden bg-mist text-[12.5px] leading-none font-semibold tracking-[.04em] whitespace-nowrap text-white"
       aria-label="Avisos"
     >
       <Faixa textos={textos} />

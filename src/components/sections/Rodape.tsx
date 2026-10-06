@@ -56,10 +56,10 @@ export function Rodape({ d }: { d: Dados }) {
   ]
 
   return (
-    <footer className="ft border-t border-border bg-white pt-11 pb-10 text-ink lg:pt-[72px] lg:pb-12">
+    <footer className="ft border-t border-border bg-card pt-11 pb-10 text-ink lg:pt-[72px] lg:pb-12">
       <div className="wrap flex flex-col">
         <div
-          className="ft-mono relative mb-7 h-[120px] w-full overflow-hidden rounded-lg bg-ink text-white lg:mb-12 lg:h-[170px]"
+          className="ft-mono relative mb-7 h-[120px] w-full overflow-hidden rounded-lg bg-mist text-white lg:mb-12 lg:h-[170px]"
           aria-hidden="true"
         >
           <span className="ft-a absolute -right-[1%] -bottom-[52%] text-[210px] leading-none font-extrabold tracking-[-.08em] text-white opacity-10 lg:-bottom-[42%] lg:text-[520px]">

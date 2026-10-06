@@ -13,7 +13,7 @@ function ItemSentir({ icone, texto, copia }: { icone?: string | null; texto: str
       className={`flex min-w-0 flex-col items-center gap-3 ${copia ? 'cl in' : ''}`}
       aria-hidden={copia || undefined}
     >
-      <span className="ico relative grid size-[92px] place-items-center rounded-full border-[1.5px] border-border bg-white text-ink">
+      <span className="ico relative grid size-[92px] place-items-center rounded-full border-[1.5px] border-border bg-card text-ink">
         {icone && <Icon name={icone as IconName} className="size-11" />}
         <i className="sp absolute top-0.5 right-1 text-[14px] text-[#9a9a9a] not-italic" aria-hidden="true">
           ✦
@@ -43,7 +43,7 @@ export function Produto({ d }: { d: Dados }) {
           </p>
         </div>
 
-        <Sentir className="feel rounded-panel bg-[#12121208] p-8 text-center text-ink lg:col-[1]! lg:flex lg:flex-col lg:justify-center lg:overflow-hidden lg:px-9 lg:py-11">
+        <Sentir className="feel rounded-panel bg-white/6 p-8 text-center text-ink lg:col-[1]! lg:flex lg:flex-col lg:justify-center lg:overflow-hidden lg:px-9 lg:py-11">
           <h3 className="text-[clamp(24px,7vw,30px)] leading-[1.1] font-semibold tracking-[-.03em]">
             {t.sentirTitulo}
           </h3>
@@ -60,7 +60,7 @@ export function Produto({ d }: { d: Dados }) {
           </ul>
         </Sentir>
 
-        <div className="cmp rounded-[24px] border border-border bg-white p-6 lg:col-[2]! lg:flex lg:items-center lg:p-8">
+        <div className="cmp rounded-[24px] border border-border bg-card p-6 lg:col-[2]! lg:flex lg:items-center lg:p-8">
           <div className="mx-auto w-full max-w-[440px] md:max-w-none" role="table" aria-label={`${sem} e ${com.charAt(0).toLowerCase()}${com.slice(1)}`}>
             <div className="cmp-head grid grid-cols-[minmax(0,1fr)_76px_76px] md:grid-cols-[minmax(0,1fr)_112px_112px]" role="row">
               <div
@@ -74,11 +74,11 @@ export function Produto({ d }: { d: Dados }) {
                 {sem}
               </span>
               <span
-                className={`${cabeca} rounded-t-[12px] border-2 border-b-0 border-white bg-ink pt-[14px] text-white`}
+                className={`${cabeca} rounded-t-[12px] border-2 border-b-0 border-card bg-ink pt-[14px] text-on-ink`}
                 role="columnheader"
               >
                 <i
-                  className="h-9 w-6 rounded-[6px_6px_9px_9px] border-[1.8px] border-dashed border-stone bg-white/12"
+                  className="h-9 w-6 rounded-[6px_6px_9px_9px] border-[1.8px] border-dashed border-white/22 bg-white/12"
                   aria-hidden="true"
                 />
                 {com}

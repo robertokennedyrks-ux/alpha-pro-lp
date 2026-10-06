@@ -31,7 +31,7 @@
   transform: translateY(-100%);
 }
 .topbar.is-float {
-  box-shadow: 0 6px 20px rgb(18 18 18 / 0.06);
+  box-shadow: 0 6px 20px rgb(0 0 0 / 0.55);
 }
 @media (min-width: 1024px) {
   .hdr {
@@ -87,7 +87,7 @@ body.drawer-open {
     content: '';
     position: absolute;
     inset: 0;
-    background: rgb(18 18 18 / 0.45);
+    background: var(--color-scrim);
     opacity: 0;
     transition: opacity 0.6s var(--ease-soft);
   }
@@ -105,7 +105,7 @@ body.drawer-open {
     border: 1px solid var(--color-border);
     overflow-x: hidden;
     transform: translateX(calc(-100% - 24px));
-    box-shadow: 24px 0 60px rgb(18 18 18 / 0.18);
+    box-shadow: 24px 0 60px rgb(0 0 0 / 0.6);
   }
   .dr-head [data-dr-cart] {
     visibility: hidden;
@@ -124,8 +124,8 @@ body.drawer-open {
 /* ===== hero ===== */
 .hero-ph {
   background:
-    linear-gradient(180deg, transparent 55%, rgb(18 18 18 / 0.08)),
-    repeating-linear-gradient(135deg, rgb(18 18 18 / 0.035) 0 14px, transparent 14px 28px),
+    linear-gradient(180deg, transparent 55%, rgb(0 0 0 / 0.35)),
+    repeating-linear-gradient(135deg, rgb(255 255 255 / 0.04) 0 14px, transparent 14px 28px),
     var(--color-mist);
 }
 @media (min-width: 1024px) {
@@ -161,8 +161,8 @@ body.drawer-open {
 /* ===== chamada final ===== */
 .fn-photo {
   background:
-    linear-gradient(180deg, transparent 30%, color-mix(in srgb, var(--color-ink) 70%, transparent) 68%, var(--color-ink) 100%),
-    repeating-linear-gradient(135deg, rgb(18 18 18 / 0.035) 0 14px, transparent 14px 28px),
+    linear-gradient(180deg, transparent 30%, rgb(0 0 0 / 0.72) 68%, rgb(0 0 0 / 0.95) 100%),
+    repeating-linear-gradient(135deg, rgb(255 255 255 / 0.04) 0 14px, transparent 14px 28px),
     var(--color-mist);
 }
 .fn-photo > span {
@@ -170,7 +170,7 @@ body.drawer-open {
 }
 /* foto do painel: o mesmo escurecido embaixo, para o título continuar legível */
 .fn-veu {
-  background: linear-gradient(180deg, transparent 30%, color-mix(in srgb, var(--color-ink) 70%, transparent) 68%, var(--color-ink) 100%);
+  background: linear-gradient(180deg, transparent 30%, rgb(0 0 0 / 0.72) 68%, rgb(0 0 0 / 0.95) 100%);
 }
 
 /* ===== rodapé ===== */

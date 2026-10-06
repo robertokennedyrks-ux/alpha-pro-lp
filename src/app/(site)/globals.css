@@ -1,25 +1,44 @@
 @import 'tailwindcss';
 
-/* Tokens do protótipo (reference/alpha-pro-lp.html, :root). Só tons de cinza;
-   verde apenas em "Grátis", "Liberado" e frete grátis.
+/* Tokens do protótipo (reference/alpha-pro-lp.html, :root), convertidos para o tema
+   escuro com a paleta da Netflix: fundo #141414, vermelho #e50914 no CTA principal,
+   verde #46d369 em "Grátis", "Liberado" e frete grátis.
    Raios de botões, tags e áreas clicáveis: 8, 12 ou 16px (rounded-sm/md/lg).
    Painéis decorativos seguem o protótipo (28px = rounded-panel). */
 @theme {
   --font-sans: 'Plus Jakarta Sans Variable', 'Helvetica Neue', Arial, sans-serif;
 
+  /* ===== Tema escuro, paleta Netflix =====
+     white continua sendo branco de verdade (texto e traços sobre fundo escuro).
+     card = superfície de card, paper = fundo da página, mist = superfície elevada,
+     ink = texto e elementos de maior destaque (agora claro, não escuro).
+     Fundo mais fundo que o #141414 da Netflix, a pedido do Roberto. */
   --color-white: #ffffff;
-  --color-paper: #f4f4f4;
-  --color-mist: #e7e7e7;
-  --color-line: #dcdcdc;
-  /* Escurecido de #8a8a8a: naquele tom o texto pequeno dava 3,45:1 no branco e
-     2,79:1 sobre o cinza, abaixo dos 4,5:1 da WCAG AA. Agora 5,74:1 e 4,64:1. */
-  --color-stone: #666666;
-  --color-graphite: #4a4a4a;
-  --color-ink: #121212;
-  --color-ink-hover: #2a2a2a;
-  --color-border: rgb(18 18 18 / 0.1);
-  --color-ok: #1e7a46;
-  --color-ok-bg: #e3f3e9;
+  /* Escada de elevação, do fundo para a frente: paper < card < mist. */
+  --color-card: #101010;
+  --color-paper: #080808;
+  --color-mist: #1a1a1a;
+  /* Traços e divisórias: branco com pouca opacidade em vez de cinza sólido —
+     acompanham a superfície embaixo e ficam mais suaves. */
+  --color-line: rgb(255 255 255 / 0.07);
+  /* Cinzas de texto invertidos: stone é o secundário (8,8:1 sobre o fundo),
+     graphite o de leitura corrida (13,9:1). Ambos acima dos 4,5:1 da WCAG AA. */
+  --color-stone: #b3b3b3;
+  --color-graphite: #e5e5e5;
+  --color-ink: #ffffff;
+  --color-ink-hover: #e6e6e6;
+  /* Texto e ícones sobre um fundo `ink`. No tema claro era branco; aqui é escuro. */
+  --color-on-ink: #141414;
+  --color-border: rgb(255 255 255 / 0.08);
+  /* Verde da Netflix (o do "match"), que no escuro precisa ser claro: 9,1:1 no fundo. */
+  --color-ok: #46d369;
+  --color-ok-bg: rgb(70 211 105 / 0.16);
+  /* Vermelho da Netflix: o CTA principal. Branco em cima dá 4,8:1. */
+  --color-brand: #e50914;
+  --color-brand-hover: #f6121d;
+  /* Tintas e sombras: no escuro partem do preto, não do ink (que agora é branco). */
+  --color-scrim: rgb(0 0 0 / 0.72);
+  --color-tint: rgb(255 255 255 / 0.06);
 
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -37,10 +56,10 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 104px;
-    color-scheme: light;
+    color-scheme: dark;
   }
   body {
-    @apply bg-white font-sans text-ink antialiased;
+    @apply bg-card font-sans text-ink antialiased;
     font-size: 16.5px;
     line-height: 1.6;
   }
@@ -141,7 +160,7 @@
   color: var(--color-graphite);
 }
 
-/* CTA principal: preto, uma linha, raio 16px. */
+/* CTA principal: vermelho Netflix, uma linha, raio 16px. */
 @utility btn {
   display: flex;
   align-items: center;
@@ -151,8 +170,8 @@
   padding: 14px 18px;
   border-radius: 16px;
   white-space: nowrap;
-  background: var(--color-ink);
-  color: var(--color-white);
+  background: var(--color-brand);
+  color: #ffffff;
   text-decoration: none;
   font: 600 clamp(13px, 3.9vw, 16px) / 1.1 var(--font-sans);
   letter-spacing: 0.02em;
@@ -161,7 +180,7 @@
     transform 0.15s,
     background 0.15s;
   &:hover {
-    background: var(--color-ink-hover);
+    background: var(--color-brand-hover);
     transform: translateY(-1px);
   }
   &:focus-visible {
@@ -191,7 +210,7 @@
     color 0.15s;
   &:hover {
     background: var(--color-ink);
-    color: var(--color-white);
+    color: var(--color-on-ink);
   }
   &:focus-visible {
     outline: 3px solid var(--color-stone);
@@ -204,7 +223,7 @@
   position: relative;
   border-radius: 28px;
   background:
-    repeating-linear-gradient(135deg, rgb(18 18 18 / 0.035) 0 14px, transparent 14px 28px),
+    repeating-linear-gradient(135deg, rgb(255 255 255 / 0.04) 0 14px, transparent 14px 28px),
     var(--color-mist);
   display: flex;
   align-items: flex-end;
@@ -214,7 +233,7 @@
   & > span {
     font: 500 12.5px/1.4 var(--font-sans);
     color: var(--color-graphite);
-    background: rgb(255 255 255 / 0.9);
+    background: rgb(24 24 24 / 0.92);
     padding: 8px 11px;
     border-radius: 12px;
     max-width: 32ch;

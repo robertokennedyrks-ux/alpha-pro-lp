@@ -10,9 +10,9 @@
   gap: 16px;
   padding: 20px;
   border-radius: 24px;
-  background: var(--color-white);
+  background: var(--color-card);
   border: 1px solid var(--color-border);
-  box-shadow: 0 10px 26px rgb(18 18 18 / 0.05);
+  box-shadow: 0 10px 26px rgb(0 0 0 / 0.5);
   transition:
     opacity 0.35s ease,
     box-shadow 0.35s ease;
@@ -32,7 +32,7 @@
   display: grid;
   place-items: center;
   background: var(--color-ink);
-  color: var(--color-white);
+  color: var(--color-on-ink);
 }
 .bn-ico svg {
   width: 28px;
@@ -78,7 +78,7 @@
   border: 0;
   border-radius: 12px;
   background: var(--color-ink);
-  color: var(--color-white);
+  color: var(--color-on-ink);
   display: grid;
   place-items: center;
   cursor: pointer;
@@ -198,7 +198,7 @@
   flex: 0 0 208px;
   scroll-snap-align: start;
   border-radius: 16px;
-  background: var(--color-white);
+  background: var(--color-card);
   border: 1px solid var(--color-border);
   overflow: hidden;
   display: flex;
@@ -210,7 +210,7 @@
 }
 .ofc.is-sel {
   border: 3px solid var(--color-ink);
-  box-shadow: 0 10px 26px rgb(18 18 18 / 0.12);
+  box-shadow: 0 10px 26px rgb(0 0 0 / 0.55);
 }
 .ofc-ph {
   position: relative;
@@ -249,9 +249,9 @@
   width: calc((100% - (var(--cols) - 1) * 11px) / var(--cols));
   max-width: 44.5px;
   aspect-ratio: 37.8/58.5;
-  border: 2.7px dashed var(--color-stone);
+  border: 2.7px dashed rgb(255 255 255 / 0.22);
   border-radius: 10.7px 10.7px 16px 16px;
-  background: rgb(255 255 255 / 0.6);
+  background: rgb(255 255 255 / 0.06);
 }
 .ofc-pots.is-sm i {
   max-width: 27px;
@@ -274,14 +274,14 @@
 .ofc-tag b {
   padding: 5.4px 5.6px 5.4px 10.7px;
   border-radius: 8px 0 0 8px;
-  background: #ebebeb;
+  background: var(--color-mist);
   color: var(--color-ink);
 }
 .ofc-tag span {
   padding: 5.6px 11px 5.6px 5.6px;
   border-radius: 0 8px 8px 0;
   background: var(--color-ink);
-  color: #ebebeb;
+  color: var(--color-paper);
 }
 .ofc-body {
   padding: 24px 14px 16px;
@@ -330,7 +330,7 @@
   white-space: nowrap;
 }
 .ofc-perks span.is-ok {
-  background: #1e7a4614;
+  background: var(--color-ok-bg);
   color: var(--color-ok);
 }
 .ofc-chk {
@@ -341,7 +341,7 @@
   height: 32px;
   border-radius: 8px;
   border: 1.5px solid var(--color-stone);
-  background: var(--color-white);
+  background: var(--color-card);
   color: transparent;
   display: grid;
   place-items: center;
@@ -364,7 +364,7 @@
 .ofc.is-sel .ofc-chk {
   background: var(--color-ink);
   border-color: var(--color-ink);
-  color: var(--color-white);
+  color: var(--color-on-ink);
 }
 .ofc-chk:focus-visible {
   outline: 3px solid var(--color-stone);
@@ -452,11 +452,11 @@
   font-size: clamp(17px, 5vw, 20px);
   font-weight: 700;
   padding: 16px 30px;
-  background: #121212;
+  background: var(--color-brand);
   color: #ffffff;
 }
 .btn.of-btn:hover {
-  background: var(--color-ink-hover);
+  background: var(--color-brand-hover);
 }
 .of-btn svg {
   width: 24px;
@@ -470,7 +470,7 @@
   z-index: 1;
   padding: 4px 7px;
   border-radius: 8px;
-  background: var(--color-white);
+  background: var(--color-card);
   color: var(--color-ink);
   border: 1.5px solid var(--color-ink);
   font: 600 12px/1 var(--font-sans);
@@ -508,11 +508,11 @@
   border: 0;
   border-radius: 16px;
   background: var(--color-ink);
-  color: var(--color-white);
+  color: var(--color-on-ink);
   font: 500 14px/1.2 var(--font-sans);
   text-align: left;
   cursor: pointer;
-  box-shadow: 0 10px 26px rgb(18 18 18 / 0.22);
+  box-shadow: 0 10px 26px rgb(0 0 0 / 0.6);
   transform: translateY(12px);
   opacity: 0;
   visibility: hidden;
@@ -551,7 +551,7 @@
   border-radius: 10px;
   display: grid;
   place-items: center;
-  background: color-mix(in srgb, var(--color-white) 14%, transparent);
+  background: color-mix(in srgb, var(--color-card) 14%, transparent);
 }
 .gs-ico svg {
   width: 18px;
@@ -576,11 +576,11 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--color-white) 25%, transparent);
+  background: color-mix(in srgb, var(--color-card) 25%, transparent);
   transition: background 0.3s;
 }
 .gs-dots i.on {
-  background: var(--color-white);
+  background: var(--color-card);
 }
 .gs-cta {
   flex: none;
@@ -616,7 +616,7 @@
 .sh-back {
   position: absolute;
   inset: 0;
-  background: rgb(18 18 18 / 0.45);
+  background: var(--color-scrim);
   opacity: 0;
   transition: opacity 0.6s var(--ease-soft);
 }
@@ -628,7 +628,7 @@
   max-height: 88vh;
   display: flex;
   flex-direction: column;
-  background: var(--color-white);
+  background: var(--color-card);
   border-radius: 24px 24px 0 0;
   transform: translateY(100%);
   transition: transform 0.38s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -663,7 +663,7 @@
   height: 40px;
   border-radius: 12px;
   border: 1px solid var(--color-border);
-  background: var(--color-white);
+  background: var(--color-card);
   color: var(--color-ink);
   display: grid;
   place-items: center;
@@ -739,7 +739,7 @@
 .ct-pots i {
   width: 20px;
   aspect-ratio: 37.8/58.5;
-  border: 1.8px dashed var(--color-stone);
+  border: 1.8px dashed rgb(255 255 255 / 0.22);
   border-radius: 6px 6px 9px 9px;
 }
 .ct-pots.n1 i {
@@ -795,7 +795,7 @@
 }
 .ct-tag.is-ink {
   background: var(--color-ink);
-  color: var(--color-white);
+  color: var(--color-on-ink);
 }
 .ct-name {
   font: 600 15px/1.25 var(--font-sans);
@@ -917,7 +917,7 @@ body.sheet-open {
   padding: 0 4px;
   border: 1px solid var(--color-border);
   border-radius: 16px;
-  background: var(--color-white);
+  background: var(--color-card);
 }
 .step button {
   position: relative;
@@ -926,7 +926,7 @@ body.sheet-open {
   height: 40px;
   padding: 0;
   border: 0;
-  background: var(--color-white);
+  background: var(--color-card);
   color: var(--color-ink);
   font: 700 18px/1 var(--font-sans);
   cursor: pointer;
@@ -939,7 +939,7 @@ body.sheet-open {
   background: var(--color-mist);
 }
 .step button:disabled {
-  color: var(--color-line);
+  color: #4a4a4a;
   cursor: default;
 }
 .step button:focus-visible {
@@ -992,7 +992,7 @@ body.sheet-open {
     border-radius: 16px;
     border: 1px solid var(--color-border);
     overflow: hidden;
-    box-shadow: -24px 0 60px rgb(18 18 18 / 0.18);
+    box-shadow: -24px 0 60px rgb(0 0 0 / 0.6);
     transform: translateX(calc(100% + 24px));
     transition: transform 0.6s var(--ease-soft);
   }
@@ -1028,7 +1028,7 @@ body.sheet-open {
     border-color 0.5s;
 }
 .fg.is-done {
-  background: #1e7a4614;
+  background: var(--color-ok-bg);
   border-color: rgb(18 18 18 / 0%);
 }
 .fg-top {
@@ -1044,7 +1044,7 @@ body.sheet-open {
   border-radius: 8px;
   display: grid;
   place-items: center;
-  background: var(--color-white);
+  background: var(--color-card);
   color: var(--color-ink);
   border: 1px solid var(--color-border);
   transition:

@@ -47,10 +47,10 @@ export function Dor({ d }: { d: Dados }) {
         <Trilha className="tl flex flex-col gap-[14px] md:max-w-[600px] lg:col-[1]! lg:row-[4] lg:max-w-none">
           {t.dia.map((item, i) => (
             <li key={i} className="relative grid grid-cols-[42px_1fr] gap-[14px]">
-              <span className="n grid size-[42px] place-items-center rounded-full bg-ink text-[17px] leading-none font-semibold text-white">
+              <span className="n grid size-[42px] place-items-center rounded-full bg-ink text-[17px] leading-none font-semibold text-on-ink">
                 {i + 1}
               </span>
-              <div className="tc flex min-w-0 flex-col gap-2 rounded-card border border-border bg-white p-8 shadow-[0_1px_2px_rgba(18,18,18,.04),0_8px_24px_rgba(18,18,18,.05)]">
+              <div className="tc flex min-w-0 flex-col gap-2 rounded-card border border-border bg-card p-8 shadow-[0_1px_2px_rgba(18,18,18,.04),0_8px_24px_rgba(18,18,18,.05)]">
                 <span className="mb-1.5 grid size-[34px] flex-none place-items-center rounded-[11px] border border-border bg-paper text-ink">
                   {item.icone && <Icon name={item.icone as IconName} className="size-[17px]" />}
                 </span>
@@ -65,7 +65,7 @@ export function Dor({ d }: { d: Dados }) {
         <div className="bx-hold lg:col-[2]! lg:row-[4]">
           <div className="bx relative mt-2 h-[380px] md:mx-auto md:w-full md:max-w-[560px] lg:sticky lg:top-[max(112px,calc(50vh-230px))] lg:mt-0 lg:h-[460px] lg:max-w-none lg:self-start">
             <div
-              className="absolute inset-x-0 bottom-0 h-[300px] rounded-panel bg-ink lg:h-[370px]"
+              className="absolute inset-x-0 bottom-0 h-[300px] rounded-panel bg-mist lg:h-[370px]"
               aria-hidden="true"
             />
             <FotoOuEspaco

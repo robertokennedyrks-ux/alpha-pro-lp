@@ -27,7 +27,7 @@
 }
 .pol-tab[aria-selected='true'] {
   background: var(--color-ink);
-  color: var(--color-white);
+  color: var(--color-on-ink);
 }
 .pol-tab:focus-visible {
   outline: 3px solid var(--color-stone);

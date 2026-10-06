@@ -8,6 +8,23 @@ LP do ALPHA PRO, cliente Genesy, feita pela RK Studios (Roberto). Responda ao Ro
 - Decisões da revisão final do Roberto: `reference/decisoes-revisao.md`.
 - Fases 1 a 6 do porte prontas: base, dados, todas as seções, carrinho e interações, políticas em `/<slug>`, painel do cliente (marca RK, perfis `rk`/`cliente`). Detalhes no `README.md`.
 
+## Tema (mudou em 05/10/2026)
+
+A página foi convertida para **tema escuro com a paleta da Netflix**, a pedido do Roberto.
+Isso substitui as regras antigas de "só tons de cinza", "nunca preto puro" e "só tema claro
+na v1" (decisão 13). Tudo passa pelos tokens em `src/app/(site)/globals.css`:
+
+- fundo da página `#080808`, card `#101010`, superfície elevada `#1a1a1a`
+- texto `#ffffff`, secundário `#b3b3b3`, leitura corrida `#e5e5e5`
+- vermelho `#e50914` no CTA principal, verde `#46d369` em "Grátis", "Liberado" e frete grátis
+- bordas e divisórias em branco translúcido (8% e 7%), não cinza sólido
+
+Dois tokens existem por causa da inversão: `--color-card` (superfície, antes era `white`)
+e `--color-on-ink` (texto sobre um fundo `ink`, que no escuro é claro). `--color-white`
+continua sendo branco de verdade, para texto e traços sobre foto e scrim.
+
+O protótipo em `reference/` continua claro: ele é a referência de **layout**, não mais de cor.
+
 ## Escopo (mudou em 05/10/2026)
 
 O painel edita **só três coisas**: preços/ofertas, frete grátis e bônus. Todo o resto da
@@ -23,10 +40,10 @@ aplicação Node.js mas não oferece PostgreSQL — e o Payload 3 não tem adapt
 
 ## Regras que não mudam
 
-- Só Plus Jakarta Sans. Só tons de cinza; o mais escuro é `#121212`, nunca preto puro. Verde só em "Grátis", "Liberado" e frete grátis.
+- Só Plus Jakarta Sans.
 - CTAs em uma linha. Raios de 8, 12 ou 16px; nada totalmente redondo (exceções: contador do carrinho, balões da dor, cápsula decorativa do título).
 - Usabilidade é pilar: texto de preço e condição com no mínimo 13px, áreas de toque com no mínimo 44px.
-- Sem promessa de emagrecimento e sem comparação com caneta. Sem boleto. Só tema claro na v1 (escuro vem depois; manter os tokens prontos).
+- Sem promessa de emagrecimento e sem comparação com caneta. Sem boleto.
 - Não mexer em hospedagem nem DNS sem a confirmação do Roberto.
 
 ## Fase 7: revisão antes do deploy

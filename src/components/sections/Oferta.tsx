@@ -43,14 +43,14 @@ export function Oferta({ d }: { d: Dados }) {
             <p>{fraseGastos}</p>
           ) : null}
         </div>
-        <div className="overflow-hidden rounded-panel border border-border bg-white shadow-[0_18px_50px_rgba(18,18,18,.07)] lg:grid lg:grid-cols-[minmax(0,.9fr)_minmax(0,1.1fr)] lg:items-stretch">
+        <div className="overflow-hidden rounded-panel border border-border bg-card shadow-[0_18px_50px_rgba(18,18,18,.07)] lg:grid lg:grid-cols-[minmax(0,.9fr)_minmax(0,1.1fr)] lg:items-stretch">
           <FotoOferta loja={loja} />
           <div className="flex flex-col gap-1.5 p-8 lg:p-11" id="comprar">
-            <span className="pill bg-[#d6d6d6] text-graphite">{t.cardEtiqueta}</span>
+            <span className="pill bg-mist text-graphite">{t.cardEtiqueta}</span>
             <h3 className="mt-3.5 flex items-center gap-2.5 text-[clamp(17px,5.6vw,26px)] leading-[1.15] font-semibold tracking-[-.025em] whitespace-nowrap">
               {loja.nome}{' '}
               {loja.capsulas ? (
-                <span className="flex-none rounded-sm bg-ink px-2.5 py-1.5 text-[clamp(10.5px,3.2vw,12.5px)] leading-none font-bold tracking-normal text-white">
+                <span className="flex-none rounded-sm bg-ink px-2.5 py-1.5 text-[clamp(10.5px,3.2vw,12.5px)] leading-none font-bold tracking-normal text-on-ink">
                   {loja.capsulas}
                 </span>
               ) : null}
@@ -72,7 +72,7 @@ export function Oferta({ d }: { d: Dados }) {
         </div>
         <div className="mt-[22px] grid grid-cols-2 gap-3 lg:mt-7 lg:grid-cols-4 lg:gap-4">
           {t.confianca.map((c, i) => (
-            <div key={i} className="flex min-w-0 flex-col items-center gap-1.5 rounded-panel bg-white p-6 text-center">
+            <div key={i} className="flex min-w-0 flex-col items-center gap-1.5 rounded-panel bg-card p-6 text-center">
               <span className="mb-2 grid size-16 place-items-center rounded-full bg-paper text-ink">
                 {c.icone && <Icon name={c.icone as IconName} className="size-8" />}
               </span>

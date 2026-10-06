@@ -24,7 +24,7 @@
   left: 20px;
   top: 50px;
   bottom: -10px;
-  border-left: 2px dashed var(--color-stone);
+  border-left: 2px dashed rgb(255 255 255 / 0.14);
   opacity: 0.6;
 }
 .pain .tl.anim > li .n {
@@ -75,16 +75,16 @@
   z-index: 2;
   padding: 11px 18px;
   border-radius: 999px;
-  background: var(--color-white);
+  background: var(--color-card);
   color: var(--color-ink);
   font: 600 clamp(14px, 4.2vw, 17px) / 1 var(--font-sans);
   letter-spacing: -0.01em;
   white-space: nowrap;
-  box-shadow: 0 8px 20px rgb(18 18 18 / 0.18);
+  box-shadow: 0 8px 20px rgb(0 0 0 / 0.55);
 }
 .pain .bx-bal > li.dk {
   background: var(--color-ink);
-  color: var(--color-white);
+  color: var(--color-on-ink);
   border: 1.5px solid var(--color-white);
   border-radius: 16px;
 }
@@ -185,34 +185,34 @@
 .nc-card.is-on {
   background: var(--color-ink);
   transform: scale(1.015);
-  box-shadow: 0 14px 34px rgb(18 18 18 / 0.22);
+  box-shadow: 0 14px 34px rgb(0 0 0 / 0.6);
 }
 .nc-card.is-on h3 {
-  color: var(--color-white);
+  color: var(--color-on-ink);
 }
 .nc-card.is-on p {
-  color: var(--color-white);
+  color: var(--color-on-ink);
   opacity: 0.72;
 }
 .nc-card.is-on .sad {
-  color: var(--color-white);
+  color: var(--color-on-ink);
   opacity: 0.35;
 }
 @media (hover: hover) and (pointer: fine) {
   .nc-card:hover {
     background: var(--color-ink);
     transform: scale(1.015);
-    box-shadow: 0 14px 34px rgb(18 18 18 / 0.22);
+    box-shadow: 0 14px 34px rgb(0 0 0 / 0.6);
   }
   .nc-card:hover h3 {
-    color: var(--color-white);
+    color: var(--color-on-ink);
   }
   .nc-card:hover p {
-    color: var(--color-white);
+    color: var(--color-on-ink);
     opacity: 0.72;
   }
   .nc-card:hover .sad {
-    color: var(--color-white);
+    color: var(--color-on-ink);
     opacity: 0.35;
   }
 }
@@ -251,10 +251,10 @@
   border: 0.07em solid var(--color-ink);
   background: linear-gradient(
     90deg,
-    #3a3a3a 0%,
-    var(--color-ink) 18%,
-    var(--color-ink) 44%,
-    #2e2e2e 50%,
+    #b00610 0%,
+    var(--color-brand) 18%,
+    var(--color-brand) 44%,
+    #c20812 50%,
     #ffffff 50%,
     #ffffff 100%
   );
@@ -368,7 +368,7 @@
 }
 .prod .cmp-row > .cmp-c.is-on {
   background: var(--color-ink);
-  color: var(--color-white);
+  color: var(--color-on-ink);
 }
 .prod .cmp-head + .cmp-row .cmp-lbl {
   border-top-left-radius: 12px;
