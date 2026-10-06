@@ -912,17 +912,20 @@
   min-height: 50px;
   font-size: clamp(11.5px, 3.3vw, 13.5px);
   padding: 10px 12px;
-  border-color: #64df8f;
+  border-color: #8df2ad;
   background:
-    linear-gradient(100deg, transparent 38%, rgb(255 255 255 / 0.16) 50%, transparent 62%) no-repeat,
-    linear-gradient(90deg, #0d4f26 2.16%, #22a355 140.47%);
+    linear-gradient(100deg, transparent 38%, rgb(255 255 255 / 0.22) 50%, transparent 62%) no-repeat,
+    linear-gradient(90deg, #1fa74f 2.16%, #5ce882 140.47%);
   background-size:
     220% 100%,
     auto;
-  box-shadow: 0 0 62.8px 0 rgb(13 79 38 / 0.3);
+  /* Verde claro só funciona com texto escuro: com branco, a ponta clara cairia para
+     2,6:1. Assim o botão fica vivo e o texto ganha folga de contraste. */
+  color: #0d2b17;
+  box-shadow: 0 0 62.8px 0 rgb(31 167 79 / 0.45);
 }
 .sh-foot .btn:hover {
-  box-shadow: 0 0 62.8px 0 rgb(13 79 38 / 0.5);
+  box-shadow: 0 0 62.8px 0 rgb(31 167 79 / 0.65);
 }
 .sh-foot .btn .arr {
   font-weight: 400;
