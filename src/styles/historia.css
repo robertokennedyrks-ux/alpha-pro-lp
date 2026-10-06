@@ -603,8 +603,8 @@
   transform: scaleX(1) rotate(-1.4deg);
 }
 
-/* Faixa rotacionada: mesmo tratamento do CTA — gradiente, borda clara e o brilho
-   varrendo. Aqui o brilho corre sempre, porque a faixa já é um elemento em movimento. */
+/* Faixa rotacionada: gradiente e halo do CTA, sem borda, com o brilho varrendo.
+   Aqui o brilho corre sempre, porque a faixa já é um elemento em movimento. */
 .nc-band {
   background:
     linear-gradient(100deg, transparent 38%, rgb(255 255 255 / 0.16) 50%, transparent 62%) no-repeat,
@@ -615,8 +615,6 @@
   background-position:
     -130% 0,
     0 0;
-  border-top: 1px solid #df6464;
-  border-bottom: 1px solid #df6464;
   box-shadow: 0 0 62.8px 0 rgb(117 20 20 / 0.25);
   animation: btn-brilho 4s var(--ease-soft) infinite;
 }
