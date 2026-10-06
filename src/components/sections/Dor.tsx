@@ -47,11 +47,11 @@ export function Dor({ d }: { d: Dados }) {
         <Trilha className="tl flex flex-col gap-[14px] md:max-w-[600px] lg:col-[1]! lg:row-[4] lg:max-w-none">
           {t.dia.map((item, i) => (
             <li key={i} className="relative grid grid-cols-[42px_1fr] gap-[14px]">
-              <span className="n grid size-[42px] place-items-center rounded-full bg-brand/10 text-[17px] leading-none font-semibold text-brand-ink">
+              <span className="n grid size-[42px] place-items-center rounded-full bg-realce/10 text-[17px] leading-none font-semibold text-realce-texto">
                 {i + 1}
               </span>
               <div className="tc flex min-w-0 flex-col gap-2 rounded-card border border-border p-8">
-                <span className="mb-1.5 grid size-[34px] flex-none place-items-center rounded-[11px] border border-border bg-paper text-ink">
+                <span className="tc-ico mb-1.5 grid size-[34px] flex-none place-items-center rounded-[11px] border border-border bg-paper text-ink">
                   {item.icone && <Icon name={item.icone as IconName} className="size-[17px]" />}
                 </span>
                 <h3 className="text-[18px] leading-[1.3] font-semibold tracking-[-.01em]">{item.titulo}</h3>

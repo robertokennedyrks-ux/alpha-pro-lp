@@ -7,7 +7,7 @@ import { usePedido } from '@/components/pedido'
 import { brl } from '@/lib/texto'
 
 import { LinkPedido } from './LinkPedido'
-import { type Loja, linkDe, parcela, precoPix, totalDe } from './loja'
+import { type Loja, linkDe } from './loja'
 
 function pertoDe(t: HTMLElement | null, pos: number[]) {
   if (!t) return 0
@@ -140,8 +140,6 @@ export function OfertaEscolha({ loja }: { loja: Loja }) {
 
   const primeira = loja.opcoes[0]
   const base = primeira ? primeira.preco / primeira.potes : 0
-  const t = totalDe(loja, qtd)
-
   return (
     <>
       <div className="ofc-wrap">
@@ -237,19 +235,6 @@ export function OfertaEscolha({ loja }: { loja: Loja }) {
           </button>
         ))}
       </div>
-      {loja.pix > 0 ? (
-        <p className="mt-[30px] text-[15px] font-medium text-ink">
-          <s className="mr-1 text-stone">{brl(t)}</s> <b className="font-medium">{loja.pix}% OFF no Pix</b>
-        </p>
-      ) : null}
-      <p className="of-price">
-        <span>{brl(precoPix(loja, t))}</span> <small>no Pix</small>
-      </p>
-      <p className="text-[15.5px] leading-[1.55] text-graphite">
-        ou <span>{brl(t)}</span> em até
-        <br />
-        {loja.parcelas}x de <span>{brl(parcela(loja, t))}</span> sem juros no cartão
-      </p>
       <LinkPedido
         link={linkDe(loja, qtd)}
         className="btn of-btn"

@@ -425,20 +425,7 @@
   transform: translate(-50%, -50%);
 }
 
-/* preço e botão de pedido */
-.of-price {
-  margin-top: 10px;
-  font: 600 32px/1 var(--font-sans);
-  letter-spacing: -0.03em;
-  color: var(--color-ink);
-  font-variant-numeric: tabular-nums;
-}
-.of-price small {
-  font-size: clamp(18px, 5.4vw, 23px);
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  margin-left: 6px;
-}
+/* botão de pedido */
 .btn.of-btn {
   position: relative;
   overflow: visible;
