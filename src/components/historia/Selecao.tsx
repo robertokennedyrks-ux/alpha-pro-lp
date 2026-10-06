@@ -44,13 +44,29 @@ export function SelecaoParcial({ texto, alvo }: { texto: string; alvo: string })
   )
 }
 
-// Trecho apagado com um risco vermelho passando por cima.
+// Trecho apagado com um rabisco vermelho por cima. São dois traços tortos, em SVG,
+// desenhados da esquerda para a direita — uma barra reta não passa a ideia de rabisco.
+// `pathLength=100` normaliza o comprimento, então o dash não depende do tamanho do texto,
+// e `vector-effect` mantém a espessura mesmo com o SVG esticado na largura.
 export function Rabisco({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLSpanElement>(null)
   useAcende(ref)
   return (
     <span ref={ref} className="rabisco">
       {children}
+      <svg className="rabisco-traco" viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true">
+        <path
+          pathLength={100}
+          d="M1.5 7.2c13-2.6 23 2.1 35-.6 11.5-2.6 22 2.4 33.5-.4 9-2.2 20 1.4 28.5-1.1"
+          vectorEffect="non-scaling-stroke"
+        />
+        <path
+          className="volta"
+          pathLength={100}
+          d="M97 8.6c-12 2-22-1.8-34 .5-11 2.1-21-1.9-32.5.3-8 1.6-18-1-28.5 1"
+          vectorEffect="non-scaling-stroke"
+        />
+      </svg>
     </span>
   )
 }
