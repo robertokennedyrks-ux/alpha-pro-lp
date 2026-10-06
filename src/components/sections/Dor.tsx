@@ -17,6 +17,7 @@ function LetrasComDestaque({ texto, destaque }: { texto: string; destaque: strin
     <>
       <Letras ocultar texto={texto.slice(0, i)} />
       <span className="sel">
+        <i className="sel-bg" aria-hidden="true" />
         <Letras ocultar texto={destaque} />
       </span>
       <Letras ocultar texto={texto.slice(i + destaque.length)} />
@@ -127,10 +128,10 @@ export function Dor({ d }: { d: Dados }) {
                 <span className="pd">
                   <Letras ocultar texto={l2.charAt(0).toLowerCase()} />
                 </span>
-                <LetrasComDestaque texto={l2.slice(1)} destaque="fome vence" />
+                <LetrasComDestaque texto={l2.slice(1)} destaque="fome vence." />
               </>
             ) : (
-              <LetrasComDestaque texto={l2} destaque="fome vence" />
+              <LetrasComDestaque texto={l2} destaque="fome vence." />
             )}
           </span>{' '}
           <span className="l mt-3.5 block text-[clamp(18px,5.8vw,34px)] font-light tracking-[-.03em] whitespace-nowrap lg:text-[40px]">

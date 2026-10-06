@@ -93,12 +93,15 @@
   clip-path: inset(0 0 calc((1 - var(--l, 0)) * 100%) 0);
 }
 @media (prefers-reduced-motion: reduce) {
-  .pain .hero-close .sel {
-    border-color: var(--color-realce);
+  .pain .hero-close .sel-bg {
+    width: 100%;
+    border-color: #751414;
+    transition: none;
   }
   .pain .hero-close .sel::before,
   .pain .hero-close .sel::after {
     opacity: 1;
+    transition: none;
   }
   .pain .tl.anim > li .n,
   .pain .tl.anim > li .tc {
@@ -111,41 +114,50 @@
   }
 }
 
-/* Seleção de texto: fundo transparente, só os dois traços laterais e as alças
-   nos cantos (superior esquerdo e inferior direito). Entra depois que a frase
-   termina de se revelar — a classe .pronta vem do Revelar.tsx.
-   A opacidade fica nas bordas e nas alças, nunca no .sel: ele contém as letras. */
+/* Seleção de texto: retângulo translúcido com os dois traços laterais e uma alça
+   redonda em cada canto oposto. Entra depois que o trecho termina de se revelar
+   (classe .pronta, vinda do Revelar.tsx) e cresce da esquerda para a direita.
+   O retângulo é uma camada própria (.sel-bg) e não o fundo do .sel: animar o span
+   apagaria as letras, que são filhas dele. */
 .pain .hero-close .sel {
   position: relative;
-  padding: 0.04em 0.1em;
-  margin: 0 -0.02em;
+  isolation: isolate;
+  padding: 0 16px;
+}
+.pain .hero-close .sel-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 0;
+  background: #7514144f;
   border-left: 2px solid transparent;
   border-right: 2px solid transparent;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
-  transition: border-color 0.4s ease;
+  transition:
+    width 0.55s var(--ease-soft),
+    border-color 0.2s ease 0.45s;
 }
 .pain .hero-close .sel::before,
 .pain .hero-close .sel::after {
   content: '';
   position: absolute;
-  width: 0.16em;
-  height: 0.16em;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
-  background: var(--color-realce);
+  background: #751414;
   opacity: 0;
-  transition: opacity 0.4s ease 0.12s;
+  transition: opacity 0.3s ease 0.5s;
 }
 .pain .hero-close .sel::before {
-  left: -0.09em;
-  top: -0.09em;
+  left: -4px;
+  top: -4px;
 }
 .pain .hero-close .sel::after {
-  right: -0.09em;
-  bottom: -0.09em;
+  right: -4px;
+  bottom: -4px;
 }
-.pain .hero-close .sel.pronta {
-  border-color: var(--color-realce);
+.pain .hero-close .sel.pronta .sel-bg {
+  width: 100%;
+  border-color: #751414;
 }
 .pain .hero-close .sel.pronta::before,
 .pain .hero-close .sel.pronta::after {
