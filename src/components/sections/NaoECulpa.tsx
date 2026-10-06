@@ -86,7 +86,7 @@ export function NaoECulpa({ d }: { d: Dados }) {
         </p>
       </div>
       <div
-        className="mx-[-5%] mt-[30px] mb-2.5 w-[110%] -rotate-4 overflow-hidden bg-mist py-[14px] lg:mt-12"
+        className="nc-band mx-[-5%] mt-[30px] mb-2.5 w-[110%] -rotate-4 overflow-hidden py-[14px] lg:mt-12"
         role="text"
         aria-label={t.faixa}
       >
