@@ -281,24 +281,22 @@
 
 /* ===== 3. não é culpa sua ===== */
 .nc-card {
+  isolation: isolate;
   transition:
-    background 0.35s ease,
-    border-color 0.35s ease,
-    transform 0.35s ease,
-    box-shadow 0.35s ease;
+    border-color 0.45s var(--ease-soft),
+    transform 0.45s var(--ease-soft),
+    box-shadow 0.45s var(--ease-soft);
 }
-.nc-card h3,
-.nc-card p,
-.nc-card .sad {
-  transition:
-    color 0.35s ease,
-    opacity 0.35s ease;
-}
-/* Card aceso: mesmo tratamento do CTA — gradiente, borda clara, halo — e o brilho
-   varrendo. O brilho é uma camada de fundo por cima do gradiente, igual ao botão,
-   e só anda no estado aceso: parado, o card não fica piscando sozinho. */
-.nc-card.is-on,
-.nc-card:where(:hover) {
+/* O vermelho vive numa camada própria que entra e sai por opacidade. background-image
+   não interpola — trocar o gradiente direto no .nc-card fazia a cor aparecer de um
+   quadro para o outro, por mais tempo de transição que tivesse. */
+.nc-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0;
   background:
     linear-gradient(100deg, transparent 38%, rgb(255 255 255 / 0.16) 50%, transparent 62%) no-repeat,
     linear-gradient(90deg, #751414 2.16%, #db2525 140.47%);
@@ -308,11 +306,29 @@
   background-position:
     -130% 0,
     0 0;
+  transition: opacity 0.45s var(--ease-soft);
+}
+.nc-card h3,
+.nc-card p,
+.nc-card .sad {
+  transition:
+    color 0.45s var(--ease-soft),
+    opacity 0.45s var(--ease-soft);
+}
+/* Card aceso: mesmo tratamento do CTA — gradiente, borda clara, halo — e o brilho
+   varrendo. O brilho é uma camada de fundo por cima do gradiente, igual ao botão,
+   e só anda no estado aceso: parado, o card não fica piscando sozinho. */
+.nc-card.is-on,
+.nc-card:where(:hover) {
   border-color: #df6464;
   transform: scale(1.015);
   box-shadow:
     0 14px 34px rgb(0 0 0 / 0.6),
     0 0 62.8px 0 rgb(117 20 20 / 0.25);
+}
+.nc-card.is-on::before,
+.nc-card:where(:hover)::before {
+  opacity: 1;
   animation: btn-brilho 4s var(--ease-soft) infinite;
 }
 .nc-card.is-on h3,
