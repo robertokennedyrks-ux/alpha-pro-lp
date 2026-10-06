@@ -899,6 +899,10 @@
   align-items: center;
   gap: 10px;
 }
+/* O CTA do carrinho é verde, com o mesmo desenho do vermelho: gradiente, borda
+   clara e halo. O brilho varrendo vem do @utility btn e continua valendo, porque a
+   camada do brilho é redeclarada aqui na mesma ordem. O verde final é mais fechado
+   que o --color-ok para o texto branco continuar legível na ponta clara. */
 .sh-foot .btn {
   position: relative;
   overflow: visible;
@@ -908,6 +912,17 @@
   min-height: 50px;
   font-size: clamp(11.5px, 3.3vw, 13.5px);
   padding: 10px 12px;
+  border-color: #64df8f;
+  background:
+    linear-gradient(100deg, transparent 38%, rgb(255 255 255 / 0.16) 50%, transparent 62%) no-repeat,
+    linear-gradient(90deg, #0d4f26 2.16%, #22a355 140.47%);
+  background-size:
+    220% 100%,
+    auto;
+  box-shadow: 0 0 62.8px 0 rgb(13 79 38 / 0.3);
+}
+.sh-foot .btn:hover {
+  box-shadow: 0 0 62.8px 0 rgb(13 79 38 / 0.5);
 }
 .sh-foot .btn .arr {
   font-weight: 400;
