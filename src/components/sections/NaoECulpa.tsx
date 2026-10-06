@@ -1,4 +1,5 @@
 import { CartoesNc } from '@/components/historia/CartoesNc'
+import { Selecao } from '@/components/historia/Selecao'
 import { Icon } from '@/components/icons'
 import { FotoOuEspaco } from '@/components/Foto'
 import type { Dados } from '@/lib/dados'
@@ -69,7 +70,7 @@ export function NaoECulpa({ d }: { d: Dados }) {
         </CartoesNc>
         <div className="mt-1.5 flex flex-col items-start gap-[18px] rounded-panel border border-border bg-card px-[22px] pt-[30px] pb-8 lg:col-span-full! lg:mt-7 lg:flex-row lg:flex-wrap lg:items-center lg:gap-x-7 lg:gap-y-4 lg:px-11 lg:py-10">
           <p className="text-[clamp(26px,7.6vw,32px)] leading-[1.15] font-semibold tracking-[-.035em] text-balance text-ink lg:flex-[1_1_420px] lg:text-[36px]">
-            {t.destaque}
+            <Selecao>{t.destaque}</Selecao>
           </p>
           <span className="inline-block rounded-sm bg-mist px-[13px] py-[7px] text-[12px] leading-[1.2] font-semibold tracking-[.03em] text-graphite uppercase">
             {t.destaqueTag}

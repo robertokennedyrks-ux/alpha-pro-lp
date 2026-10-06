@@ -531,3 +531,50 @@
 .pain .n-grad {
   background: linear-gradient(135deg, #751414 0%, #db2525 120%);
 }
+
+/* Seleção de texto para trechos fora do <Revelar> (ex.: o destaque da seção 3).
+   Aqui o retângulo é o próprio fundo do span, e não uma camada absoluta: assim ele
+   acompanha a quebra de linha, com box-decoration-break repetindo a moldura em cada
+   pedaço. O crescimento vem do background-size, que anima sem mexer no texto. */
+.sel-linha {
+  position: relative;
+  padding: 0 14px;
+  border-left: 2px solid transparent;
+  border-right: 2px solid transparent;
+  background: linear-gradient(#7514144f, #7514144f) no-repeat left center;
+  background-size: 0% 100%;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  transition:
+    background-size 0.55s var(--ease-soft),
+    border-color 0.2s ease 0.45s,
+    color 0.3s ease 0.32s;
+}
+.sel-linha::before,
+.sel-linha::after {
+  content: '';
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #db2525;
+  opacity: 0;
+  transition: opacity 0.3s ease 0.5s;
+}
+.sel-linha::before {
+  left: -4px;
+  top: -4px;
+}
+.sel-linha::after {
+  right: -4px;
+  bottom: -4px;
+}
+.sel-linha.pronta {
+  background-size: 100% 100%;
+  border-color: #db2525;
+  color: #db2525;
+}
+.sel-linha.pronta::before,
+.sel-linha.pronta::after {
+  opacity: 1;
+}
