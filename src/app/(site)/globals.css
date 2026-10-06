@@ -36,6 +36,9 @@
   /* Vermelho da Netflix: o CTA principal. Branco em cima dá 4,8:1. */
   --color-brand: #e50914;
   --color-brand-hover: #f6121d;
+  /* O #e50914 serve de fundo (branco em cima dá 4,8:1), mas como TEXTO sobre o escuro
+     fica em 4,0:1. Este é o mesmo vermelho puxado para a luz, para ler: 5,8:1. */
+  --color-brand-ink: #ff4a52;
   /* Tintas e sombras: no escuro partem do preto, não do ink (que agora é branco). */
   --color-scrim: rgb(0 0 0 / 0.72);
   --color-tint: rgb(255 255 255 / 0.06);
