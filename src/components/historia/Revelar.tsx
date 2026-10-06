@@ -4,6 +4,9 @@ import React, { useEffect, useRef } from 'react'
 
 const reduzido = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
 const eio = (x: number) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2)
+// Curva do varrimento da frase: começa devagar, dispara no meio e desacelera no fim.
+// Quíntica em vez de cúbica, para o meio ser bem mais rápido que as pontas.
+const varre = (x: number) => (x < 0.5 ? 16 * x * x * x * x * x : 1 - Math.pow(-2 * x + 2, 5) / 2)
 const lim = (x: number) => Math.max(0, Math.min(1, x))
 
 type Props = {
@@ -39,8 +42,10 @@ export function Revelar({ modo, as: Tag = 'p', className, children, ...rest }: P
       })
       return { el: m, ultima }
     })
-    const W = titulo ? 10 : 12
-    const VMAX = titulo ? 0.4 : 0.28
+    // Onda mais curta e teto de velocidade maior = letras resolvem mais rápido.
+    // Antes: W 10/12, VMAX 0,4/0,28.
+    const W = titulo ? 7 : 8
+    const VMAX = titulo ? 0.58 : 0.44
     let Pd = 0,
       Pt = 0,
       last = 0,
@@ -51,10 +56,12 @@ export function Revelar({ modo, as: Tag = 'p', className, children, ...rest }: P
       const r = el.getBoundingClientRect()
       const vh = window.innerHeight
       const cy = r.top + r.height / 2
-      return titulo ? lim((vh * 0.95 - cy) / (vh * 0.42)) : lim((vh * 0.98 - cy) / (vh * 0.36))
+      // Trecho de rolagem em que o progresso vai de 0 a 1. Precisa ser largo o bastante
+      // para a curva do varrimento aparecer: num trecho curto ela vira um corte seco.
+      return titulo ? lim((vh * 0.95 - cy) / (vh * 0.62)) : lim((vh * 0.98 - cy) / (vh * 0.62))
     }
     const pinta = () => {
-      const head = Pd * (N + W)
+      const head = varre(lim(Pd)) * (N + W)
       for (let i = 0; i < N; i++) {
         const { el: s, cap } = itens[i]
         if (cap) {
@@ -78,10 +85,10 @@ export function Revelar({ modo, as: Tag = 'p', className, children, ...rest }: P
       last = agora
       const d = Pt - Pd
       if (titulo) {
-        const a = Math.min(VMAX * dt, Math.max(0.1 * dt, Math.abs(d) * Math.min(1, dt * 2.4)))
+        const a = Math.min(VMAX * dt, Math.max(0.1 * dt, Math.abs(d) * Math.min(1, dt * 3.4)))
         Pd += d > 0 ? Math.min(d, a) : Math.max(d, -a)
       } else {
-        const v = d * Math.min(1, dt * 1.8)
+        const v = d * Math.min(1, dt * 2.8)
         const cap = VMAX * dt
         Pd += Math.max(-cap, Math.min(cap, v))
         if (Math.abs(Pt - Pd) < 0.0008) Pd = Pt
