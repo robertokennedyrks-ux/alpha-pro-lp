@@ -21,10 +21,11 @@
   /* Traços e divisórias: branco com pouca opacidade em vez de cinza sólido —
      acompanham a superfície embaixo e ficam mais suaves. */
   --color-line: rgb(255 255 255 / 0.07);
-  /* Cinzas de texto invertidos: stone é o secundário (8,8:1 sobre o fundo),
-     graphite o de leitura corrida (13,9:1). Ambos acima dos 4,5:1 da WCAG AA. */
-  --color-stone: #b3b3b3;
-  --color-graphite: #e5e5e5;
+  /* Hierarquia de texto: só os títulos (ink) ficam em branco cheio. O corpo e as
+     legendas usam branco com opacidade, o que os assenta no fundo sem perder leitura.
+     0,45 é o piso: abaixo disso o texto cai dos 4,5:1 da WCAG AA neste fundo. */
+  --color-graphite: rgb(255 255 255 / 0.5);
+  --color-stone: rgb(255 255 255 / 0.46);
   --color-ink: #ffffff;
   --color-ink-hover: #e6e6e6;
   /* Texto e ícones sobre um fundo `ink`. No tema claro era branco; aqui é escuro. */
