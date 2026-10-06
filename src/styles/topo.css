@@ -51,8 +51,29 @@ body.drawer-open {
 }
 
 /* ===== menu lateral ===== */
+/* O painel flutua em qualquer largura. No celular fica a 16px das bordas; no PC
+   vira uma coluna de 420px colada à esquerda (ver o @media mais abaixo). */
+.drawer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-scrim);
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-soft);
+}
+.drawer.is-open::before {
+  opacity: 1;
+}
 .dr-panel {
-  transform: translateX(-100%);
+  top: 16px;
+  right: 16px;
+  bottom: 16px;
+  left: 16px;
+  border-radius: 16px;
+  border: 1px solid var(--color-border);
+  overflow-x: hidden;
+  box-shadow: 24px 0 60px rgb(0 0 0 / 0.6);
+  transform: translateX(calc(-100% - 32px));
   transition: transform 0.6s var(--ease-soft);
 }
 .drawer.is-open .dr-panel {
@@ -82,18 +103,7 @@ body.drawer-open {
   background: repeating-linear-gradient(135deg, var(--color-mist) 0 12px, var(--color-paper) 12px 24px);
 }
 @media (min-width: 1024px) {
-  /* no PC o menu vira painel flutuante com fundo escurecido */
-  .drawer::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--color-scrim);
-    opacity: 0;
-    transition: opacity 0.6s var(--ease-soft);
-  }
-  .drawer.is-open::before {
-    opacity: 1;
-  }
+  /* no PC o painel encosta mais na borda e vira uma coluna estreita */
   .dr-panel {
     top: 8px;
     bottom: 8px;
@@ -101,11 +111,7 @@ body.drawer-open {
     right: auto;
     width: 420px;
     max-width: calc(100vw - 64px);
-    border-radius: 16px;
-    border: 1px solid var(--color-border);
-    overflow-x: hidden;
     transform: translateX(calc(-100% - 24px));
-    box-shadow: 24px 0 60px rgb(0 0 0 / 0.6);
   }
   .dr-head [data-dr-cart] {
     visibility: hidden;

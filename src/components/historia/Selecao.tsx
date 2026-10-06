@@ -27,3 +27,16 @@ export function Selecao({ children }: { children: React.ReactNode }) {
     </span>
   )
 }
+
+// Marca só um trecho da frase; o resto fica como está.
+export function SelecaoParcial({ texto, alvo }: { texto: string; alvo: string }) {
+  const i = texto.indexOf(alvo)
+  if (i < 0) return <>{texto}</>
+  return (
+    <>
+      {texto.slice(0, i)}
+      <Selecao>{alvo}</Selecao>
+      {texto.slice(i + alvo.length)}
+    </>
+  )
+}
