@@ -104,6 +104,16 @@
   }
 }
 
+/* Retângulo atrás de um trecho do fechamento, imitando seleção de texto.
+   box-decoration-break: clone para a marca continuar inteira se a frase quebrar linha. */
+.pain .hero-close .sel {
+  background: var(--color-realce);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding: 0.04em 0.08em;
+  margin: 0 -0.02em;
+}
+
 /* ===== 2. balões em volta da foto ===== */
 @property --fy {
   syntax: '<length>';

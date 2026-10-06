@@ -9,6 +9,21 @@ import type { Dados } from '@/lib/dados'
 // Posição de cada balão em volta da foto (o 2º e o 3º são escuros).
 const lugares = ['b1', 'b2 dk', 'b3 dk', 'b4']
 
+// Trecho do fechamento com um retângulo atrás, como uma seleção de texto.
+function LetrasComDestaque({ texto, destaque }: { texto: string; destaque: string }) {
+  const i = texto.indexOf(destaque)
+  if (i < 0) return <Letras ocultar texto={texto} />
+  return (
+    <>
+      <Letras ocultar texto={texto.slice(0, i)} />
+      <span className="sel">
+        <Letras ocultar texto={destaque} />
+      </span>
+      <Letras ocultar texto={texto.slice(i + destaque.length)} />
+    </>
+  )
+}
+
 // Linha do fechamento: palavras com hífen não quebram no meio.
 function LinhaLetras({ texto }: { texto: string }) {
   return (
@@ -112,10 +127,10 @@ export function Dor({ d }: { d: Dados }) {
                 <span className="pd">
                   <Letras ocultar texto={l2.charAt(0).toLowerCase()} />
                 </span>
-                <Letras ocultar texto={l2.slice(1)} />
+                <LetrasComDestaque texto={l2.slice(1)} destaque="fome vence" />
               </>
             ) : (
-              <Letras ocultar texto={l2} />
+              <LetrasComDestaque texto={l2} destaque="fome vence" />
             )}
           </span>{' '}
           <span className="l mt-3.5 block text-[clamp(18px,5.8vw,34px)] font-light tracking-[-.03em] whitespace-nowrap lg:text-[40px]">
