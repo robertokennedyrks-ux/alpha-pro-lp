@@ -24,17 +24,20 @@ export function Trilha({ className, children }: { className?: string; children: 
         const r = el.getBoundingClientRect()
         return r.top + r.height / 2 <= centro
       }
+      // Candidato a aceso: já revelado e com o próximo ainda longe do meio da tela.
+      // O último item não tem próximo, então usa a si mesmo e esfria ao passar do meio.
+      let aceso = -1
       itens.forEach((li, i) => {
         const r = li.getBoundingClientRect()
         const p = (ancora - r.top) / (r.height + gap)
         const revelado = p > 0.12
         li.classList.toggle('on-n', p > 0)
         li.classList.toggle('on-c', revelado)
-        // Esfria quando o próximo chega ao meio da tela. O último não tem próximo,
-        // então usa a si mesmo e esfria ao passar do meio.
-        li.classList.toggle('quente', revelado && !noCentro(itens[i + 1] ?? li))
         li.style.setProperty('--l', Math.max(0, Math.min(1, (p - 0.3) / 0.7)).toFixed(3))
+        if (revelado && !noCentro(itens[i + 1] ?? li)) aceso = i
       })
+      // Só um aceso por vez: o mais recente ganha e apaga o anterior.
+      itens.forEach((li, i) => li.classList.toggle('quente', i === aceso))
     }
     const pede = () => {
       if (!tick) {

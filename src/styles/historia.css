@@ -62,8 +62,18 @@
     0 0 30px -6px rgb(229 9 20 / 0.55);
 }
 
-/* No computador, o mouse acende o mesmo estado, com tempo próprio (mais curto). */
 @media (hover: hover) and (pointer: fine) {
+  /* Com o mouse sobre algum card, o aceso pela rolagem apaga — assim nunca há dois
+     acesos ao mesmo tempo. O `:not(:hover)` tira o próprio card sob o mouse desta
+     regra: sem isso, passar o mouse no card já aceso apagaria os dois. */
+  .pain .tl:has(.tc:hover) > li.quente .tc:not(:hover),
+  .pain .tl.anim:has(.tc:hover) > li.on-c.quente .tc:not(:hover) {
+    border-color: var(--color-border);
+    box-shadow: none;
+  }
+
+  /* O card sob o mouse acende, com tempo próprio (mais curto). Vem por último para
+     ganhar da regra acima quando o mouse está justamente sobre o card aceso. */
   .pain .tl > li .tc:hover,
   .pain .tl.anim > li.on-c .tc:hover {
     border-color: var(--color-brand);
