@@ -63,7 +63,7 @@ export function Dor({ d }: { d: Dados }) {
         <Trilha className="tl flex flex-col gap-[14px] md:max-w-[600px] lg:col-[1]! lg:row-[4] lg:max-w-none">
           {t.dia.map((item, i) => (
             <li key={i} className="relative grid grid-cols-[42px_1fr] gap-[14px]">
-              <span className="n grid size-[42px] place-items-center rounded-full bg-realce text-[17px] leading-none font-semibold text-ink">
+              <span className="n grid size-[42px] place-items-center n-grad rounded-full text-[17px] leading-none font-semibold text-ink">
                 {i + 1}
               </span>
               <div className="tc flex min-w-0 flex-col gap-2 rounded-card border border-border p-8">
@@ -81,7 +81,7 @@ export function Dor({ d }: { d: Dados }) {
         <div className="bx-hold lg:col-[2]! lg:row-[4]">
           <div className="bx relative mt-2 h-[380px] md:mx-auto md:w-full md:max-w-[560px] lg:sticky lg:top-[max(112px,calc(50vh-230px))] lg:mt-0 lg:h-[460px] lg:max-w-none lg:self-start">
             <div
-              className="absolute inset-x-0 bottom-0 h-[300px] rounded-panel bg-realce lg:h-[370px]"
+              className="bx-grad absolute inset-x-0 bottom-0 h-[300px] rounded-panel lg:h-[370px]"
               aria-hidden="true"
             />
             <FotoOuEspaco

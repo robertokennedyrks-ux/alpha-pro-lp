@@ -197,7 +197,19 @@ html.lenis body {
   border-radius: 16px;
   white-space: nowrap;
   border: 1px solid #df6464;
-  background: linear-gradient(90deg, #751414 2.16%, #db2525 140.47%);
+  /* Duas camadas: o brilho que varre por cima e o gradiente do botão por baixo.
+     Varrer uma camada de fundo em vez de um pseudo-elemento evita `overflow: hidden`,
+     que cortaria o selo de desconto do botão da oferta. */
+  background:
+    linear-gradient(100deg, transparent 38%, rgb(255 255 255 / 0.16) 50%, transparent 62%) no-repeat,
+    linear-gradient(90deg, #751414 2.16%, #db2525 140.47%);
+  background-size:
+    220% 100%,
+    auto;
+  background-position:
+    -130% 0,
+    0 0;
+  animation: btn-brilho 4s var(--ease-soft) infinite;
   box-shadow: 0 0 62.8px 0 rgb(117 20 20 / 0.25);
   color: #ffffff;
   text-decoration: none;
@@ -216,6 +228,21 @@ html.lenis body {
   &:focus-visible {
     outline: 3px solid var(--color-stone);
     outline-offset: 3px;
+  }
+}
+
+/* Brilho dos botões: atravessa em 2s e descansa 2s. */
+@keyframes btn-brilho {
+  0% {
+    background-position:
+      -130% 0,
+      0 0;
+  }
+  50%,
+  100% {
+    background-position:
+      230% 0,
+      0 0;
   }
 }
 

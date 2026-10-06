@@ -93,9 +93,13 @@
   clip-path: inset(0 0 calc((1 - var(--l, 0)) * 100%) 0);
 }
 @media (prefers-reduced-motion: reduce) {
+  .pain .hero-close .sel .tw-c {
+    color: #db2525;
+    transition: none;
+  }
   .pain .hero-close .sel-bg {
     width: 100%;
-    border-color: #751414;
+    border-color: #db2525;
     transition: none;
   }
   .pain .hero-close .sel::before,
@@ -132,6 +136,7 @@
   background: #7514144f;
   border-left: 2px solid transparent;
   border-right: 2px solid transparent;
+  /* o traço e as alças usam o vermelho claro, que lê bem sobre o fundo translúcido */
   transition:
     width 0.55s var(--ease-soft),
     border-color 0.2s ease 0.45s;
@@ -143,7 +148,7 @@
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: #751414;
+  background: #db2525;
   opacity: 0;
   transition: opacity 0.3s ease 0.5s;
 }
@@ -155,9 +160,15 @@
   right: -4px;
   bottom: -4px;
 }
+.pain .hero-close .sel .tw-c {
+  transition: color 0.3s ease 0.32s;
+}
+.pain .hero-close .sel.pronta .tw-c {
+  color: #db2525;
+}
 .pain .hero-close .sel.pronta .sel-bg {
   width: 100%;
-  border-color: #751414;
+  border-color: #db2525;
 }
 .pain .hero-close .sel.pronta::before,
 .pain .hero-close .sel.pronta::after {
@@ -488,8 +499,8 @@
 }
 .pain .tl > li.quente .tc .tc-ico,
 .pain .tl.anim > li.on-c.quente .tc .tc-ico {
-  color: var(--color-realce-texto);
-  border-color: color-mix(in srgb, var(--color-realce) 45%, transparent);
+  color: #db2525;
+  border-color: color-mix(in srgb, #db2525 45%, transparent);
 }
 @media (hover: hover) and (pointer: fine) {
   .pain .tl:has(.tc:hover) > li.quente .tc:not(:hover) .tc-ico {
@@ -498,10 +509,23 @@
     transition: none;
   }
   .pain .tl > li .tc:hover .tc-ico {
-    color: var(--color-realce-texto);
-    border-color: color-mix(in srgb, var(--color-realce) 45%, transparent);
+    color: #db2525;
+    border-color: color-mix(in srgb, #db2525 45%, transparent);
     transition:
       color 0.2s ease,
       border-color 0.2s ease;
   }
+}
+
+/* Mesmo tratamento do CTA (@utility btn): gradiente, borda clara e halo.
+   Usado no número da trilha e no painel atrás da foto da dor. */
+.pain .n-grad,
+.pain .bx-grad {
+  background: linear-gradient(90deg, #751414 2.16%, #db2525 140.47%);
+  border: 1px solid #df6464;
+  box-shadow: 0 0 62.8px 0 rgb(117 20 20 / 0.25);
+}
+/* No número o gradiente corre em 42px, então o fim do degradê precisa chegar antes. */
+.pain .n-grad {
+  background: linear-gradient(135deg, #751414 0%, #db2525 120%);
 }
