@@ -439,11 +439,7 @@
   font-size: clamp(17px, 5vw, 20px);
   font-weight: 700;
   padding: 16px 30px;
-  background: var(--color-brand);
   color: #ffffff;
-}
-.btn.of-btn:hover {
-  background: var(--color-brand-hover);
 }
 .of-btn svg {
   width: 24px;

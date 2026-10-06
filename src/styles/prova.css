@@ -611,7 +611,9 @@
   gap: 8px;
   min-height: 52px;
   border-radius: 16px;
-  background: var(--color-brand);
+  border: 1px solid #df6464;
+  background: linear-gradient(90deg, #751414 2.16%, #db2525 140.47%);
+  box-shadow: 0 0 62.8px 0 rgb(117 20 20 / 0.25);
   color: #ffffff;
   font: 700 15px/1 var(--font-sans);
   text-decoration: none;
@@ -654,7 +656,6 @@
   outline-color: #ffffff;
 }
 .vs-frame.is-ph .vs-cta {
-  background: var(--color-brand);
   color: #fff;
 }
 .vs.is-held .vs-top,
