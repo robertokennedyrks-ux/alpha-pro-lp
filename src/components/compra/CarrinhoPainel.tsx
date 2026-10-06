@@ -201,7 +201,7 @@ export function CarrinhoPainel({ loja }: { loja: Loja }) {
           {loja.bonusOn && loja.bonus.length ? <p className="sh-lbl">Seus brindes</p> : null}
           {loja.frete.on ? <FreteBarra frete={loja.frete} total={t} aberto={aberto} /> : null}
           {loja.bonusOn && loja.bonus.length ? (
-            <ul className="ct-list">
+            <ul className="ct-list ct-brindes">
               {loja.bonus.map((b, i) => {
                 const preso = n < b.min
                 return (
