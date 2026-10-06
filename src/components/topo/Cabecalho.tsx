@@ -12,7 +12,7 @@ const FECHAR_MS = 640
 const hdrBtn =
   'hdr-btn relative grid size-11 cursor-pointer place-items-center rounded-md border-0 bg-transparent text-ink focus-visible:outline-3 focus-visible:-outline-offset-3 focus-visible:outline-stone'
 const badge =
-  'hdr-badge absolute top-1 right-0.5 box-content h-[18px] min-w-[18px] rounded-[999px] border-2 border-paper bg-ink px-[5px] text-center text-[11px] leading-[18px] font-bold text-white tabular-nums'
+  'hdr-badge absolute top-1 right-0.5 box-content h-[18px] min-w-[18px] rounded-[999px] border-2 border-paper bg-realce px-[5px] text-center text-[11px] leading-[18px] font-bold text-white tabular-nums'
 const drRow =
   'dr-row flex w-full cursor-pointer items-center gap-3.5 border-0 bg-transparent px-6 py-[17px] text-left text-[19px] leading-[1.2] font-semibold tracking-[-.01em] text-ink no-underline [&>span]:flex-1 [&>svg]:size-[22px] [&>svg]:flex-none [&>svg]:opacity-90'
 
