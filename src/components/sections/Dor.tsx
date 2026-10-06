@@ -65,7 +65,7 @@ export function Dor({ d }: { d: Dados }) {
         <div className="bx-hold lg:col-[2]! lg:row-[4]">
           <div className="bx relative mt-2 h-[380px] md:mx-auto md:w-full md:max-w-[560px] lg:sticky lg:top-[max(112px,calc(50vh-230px))] lg:mt-0 lg:h-[460px] lg:max-w-none lg:self-start">
             <div
-              className="absolute inset-x-0 bottom-0 h-[300px] rounded-panel bg-mist lg:h-[370px]"
+              className="absolute inset-x-0 bottom-0 h-[300px] rounded-panel bg-realce lg:h-[370px]"
               aria-hidden="true"
             />
             <FotoOuEspaco
