@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 /* Tokens do protótipo (reference/alpha-pro-lp.html, :root), convertidos para o tema
-   escuro com a paleta da Netflix: fundo #141414, vermelho #e50914 no CTA principal,
+   escuro: fundo #141414, vermelho #751414 no CTA principal e no realce,
    verde #46d369 em "Grátis", "Liberado" e frete grátis.
    Raios de botões, tags e áreas clicáveis: 8, 12 ou 16px (rounded-sm/md/lg).
    Painéis decorativos seguem o protótipo (28px = rounded-panel). */
@@ -35,16 +35,15 @@
   --color-ok: #46d369;
   --color-ok-bg: rgb(70 211 105 / 0.16);
   /* Vermelho da Netflix: o CTA principal. Branco em cima dá 4,8:1. */
-  --color-brand: #e50914;
-  --color-brand-hover: #f6121d;
-  /* O #e50914 serve de fundo (branco em cima dá 4,8:1), mas como TEXTO sobre o escuro
-     fica em 4,0:1. Este é o mesmo vermelho puxado para a luz, para ler: 5,8:1. */
-  --color-brand-ink: #ff4a52;
+  --color-brand: #751414;
+  --color-brand-hover: #8d1818;
+  /* Vermelho usado como TEXTO sobre o escuro. */
+  --color-brand-ink: #751414;
   /* Cor do realce da trilha (borda, brilho, número e ícone do card aceso).
      Trocar só esta linha muda o efeito inteiro — o brilho e o halo saem dela
      por color-mix, então acompanham sozinhos. */
-  --color-realce: #e50914;
-  --color-realce-texto: #ff4a52;
+  --color-realce: #751414;
+  --color-realce-texto: #751414;
   /* Tintas e sombras: no escuro partem do preto, não do ink (que agora é branco). */
   --color-scrim: rgb(0 0 0 / 0.72);
   --color-tint: rgb(255 255 255 / 0.06);

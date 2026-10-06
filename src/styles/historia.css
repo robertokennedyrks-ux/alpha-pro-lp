@@ -291,10 +291,10 @@
   border: 0.07em solid var(--color-ink);
   background: linear-gradient(
     90deg,
-    #b00610 0%,
+    #5a0f0f 0%,
     var(--color-brand) 18%,
     var(--color-brand) 44%,
-    #c20812 50%,
+    #661111 50%,
     #ffffff 50%,
     #ffffff 100%
   );
