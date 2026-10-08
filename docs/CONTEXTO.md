@@ -2,6 +2,19 @@
 
 LP do ALPHA PRO, cliente Genesy, feita pela RK Studios (Roberto). Responda ao Roberto sempre em português (pt-BR).
 
+## MIGRAÇÃO EM CURSO (07/10/2026)
+
+**Este projeto em Next.js está congelado.** A LP vai ser refeita em
+**WordPress + Elementor + plugin próprio**, a pedido do Roberto, depois de uma análise
+externa apontar brechas de segurança no código atual.
+
+O plano está em `docs/MIGRACAO-WORDPRESS.md`. O workflow de referência é o do projeto
+CP Import World (`D:\Arquivos Profissionais\Clientes\Carla Piellusch\Codigos\cp-import-world`):
+plugin modular, `bin/deploy.sh` por SSH, prefixo próprio, painel `/adm` fora do wp-admin.
+
+Daqui para frente esta pasta serve como **referência de layout e conteúdo**, não recebe
+mais feature. Tudo abaixo descreve o estado congelado.
+
 ## Onde está
 
 - Protótipo aprovado, fonte da verdade visual: `reference/alpha-pro-lp.html` (landing) e `reference/legal.html` (políticas).
