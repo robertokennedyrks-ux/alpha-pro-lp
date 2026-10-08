@@ -120,4 +120,5 @@ Erros já pagos neste projeto, que valem para o novo código:
 
 A pasta `alpha-pro-lp-main` fica congelada como referência de layout e de conteúdo —
 é dela que saem textos, medidas, cores e comportamento. Não recebe mais feature.
-Os 40 commits locais precisam ser publicados antes de congelar.
+Os 42 commits locais foram publicados no GitHub em 07/10/2026 (`c5c7e3a..6eadef6`);
+o congelamento vale a partir daí.
