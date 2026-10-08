@@ -52,11 +52,30 @@ ataque para resolver um problema que não existe aqui.
 - **3 telas de painel** (ofertas, frete, bônus) → painel próprio, modelo `/adm` do CP.
 - **712 linhas de conteúdo estático** → controls e options.
 
+## Critério de aceite
+
+`docs/SEGURANCA.md` governa esta migração. São 22 critérios, e eles não são revisão de
+fim de obra: entram como porta de cada fase. A regra que o documento fecha vale repetir —
+**a segurança não é propriedade do WordPress**, é do conjunto ambiente + plugins + código
+próprio + autorização + validação + testes.
+
+Quatro artefatos nascem com o projeto e são mantidos vivos:
+
+| Artefato | Nasce na fase |
+|---|---|
+| Matriz de permissões (Next × WordPress) | 0 — antes de escrever código |
+| Inventário de plugins e dependências | 0 |
+| Inventário de endpoints | 3, quando o primeiro endpoint existir |
+| Evidências dos testes de autorização | 6, mas cada fase deixa a sua |
+
 ## Fases
 
 **0 · Pipeline.** Chave SSH na Hostinger, `.env`, scaffold com `bin/deploy.sh`,
 `watch.sh`, `logs.sh`, `wp.sh`. Validar com um plugin vazio antes de escrever qualquer
 coisa. Sem isso funcionando, nada mais anda.
+Entra aqui também o endurecimento do AC-16 (HTTPS, cookies, debug, XML-RPC, REST,
+cabeçalhos, versão exposta), a matriz de permissões do AC-21 e o inventário do AC-14 —
+é barato fazer agora e caro descobrir depois.
 
 **1 · Plugin base.** Loader de módulos, tokens de cor e tipografia, CSS global,
 registro da categoria de widgets, helpers de sanitização e de nonce.
@@ -67,14 +86,22 @@ oferta, dúvidas, final, rodapé, aviso de cookies.
 
 **3 · Compra.** Estado do pedido, carrinho em gaveta, seletor de oferta, barra de frete
 e os links de checkout por quantidade. É a parte com mais lógica.
+Atenção ao AC-06: preço, total e quantidade **nunca** vêm do cliente. O link de checkout
+é montado a partir da quantidade relida do banco, não do que o navegador mandou.
 
 **4 · Painel da Genesy.** Preços, frete e bônus. Modelo `/adm`: rewrite próprio, não
 página do Elementor, nunca cacheado.
+É a parte com mais superfície: login nativo (AC-01), capability em cada ação (AC-03),
+nonce em cada escrita (AC-05), endpoints documentados (AC-10) e upload de imagem de bônus
+validado no servidor (AC-12).
 
 **5 · Políticas, SEO e cookies.** Três URLs reais por rewrite, texto em option.
 
 **6 · Revisão.** Acessibilidade (axe-core), Lighthouse, teclado, `prefers-reduced-motion`,
 e a comparação lado a lado com o site atual.
+Mais a bateria do AC-22 em cada funcionalidade protegida — admin, usuário autorizado, sem
+permissão, recurso de outro, não autenticado, sem nonce, nonce inválido, ID manipulado —
+com as evidências guardadas. Sem isso não há go-live.
 
 ## O que não se repete
 

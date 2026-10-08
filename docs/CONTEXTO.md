@@ -15,6 +15,26 @@ plugin modular, `bin/deploy.sh` por SSH, prefixo próprio, painel `/adm` fora do
 Daqui para frente esta pasta serve como **referência de layout e conteúdo**, não recebe
 mais feature. Tudo abaixo descreve o estado congelado.
 
+### Segurança: critério de aceite, não recomendação
+
+**`docs/SEGURANCA.md` é obrigatório e vem antes de qualquer entrega.** São 22 critérios
+(AC-01 a AC-22) definidos pelo Roberto. Nenhum código da migração é considerado pronto
+sem atendê-los, e nenhuma funcionalidade vai ao ar sem os testes de autorização do AC-22.
+
+O que isso muda no dia a dia, em uma linha cada:
+
+- Autenticação é a do WordPress. Não se escreve login, sessão nem token.
+- Toda escrita tem nonce. Toda operação sensível tem `current_user_can()`.
+- Permissão é verificada **para aquele recurso**, não para a classe dele.
+- Entrada passa por validação além de `sanitize_*`; saída passa por `esc_*` no contexto.
+- SQL só com `$wpdb->prepare()` ou API do WordPress.
+- Endpoint sem política de acesso documentada não existe.
+- Segredo nenhum no código, no JS, no HTML ou no log.
+
+Quatro artefatos precisam existir e ficar atualizados, porque sem eles os critérios não
+são verificáveis: matriz de permissões, inventário de endpoints, inventário de plugins e
+as evidências dos testes. Ver o fim do `docs/SEGURANCA.md`.
+
 ## Onde está
 
 - Protótipo aprovado, fonte da verdade visual: `reference/alpha-pro-lp.html` (landing) e `reference/legal.html` (políticas).
