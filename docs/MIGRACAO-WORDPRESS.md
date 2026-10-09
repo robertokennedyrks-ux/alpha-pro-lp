@@ -122,3 +122,21 @@ A pasta `alpha-pro-lp-main` fica congelada como referência de layout e de conte
 é dela que saem textos, medidas, cores e comportamento. Não recebe mais feature.
 Os 42 commits locais foram publicados no GitHub em 07/10/2026 (`c5c7e3a..6eadef6`);
 o congelamento vale a partir daí.
+
+## Onde paramos (08/10/2026)
+
+Só existe planejamento. **Nenhuma linha de WordPress foi escrita.** O que está pronto é
+este plano, o `docs/SEGURANCA.md` com os 22 critérios e a pasta `docs/seguranca/` esperando
+os quatro artefatos. O repositório Next está publicado e congelado.
+
+Três coisas travam a fase 0, todas do Roberto:
+
+| Falta | Para quê |
+|---|---|
+| A lista de brechas que o dev encontrou | AC-21: nenhuma regra de segurança pode se perder na troca. Sem ela há risco de repetir em PHP o mesmo erro achado em TS |
+| SSH da Hostinger: host, porta (normalmente 65002), usuário, caminho absoluto do site, e a chave pública no hPanel → SSH | Fase 0 inteira — `bin/deploy.sh`, `watch.sh`, `logs.sh`, `wp.sh` |
+| O subdomínio, e se já existe WordPress instalado nele | Saber se a fase 0 instala ou herda |
+
+Com o SSH na mão, a ordem é: validar o pipeline com um plugin vazio, aí o endurecimento do
+AC-16, a matriz de permissões do AC-21 e o inventário de plugins do AC-14 — antes de
+qualquer widget.
