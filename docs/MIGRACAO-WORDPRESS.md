@@ -123,20 +123,37 @@ A pasta `alpha-pro-lp-main` fica congelada como referência de layout e de conte
 Os 42 commits locais foram publicados no GitHub em 07/10/2026 (`c5c7e3a..6eadef6`);
 o congelamento vale a partir daí.
 
-## Onde paramos (08/10/2026)
+## Onde paramos (09/10/2026)
 
-Só existe planejamento. **Nenhuma linha de WordPress foi escrita.** O que está pronto é
-este plano, o `docs/SEGURANCA.md` com os 22 critérios e a pasta `docs/seguranca/` esperando
-os quatro artefatos. O repositório Next está publicado e congelado.
+**Acesso ao servidor resolvido.** O WordPress do ALPHA PRO ja existe e esta limpo:
+Elementor 4.3.4 e Elementor Pro 4.3.1 ativos, LiteSpeed Cache inativo, WordPress 7.1.3
+sobre PHP 8.2.33. Os dados de host, usuario e caminho ficam em `docs/seguranca/inventario.md`,
+fora do Git.
 
-Três coisas travam a fase 0, todas do Roberto:
+A conta SSH e a **mesma do CP Import World** e hospeda outros 12 sites, entao reaproveitei
+a chave de la: uma chave nova nao isolaria nada, por ser a mesma conta. Os atalhos locais
+sao `alphapro` (abre na pasta do site) e `alphapro-cmd` (para scripts).
 
-| Falta | Para quê |
+O inventario do AC-14 traz tambem o levantamento do endurecimento que falta: nenhuma
+constante do AC-16 esta definida, `xmlrpc.php` no ar, unico usuario e `admin`.
+**Nada foi alterado no servidor** — so leitura.
+
+Ainda nenhuma linha de plugin escrita.
+
+### O que falta decidir
+
+| Pendencia | Por que |
 |---|---|
-| A lista de brechas que o dev encontrou | AC-21: nenhuma regra de segurança pode se perder na troca. Sem ela há risco de repetir em PHP o mesmo erro achado em TS |
-| SSH da Hostinger: host, porta (normalmente 65002), usuário, caminho absoluto do site, e a chave pública no hPanel → SSH | Fase 0 inteira — `bin/deploy.sh`, `watch.sh`, `logs.sh`, `wp.sh` |
-| O subdomínio, e se já existe WordPress instalado nele | Saber se a fase 0 instala ou herda |
+| A lista de brechas que o dev encontrou | AC-21: nenhuma regra de seguranca pode se perder na troca. Sem ela ha risco de repetir em PHP o mesmo erro achado em TS |
+| O dominio definitivo | hoje e um temporario da Hostinger; o `hostinger-preview-domain` sai junto |
+| Onde fica o repositorio do plugin | pasta nova, irma desta; nao entra neste repositorio, que esta congelado |
+| PHP 8.3 | o site roda 8.2.33; da para subir no hPanel, mas e mudanca no ambiente e precisa da sua confirmacao |
+| Elementor Pro | se nenhum recurso dele for usado, sai — e superficie e licenca a toa |
+| Trocar o tema por Hello Elementor | o `twentytwentyfive` e tema de blocos, base ruim para Elementor |
 
-Com o SSH na mão, a ordem é: validar o pipeline com um plugin vazio, aí o endurecimento do
-AC-16, a matriz de permissões do AC-21 e o inventário de plugins do AC-14 — antes de
-qualquer widget.
+### Proximo passo, quando voce liberar
+
+Fase 0 na ordem: scaffold do plugin vazio e `bin/deploy.sh` validando o caminho inteiro,
+depois o endurecimento do AC-16, a matriz de permissoes do AC-21 e so entao o primeiro
+widget. Mexer no `wp-config.php` e nos papeis de usuario e alteracao em producao —
+nao faco sem voce mandar.

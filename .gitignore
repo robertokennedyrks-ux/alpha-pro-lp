@@ -56,3 +56,6 @@ node_modules/
 *.db-journal
 *.db-wal
 *.db-shm
+
+# Inventario com host, usuario e caminhos do servidor — nao versionar
+docs/seguranca/inventario.md
