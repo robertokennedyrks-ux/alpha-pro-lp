@@ -125,35 +125,42 @@ o congelamento vale a partir daí.
 
 ## Onde paramos (09/10/2026)
 
-**Acesso ao servidor resolvido.** O WordPress do ALPHA PRO ja existe e esta limpo:
-Elementor 4.3.4 e Elementor Pro 4.3.1 ativos, LiteSpeed Cache inativo, WordPress 7.1.3
-sobre PHP 8.2.33. Os dados de host, usuario e caminho ficam em `docs/seguranca/inventario.md`,
-fora do Git.
+A lista de achados do dev **nao vira mais** — o Roberto perdeu contato com ele.
+Seguimos sem ela, com a regra que ele deu: a cada entrega, pensar como alguem
+tentaria quebrar aquilo. Os 22 criterios do `docs/SEGURANCA.md` continuam sendo
+a porta, e ele revisa no fim.
 
-A conta SSH e a **mesma do CP Import World** e hospeda outros 12 sites, entao reaproveitei
-a chave de la: uma chave nova nao isolaria nada, por ser a mesma conta. Os atalhos locais
-sao `alphapro` (abre na pasta do site) e `alphapro-cmd` (para scripts).
+### Feito
 
-O inventario do AC-14 traz tambem o levantamento do endurecimento que falta: nenhuma
-constante do AC-16 esta definida, `xmlrpc.php` no ar, unico usuario e `admin`.
-**Nada foi alterado no servidor** — so leitura.
+O acesso por SSH esta validado e o WordPress do ALPHA PRO foi levantado:
+WordPress 7.1.3, Elementor 4.3.4 e Pro 4.3.1, instalacao limpa, so o conteudo
+de exemplo.
 
-Ainda nenhuma linha de plugin escrita.
+O tema agora e o **`alpha-pro`**, filho do Hello Elementor, com o Hello reduzido
+ao minimo — fora o modulo `admin-home` (rotas REST, AJAX, API externa, banners),
+cabecalho e rodape do Hello, suporte a WooCommerce, comentarios, CSS do editor
+de blocos e emojis. A home nao expoe mais nenhuma rota REST do tema e carrega
+dois CSS. Os tres temas `twentytwenty*` foram apagados.
 
-### O que falta decidir
+O codigo do tema vive em **`alpha-pro-wp/`**, pasta irma desta, com o motivo de
+cada desligamento escrito no `README.md` de la. Endurecimento do site (versao
+exposta, XML-RPC, REST para anonimo, cabecalhos) **nao entrou no tema** de
+proposito: e do plugin, porque tema se troca e protecao que mora no tema vai
+junto.
 
-| Pendencia | Por que |
-|---|---|
-| A lista de brechas que o dev encontrou | AC-21: nenhuma regra de seguranca pode se perder na troca. Sem ela ha risco de repetir em PHP o mesmo erro achado em TS |
-| O dominio definitivo | hoje e um temporario da Hostinger; o `hostinger-preview-domain` sai junto |
-| Onde fica o repositorio do plugin | pasta nova, irma desta; nao entra neste repositorio, que esta congelado |
-| PHP 8.3 | o site roda 8.2.33; da para subir no hPanel, mas e mudanca no ambiente e precisa da sua confirmacao |
-| Elementor Pro | se nenhum recurso dele for usado, sai — e superficie e licenca a toa |
-| Trocar o tema por Hello Elementor | o `twentytwentyfive` e tema de blocos, base ruim para Elementor |
+### Nao feito, e por que
 
-### Proximo passo, quando voce liberar
+**PHP continua 8.2.33.** A versao nao e por site: vem de um seletor unico da
+conta, e nenhum dominio tem handler proprio para sobrescrever. Subir para 8.3
+moveria os 13 sites da conta de uma vez, incluindo sites de clientes em
+producao. Precisa ser combinado e testado, nao e um comando.
 
-Fase 0 na ordem: scaffold do plugin vazio e `bin/deploy.sh` validando o caminho inteiro,
-depois o endurecimento do AC-16, a matriz de permissoes do AC-21 e so entao o primeiro
-widget. Mexer no `wp-config.php` e nos papeis de usuario e alteracao em producao —
-nao faco sem voce mandar.
+**Elementor Pro pode estar sem licenca valida.** Ha chave salva, mas nenhum dado
+de licenca em cache. Pelo AC-15 isso e risco real: sem licenca o Pro nao recebe
+atualizacao de seguranca.
+
+### Proximo passo
+
+O plugin `alpha-pro-core`: scaffold, `bin/deploy.sh`, e o endurecimento do AC-16
+como primeiro modulo. Mexer em `wp-config.php` e em papeis de usuario e alteracao
+em producao — nao faco sem o Roberto mandar.
